@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0b">
+<title>Великие</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+:root{
+  --bg:#0a0a0b; --card:#141416; --line:#26262a; --text:#f2f0eb; --muted:#9a978f;
+  --gold:#e9b44c; --gold-dim:#a77f2e; --red:#d8432f;
+  --pad:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text)}
+body{font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:640px;margin:0 auto}
+
+/* Шапка */
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) var(--pad) 12px;background:rgba(10,10,11,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{font-weight:900;letter-spacing:.22em;font-size:15px;text-transform:uppercase}
+.logo b{color:var(--gold)}
+.icon-btn{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line)}
+.icon-btn svg{width:20px;height:20px}
+.icon-btn.on{border-color:var(--gold);color:var(--gold)}
+
+/* Человек дня */
+.hero{position:relative;margin:16px var(--pad) 0;border-radius:20px;overflow:hidden;background:var(--card);min-height:440px;display:flex;align-items:flex-end;cursor:pointer}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(.35) contrast(1.05)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,0) 30%,rgba(10,10,11,.85) 68%,#0a0a0b 100%)}
+.hero-body{position:relative;z-index:1;padding:22px}
+.kicker{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#0a0a0b;background:var(--gold);padding:5px 10px;border-radius:6px}
+.hero h1{font-size:38px;line-height:1.05;font-weight:900;margin:12px 0 10px;text-transform:uppercase;letter-spacing:-.01em}
+.hero p{color:#d6d3cc;font-size:16px;line-height:1.5}
+.btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:13px 20px;border-radius:12px;background:var(--gold);color:#0a0a0b;font-weight:800;font-size:15px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn:disabled{opacity:.5}
+
+/* Фильтры и список */
+.section-title{margin:32px var(--pad) 12px;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 var(--pad) 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--muted)}
+.chip.on{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px var(--pad) 40px}
+.card{background:var(--card);border-radius:16px;overflow:hidden;text-align:left;border:1px solid var(--line)}
+.card .ph{aspect-ratio:3/4;background:#1c1c1f;overflow:hidden}
+.card img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(.4)}
+.card .cb{padding:10px 12px 12px}
+.card h3{font-size:15px;line-height:1.25;font-weight:800}
+.card span{display:block;margin-top:3px;font-size:12px;color:var(--muted)}
+.empty{grid-column:1/-1;color:var(--muted);padding:30px 0;text-align:center}
+
+/* Страница человека */
+.gallery{position:relative}
+.slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.slides::-webkit-scrollbar{display:none}
+.slides img{flex:none;width:100%;height:62vh;max-height:560px;object-fit:cover;object-position:center 20%;scroll-snap-align:center;background:#1c1c1f}
+.dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:6px;z-index:2}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)}
+.dots i.on{background:var(--gold);width:18px;border-radius:3px}
+.gallery::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(180deg,rgba(10,10,11,0),#0a0a0b);pointer-events:none}
+.back{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;z-index:3;background:rgba(10,10,11,.6);backdrop-filter:blur(8px);border-color:transparent}
+.fav{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:3;background:rgba(10,10,11,.6);backdrop-filter:blur(8px);border-color:transparent}
+.fav.on{color:var(--gold)}
+.fav.on svg{fill:currentColor}
+.person{padding:4px var(--pad) 40px}
+.meta{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.person h1{font-size:36px;line-height:1.05;font-weight:900;text-transform:uppercase;margin:8px 0 6px}
+.role{color:var(--muted);font-size:15px}
+.story{margin-top:24px}
+.story p{font-size:18px;line-height:1.65;margin-bottom:18px;color:#e6e3dc}
+.story.lead p:first-child::first-letter{float:left;font-size:58px;line-height:.9;font-weight:900;color:var(--gold);margin:6px 10px 0 0}
+.quote{margin:26px 0;padding:4px 0 4px 18px;border-left:3px solid var(--gold);font-size:20px;line-height:1.45;font-weight:700}
+.quote small{display:block;margin-top:8px;font-size:13px;color:var(--muted);font-weight:500}
+.lesson{margin-top:30px;padding:20px;border-radius:16px;background:linear-gradient(135deg,#1d1810,#141416);border:1px solid #3a2f17}
+.lesson b{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.lesson p{font-size:18px;line-height:1.5;font-weight:600}
+.next{display:flex;align-items:center;gap:14px;width:100%;margin-top:30px;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line);text-align:left}
+.next img{width:56px;height:56px;border-radius:12px;object-fit:cover;filter:grayscale(.4)}
+.next small{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.next strong{font-size:17px}
+.credits{margin-top:30px;font-size:12px;color:#6c6a64;line-height:1.5}
+.credits a{color:#8d8a83}
+
+/* Настройки */
+.panel{padding:24px var(--pad) 40px}
+.panel h2{font-size:28px;font-weight:900;text-transform:uppercase;line-height:1.1}
+.panel p{color:#cfccc4;margin-top:12px}
+.box{margin-top:20px;padding:18px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.status{display:flex;align-items:center;gap:10px;font-weight:700}
+.status i{width:10px;height:10px;border-radius:50%;background:var(--muted)}
+.status.ok i{background:#4cc36a}
+.status.bad i{background:var(--red)}
+textarea{width:100%;height:110px;margin-top:12px;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0d0d0f;color:#bdbab2;font:12px/1.4 ui-monospace,monospace;resize:none}
+.small{font-size:13px;color:var(--muted);margin-top:10px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// Публичный ключ VAPID (пара к секрету VAPID_PRIVATE в GitHub)
+const VAPID_PUBLIC = "BCjQJYSZfXAK5ovB3jXrIgjABBZprAtgLOwU44pGzaEaV35P-uDILVsyWdDlGkGzbVN97ftdWRy8HPn4QzFn2pI";
+// День, с которого считается очередь «человека дня» (тот же расчёт в send_push.py)
+const START_DAY = Date.UTC(2026, 10, 6) / 86400000;
+
+const ICONS = {
+  bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
+  back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+};
+
+let PEOPLE = [];
+let filter = "Все";
+const $app = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const favs = new Set(JSON.parse(localStorage.getItem("favs") || "[]"));
+const saveFavs = () => localStorage.setItem("favs", JSON.stringify([...favs]));
+
+function todayIndex() {
+  // Сутки по Москве (UTC+3), чтобы совпадало с уведомлением
+  const day = Math.floor((Date.now() + 3 * 3600e3) / 86400000);
+  return ((day - START_DAY) % PEOPLE.length + PEOPLE.length) % PEOPLE.length;
+}
+const readMin = p => Math.max(2, Math.round([...p.story, ...p.quotes, p.lesson].join(" ").split(/\s+/).length / 130));
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+function topBar() {
+  const on = "Notification" in window && Notification.permission === "granted";
+  return `<header class="top"><div class="logo">Вели<b>кие</b></div>
+    <button class="icon-btn ${on ? "on" : ""}" onclick="go('#/settings')" aria-label="Уведомления">${ICONS.bell}</button></header>`;
+}
+
+function renderHome() {
+  const p = PEOPLE[todayIndex()];
+  const fields = ["Все", ...new Set(PEOPLE.map(x => x.field)), "Избранное"];
+  const list = PEOPLE.filter(x => filter === "Все" || (filter === "Избранное" ? favs.has(x.id) : x.field === filter));
+  $app.innerHTML = topBar() + `
+    <article class="hero" onclick="go('#/p/${p.id}')">
+      <img src="${p.photos[0].src}" alt="${esc(p.name)}">
+      <div class="hero-body">
+        <span class="kicker">Человек дня</span>
+        <h1>${esc(p.name)}</h1>
+        <p>${esc(p.teaser)}</p>
+        <span class="btn">Читать историю · ${readMin(p)} мин ${ICONS.arrow}</span>
+      </div>
+    </article>
+    <div class="section-title">Все истории</div>
+    <div class="chips">${fields.map(f => `<button class="chip ${f === filter ? "on" : ""}" onclick="setFilter('${f}')">${f}</button>`).join("")}</div>
+    <div class="grid">${list.length ? list.map(x => `
+      <button class="card" onclick="go('#/p/${x.id}')">
+        <div class="ph"><img loading="lazy" src="${x.photos[0].src}" alt=""></div>
+        <div class="cb"><h3>${esc(x.name)}</h3><span>${esc(x.field)} · ${esc(x.years)}</span></div>
+      </button>`).join("") : `<div class="empty">Здесь появятся истории, которые вы отметите звёздочкой</div>`}
+    </div>`;
+}
+function setFilter(f) { filter = f; renderHome(); }
+
+function renderPerson(id) {
+  const i = PEOPLE.findIndex(x => x.id === id);
+  if (i < 0) return go("#/");
+  const p = PEOPLE[i], n = PEOPLE[(i + 1) % PEOPLE.length];
+  $app.innerHTML = `
+    <div class="gallery">
+      <button class="icon-btn back" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
+      <button class="icon-btn fav ${favs.has(p.id) ? "on" : ""}" onclick="toggleFav('${p.id}', this)" aria-label="В избранное">${ICONS.star}</button>
+      <div class="slides" id="slides">${p.photos.map((ph, k) => `<img ${k ? 'loading="lazy"' : ""} src="${ph.src}" alt="${esc(p.name)}">`).join("")}</div>
+      <div class="dots" id="dots">${p.photos.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</div>
+    </div>
+    <section class="person">
+      <div class="meta">${esc(p.field)} · ${esc(p.years)} · ${readMin(p)} мин</div>
+      <h1>${esc(p.name)}</h1>
+      <div class="role">${esc(p.role)}</div>
+      <div class="story lead">${p.story.slice(0, 3).map(t => `<p>${esc(t)}</p>`).join("")}</div>
+      <blockquote class="quote">«${esc(p.quotes[0])}»<small>— ${esc(p.name)}</small></blockquote>
+      <div class="story">${p.story.slice(3).map(t => `<p>${esc(t)}</p>`).join("")}</div>
+      ${p.quotes[1] ? `<blockquote class="quote">«${esc(p.quotes[1])}»<small>— ${esc(p.name)}</small></blockquote>` : ""}
+      <div class="lesson"><b>Урок на сегодня</b><p>${esc(p.lesson)}</p></div>
+      <button class="next" onclick="go('#/p/${n.id}')">
+        <img src="${n.photos[0].src}" alt="">
+        <div><small>Следующая история</small><strong>${esc(n.name)}</strong></div>
+      </button>
+      <div class="credits">Фото: Wikimedia Commons — ${p.photos.map((ph, k) => `<a href="${ph.page}" target="_blank" rel="noopener">${k + 1}</a> (${esc(ph.license || "свободная лицензия")})`).join(", ")}</div>
+    </section>`;
+  window.scrollTo(0, 0);
+  const s = document.getElementById("slides"), dots = [...document.querySelectorAll("#dots i")];
+  s.addEventListener("scroll", () => {
+    const k = Math.round(s.scrollLeft / s.clientWidth);
+    dots.forEach((d, j) => d.classList.toggle("on", j === k));
+  }, {passive: true});
+}
+function toggleFav(id, el) {
+  favs.has(id) ? favs.delete(id) : favs.add(id);
+  saveFavs(); el.classList.toggle("on", favs.has(id));
+  toast(favs.has(id) ? "Добавлено в избранное" : "Убрано из избранного");
+}
+
+/* ---------- Уведомления ---------- */
+function b64ToUint8(b64) {
+  const pad = "=".repeat((4 - b64.length % 4) % 4);
+  const raw = atob((b64 + pad).replace(/-/g, "+").replace(/_/g, "/"));
+  return Uint8Array.from(raw, c => c.charCodeAt(0));
+}
+async function getSub() {
+  if (!("serviceWorker" in navigator) || !("PushManager" in window)) return null;
+  const reg = await navigator.serviceWorker.ready;
+  return reg.pushManager.getSubscription();
+}
+async function enablePush() {
+  try {
+    const perm = await Notification.requestPermission();
+    if (perm !== "granted") return toast("Разрешение на уведомления не дано");
+    const reg = await navigator.serviceWorker.ready;
+    let sub = await reg.pushManager.getSubscription();
+    if (!sub) sub = await reg.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: b64ToUint8(VAPID_PUBLIC)});
+    toast("Уведомления включены");
+  } catch (e) { toast("Ошибка: " + e.message); }
+  renderSettings();
+}
+async function testPush() {
+  const reg = await navigator.serviceWorker.ready;
+  const p = PEOPLE[todayIndex()];
+  reg.showNotification(p.name, {
+    body: p.teaser, icon: "icons/icon-192.png", badge: "icons/badge-96.png",
+    image: p.photos[0].src, data: {url: "./#/p/" + p.id}, tag: "test"
+  });
+}
+async function copyCode() {
+  const t = document.getElementById("code");
+  try { await navigator.clipboard.writeText(t.value); toast("Код скопирован"); }
+  catch { t.select(); document.execCommand("copy"); toast("Код скопирован"); }
+}
+async function renderSettings() {
+  const supported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  const sub = supported ? await getSub() : null;
+  const granted = supported && Notification.permission === "granted";
+  let state;
+  if (!supported) state = `<div class="status bad"><i></i>Этот браузер не поддерживает уведомления</div><p class="small">Откройте сайт в Chrome на Android и установите на главный экран.</p>`;
+  else if (sub && granted) state = `<div class="status ok"><i></i>Уведомления включены</div>
+      <div class="row" style="margin-top:14px"><button class="btn ghost" onclick="testPush()">Показать пример</button></div>
+      <p class="small">Код подписки — его нужно один раз передать, чтобы сервер знал, куда отправлять ежедневное уведомление.</p>
+      <textarea id="code" readonly>${esc(JSON.stringify(sub))}</textarea>
+      <div class="row" style="margin-top:10px"><button class="btn" onclick="copyCode()">Скопировать код</button></div>`;
+  else if (Notification.permission === "denied") state = `<div class="status bad"><i></i>Уведомления запрещены</div><p class="small">Разрешите их в настройках телефона: Настройки → Приложения → Великие → Уведомления.</p>`;
+  else state = `<div class="status"><i></i>Уведомления выключены</div><button class="btn" onclick="enablePush()">Включить уведомления</button>`;
+  $app.innerHTML = `<header class="top"><button class="icon-btn" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button><div class="logo">Вели<b>кие</b></div><span style="width:40px"></span></header>
+    <section class="panel">
+      <h2>Каждый день в 13:00</h2>
+      <p>Приходит уведомление с коротким рассказом о великом человеке. Нажмите на него — откроется полная история.</p>
+      <div class="box">${state}</div>
+      ${installBox()}
+    </section>`;
+}
+
+let deferredInstall = null;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredInstall = e; if (location.hash === "#/settings") renderSettings(); });
+function installBox() {
+  if (matchMedia("(display-mode: standalone)").matches) return "";
+  return `<div class="box"><div class="status"><i></i>Приложение не установлено</div>
+    <p class="small">Установите на главный экран, чтобы открывать как приложение и получать уведомления надёжнее.</p>
+    ${deferredInstall ? `<button class="btn" onclick="installApp()">Установить</button>` : `<p class="small">Chrome: меню ⋮ → «Добавить на главный экран».</p>`}</div>`;
+}
+async function installApp() { deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; renderSettings(); }
+
+/* ---------- Роутинг ---------- */
+function go(h) { if (location.hash === h) route(); else location.hash = h; }
+function route() {
+  const h = location.hash || "#/";
+  if (h.startsWith("#/p/")) renderPerson(decodeURIComponent(h.slice(4)));
+  else if (h === "#/settings") renderSettings();
+  else renderHome();
+}
+window.addEventListener("hashchange", route);
+
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
+fetch("data/people.json").then(r => r.json()).then(d => { PEOPLE = d; route(); });
+</script>
+</body>
+</html>

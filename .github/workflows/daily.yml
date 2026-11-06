@@ -1,0 +1,22 @@
+name: Ежедневное уведомление
+
+on:
+  schedule:
+    - cron: "0 10 * * *"   # 13:00 по Москве (GitHub может задержать запуск на 5–20 минут)
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pywebpush==2.0.3
+      - run: python send_push.py
+        env:
+          VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
+          SUBSCRIPTIONS: ${{ secrets.SUBSCRIPTIONS }}
+          SITE_URL: https://vladislavbropiton.github.io/velikie/
