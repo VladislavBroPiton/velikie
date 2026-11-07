@@ -1,0 +1,1085 @@
+{
+ "bolt": [
+  {
+   "src": "photos/bolt-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:De_Grasse_and_Bolt_Rio_100m_final_2016.jpg",
+   "license": "CC BY 3.0 br",
+   "file": "De Grasse and Bolt Rio 100m final 2016.jpg"
+  },
+  {
+   "src": "photos/bolt-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Boltbeijing.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Boltbeijing.jpg"
+  },
+  {
+   "src": "photos/bolt-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bolt_se_aposenta_com_medalha_de_ouro_no_4_x_100_metros_1039119-19.08.2016_frz-9613.jpg",
+   "license": "CC BY 3.0 br",
+   "file": "Bolt se aposenta com medalha de ouro no 4 x 100 metros 1039119-19.08.2016 frz-9613.jpg"
+  }
+ ],
+ "ronaldo": [
+  {
+   "src": "photos/ronaldo-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo_Croatia_v_Portugal_2_July_2026-075_(cropped).jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Cristiano Ronaldo Croatia v Portugal 2 July 2026-075 (cropped).jpg"
+  },
+  {
+   "src": "photos/ronaldo-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo_in_2023.jpg",
+   "license": "CC BY 4.0",
+   "file": "Cristiano Ronaldo in 2023.jpg"
+  },
+  {
+   "src": "photos/ronaldo-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo_figure_at_Madame_Tussauds_London_(31094131932).jpg",
+   "license": "CC BY 2.0",
+   "file": "Cristiano Ronaldo figure at Madame Tussauds London (31094131932).jpg"
+  }
+ ],
+ "messi": [
+  {
+   "src": "photos/messi-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo_and_Lionel_Messi_-_Portugal_vs_Argentina,_9th_February_2011.jpg",
+   "license": "CC BY 3.0",
+   "file": "Cristiano Ronaldo and Lionel Messi - Portugal vs Argentina, 9th February 2011.jpg"
+  },
+  {
+   "src": "photos/messi-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:CINvMIA_2023-08-23_-_Lionel_Messi,_Tata_Martino_(PXL_20230824_010525464)_(Messi_crop).jpg",
+   "license": "CC BY 4.0",
+   "file": "CINvMIA 2023-08-23 - Lionel Messi, Tata Martino (PXL 20230824 010525464) (Messi crop).jpg"
+  }
+ ],
+ "maradona": [
+  {
+   "src": "photos/maradona-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Argentina_celebrando_copa_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Argentina celebrando copa (cropped).jpg"
+  },
+  {
+   "src": "photos/maradona-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Maradona_-_grafiti.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Maradona - grafiti.jpg"
+  },
+  {
+   "src": "photos/maradona-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Maradona-Mundial_86_con_la_copa.JPG",
+   "license": "Public domain",
+   "file": "Maradona-Mundial 86 con la copa.JPG"
+  }
+ ],
+ "kobe": [
+  {
+   "src": "photos/kobe-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kobe_Bryant_Dec_2014.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Kobe Bryant Dec 2014.jpg"
+  },
+  {
+   "src": "photos/kobe-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:LeBron_James_vs._Kobe_Bryant_(24848589252)B.jpg",
+   "license": "CC BY 2.0",
+   "file": "LeBron James vs. Kobe Bryant (24848589252)B.jpg"
+  },
+  {
+   "src": "photos/kobe-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kobe_Bryant_vs_Marcin_Gortat.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Kobe Bryant vs Marcin Gortat.jpg"
+  }
+ ],
+ "serena": [],
+ "federer": [
+  {
+   "src": "photos/federer-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:R_federer.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "R federer.jpg"
+  },
+  {
+   "src": "photos/federer-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Match_Federer-Gasquet_(Coupe_Davis_2014).JPG",
+   "license": "CC BY-SA 4.0",
+   "file": "Match Federer-Gasquet (Coupe Davis 2014).JPG"
+  },
+  {
+   "src": "photos/federer-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Federer_Wimbledon_2012_Champion.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Federer Wimbledon 2012 Champion.jpg"
+  }
+ ],
+ "phelps": [
+  {
+   "src": "photos/phelps-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Adrian,_Held,_Phelps,_Dressel_Rio_2016.jpg",
+   "license": "CC BY 3.0 br",
+   "file": "Adrian, Held, Phelps, Dressel Rio 2016.jpg"
+  }
+ ],
+ "senna": [
+  {
+   "src": "photos/senna-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ayrton_Senna_Pesawat_RC_Cropped.jpg",
+   "license": "CC BY 2.0",
+   "file": "Ayrton Senna Pesawat RC Cropped.jpg"
+  },
+  {
+   "src": "photos/senna-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bruno_Senna_demonstrating_Lotus_97T_2010_Japan.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Bruno Senna demonstrating Lotus 97T 2010 Japan.jpg"
+  },
+  {
+   "src": "photos/senna-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ayrton_Senna_with_a_Dog.jpg",
+   "license": "CC BY 2.0",
+   "file": "Ayrton Senna with a Dog.jpg"
+  }
+ ],
+ "schumacher": [
+  {
+   "src": "photos/schumacher-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Michael_Schumacher,_September_2005.jpg",
+   "license": "CC BY 2.0",
+   "file": "Michael Schumacher, September 2005.jpg"
+  },
+  {
+   "src": "photos/schumacher-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Omega_Speedmaster_Omega_Speedmaster_Schumacher_Edition_compo.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Omega Speedmaster Omega Speedmaster Schumacher Edition compo.jpg"
+  },
+  {
+   "src": "photos/schumacher-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Mschumacher_2002.jpg",
+   "license": "CC BY 2.5",
+   "file": "Mschumacher 2002.jpg"
+  }
+ ],
+ "hamilton": [
+  {
+   "src": "photos/hamilton-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hamilton_Brazil_2008_celebrations.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Hamilton Brazil 2008 celebrations.jpg"
+  },
+  {
+   "src": "photos/hamilton-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hamilton_Abuse_Jerez.jpg",
+   "license": "CC BY 2.0",
+   "file": "Hamilton Abuse Jerez.jpg"
+  },
+  {
+   "src": "photos/hamilton-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hamilton_2012_brazil_retire.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Hamilton 2012 brazil retire.jpg"
+  }
+ ],
+ "gretzky": [
+  {
+   "src": "photos/gretzky-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Andrew_Scheer_with_Wayne_Gretzky_(48055697168)_(cropped).jpg",
+   "license": "CC0",
+   "file": "Andrew Scheer with Wayne Gretzky (48055697168) (cropped).jpg"
+  },
+  {
+   "src": "photos/gretzky-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Wayne_Gretzky_jersey.JPG",
+   "license": "Public domain",
+   "file": "Wayne Gretzky jersey.JPG"
+  },
+  {
+   "src": "photos/gretzky-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Wayne_Gretzky_1997.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Wayne Gretzky 1997.jpg"
+  }
+ ],
+ "tigerwoods": [
+  {
+   "src": "photos/tigerwoods-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Donald_Trump_hosts_a_reception_honoring_Black_History_Month_(54341713089)_(cropped).jpg",
+   "license": "Public domain",
+   "file": "President Donald Trump hosts a reception honoring Black History Month (54341713089) (cropped).jpg"
+  },
+  {
+   "src": "photos/tigerwoods-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tiger_Woods_speaks_at_We_Are_One.JPG",
+   "license": "Public domain",
+   "file": "Tiger Woods speaks at We Are One.JPG"
+  },
+  {
+   "src": "photos/tigerwoods-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tiger_Woods_figure_at_Madame_Tussauds_London_(12329858684).jpg",
+   "license": "CC BY 2.0",
+   "file": "Tiger Woods figure at Madame Tussauds London (12329858684).jpg"
+  }
+ ],
+ "marciano": [
+  {
+   "src": "photos/marciano-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Rocky_Marciano_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Rocky Marciano (cropped).jpg"
+  },
+  {
+   "src": "photos/marciano-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Unidentified_man,_boxer_Rocky_Marciano,_Mayor_John_F._Collins,_and_singer_Jimmy_Durante_(10559562993).jpg",
+   "license": "CC BY 2.0",
+   "file": "Unidentified man, boxer Rocky Marciano, Mayor John F. Collins, and singer Jimmy Durante (10559562993).jpg"
+  },
+  {
+   "src": "photos/marciano-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tommy_Harrison_and_Rocky_Marciano_1953.jpg",
+   "license": "Public domain",
+   "file": "Tommy Harrison and Rocky Marciano 1953.jpg"
+  }
+ ],
+ "owens": [
+  {
+   "src": "photos/owens-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Jesse_Owens_1936.jpg",
+   "license": "Public domain",
+   "file": "Jesse Owens 1936.jpg"
+  },
+  {
+   "src": "photos/owens-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Jesse_Owens_figure_at_Madame_Tussauds_London_(30870323410).jpg",
+   "license": "CC BY 2.0",
+   "file": "Jesse Owens figure at Madame Tussauds London (30870323410).jpg"
+  },
+  {
+   "src": "photos/owens-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-R96374,_Berlin,_Olympiade,_Jesse_Owens_beim_Weitsprung_crop.jpg",
+   "license": "CC BY-SA 3.0 de",
+   "file": "Bundesarchiv Bild 183-R96374, Berlin, Olympiade, Jesse Owens beim Weitsprung crop.jpg"
+  }
+ ],
+ "khabib": [
+  {
+   "src": "photos/khabib-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Khabib_nurmagomedov.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Khabib nurmagomedov.jpg"
+  },
+  {
+   "src": "photos/khabib-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sports_Minister_Pavel_Kolobkov,_left,_congratulated_Khabib_Nurmagomedov_on_winning_the_UFC_Championship.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Sports Minister Pavel Kolobkov, left, congratulated Khabib Nurmagomedov on winning the UFC Championship.jpg"
+  }
+ ],
+ "fedor": [
+  {
+   "src": "photos/fedor-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Fedor_Emelianenko_Dec_2015.jpg",
+   "license": "CC BY 3.0",
+   "file": "Fedor Emelianenko Dec 2015.jpg"
+  }
+ ],
+ "karelin": [
+  {
+   "src": "photos/karelin-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Aleksandr_Karelin_WCG-2013.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Aleksandr Karelin WCG-2013.jpg"
+  },
+  {
+   "src": "photos/karelin-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Aleksandr_Karelin_2018.jpg",
+   "license": "CC BY 4.0",
+   "file": "Aleksandr Karelin 2018.jpg"
+  }
+ ],
+ "kasparov": [
+  {
+   "src": "photos/kasparov-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Garri_Kasparow_(18776605665)_(cropped)_2.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Garri Kasparow (18776605665) (cropped) 2.jpg"
+  },
+  {
+   "src": "photos/kasparov-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kasparov-18.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Kasparov-18.jpg"
+  },
+  {
+   "src": "photos/kasparov-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kasparov-11.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Kasparov-11.jpg"
+  }
+ ],
+ "comaneci": [
+  {
+   "src": "photos/comaneci-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Nadia_Com%C4%83neci_Prague1977.jpeg",
+   "license": "Public domain",
+   "file": "Nadia Comăneci Prague1977.jpeg"
+  },
+  {
+   "src": "photos/comaneci-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Nadia_Com%C4%83neci_Moscow1980c.jpg",
+   "license": "Public domain",
+   "file": "Nadia Comăneci Moscow1980c.jpg"
+  },
+  {
+   "src": "photos/comaneci-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Nadia_Com%C4%83neci_Moscow1980.jpeg",
+   "license": "Public domain",
+   "file": "Nadia Comăneci Moscow1980.jpeg"
+  }
+ ],
+ "zidane": [],
+ "yashin": [],
+ "tretiak": [
+  {
+   "src": "photos/tretiak-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladislav_Tretiak.JPG",
+   "license": "CC BY 3.0",
+   "file": "Vladislav Tretiak.JPG"
+  },
+  {
+   "src": "photos/tretiak-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Vladislav_Tretiak_Panini_1979.jpg",
+   "license": "Public domain",
+   "file": "Vladislav Tretiak Panini 1979.jpg"
+  }
+ ],
+ "kharlamov": [
+  {
+   "src": "photos/kharlamov-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Valeri_Kharlamov_2023_cover_of_Russia_cr6.jpg",
+   "license": "Public domain",
+   "file": "Valeri Kharlamov 2023 cover of Russia cr6.jpg"
+  }
+ ],
+ "bubka": [
+  {
+   "src": "photos/bubka-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sergey_Bubka_2013.jpg",
+   "license": "CC BY 2.0",
+   "file": "Sergey Bubka 2013.jpg"
+  }
+ ],
+ "isinbayeva": [
+  {
+   "src": "photos/isinbayeva-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Osaka07_D4A_Isinbayeva_Celebrating.jpg",
+   "license": "CC BY 2.5",
+   "file": "Osaka07 D4A Isinbayeva Celebrating.jpg"
+  },
+  {
+   "src": "photos/isinbayeva-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Osaka07_D4A_Isinbayeva_4m80_jump.jpg",
+   "license": "CC BY 2.5",
+   "file": "Osaka07 D4A Isinbayeva 4m80 jump.jpg"
+  },
+  {
+   "src": "photos/isinbayeva-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Isinbayeva_Berlin_2009.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Isinbayeva Berlin 2009.jpg"
+  }
+ ],
+ "carlsen": [
+  {
+   "src": "photos/carlsen-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:ErnstCarlsenWijkaanZee2004.jpg",
+   "license": "CC0",
+   "file": "ErnstCarlsenWijkaanZee2004.jpg"
+  },
+  {
+   "src": "photos/carlsen-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Caruana-Carlsen_2018_Karlsruhe.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Caruana-Carlsen 2018 Karlsruhe.jpg"
+  },
+  {
+   "src": "photos/carlsen-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Carlsen_Magnus_(30238051906).jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Carlsen Magnus (30238051906).jpg"
+  }
+ ],
+ "musk": [
+  {
+   "src": "photos/musk-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Elon_Musk_-_54820081119_(3x4_cropped,_Rule_of_thirds).jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Elon Musk - 54820081119 (3x4 cropped, Rule of thirds).jpg"
+  },
+  {
+   "src": "photos/musk-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:X_%C3%86_A-Xii,_Elon_Musk_and_Donald_Trump_in_the_Oval_Office_-_P20250207DT-0103_(54320797642).jpg",
+   "license": "Public domain",
+   "file": "X Æ A-Xii, Elon Musk and Donald Trump in the Oval Office - P20250207DT-0103 (54320797642).jpg"
+  },
+  {
+   "src": "photos/musk-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:SpaceX_CEO_Elon_Musk_visits_N%26NC_and_AFSPC_(190416-F-ZZ999-006)_(cropped).jpg",
+   "license": "Public domain",
+   "file": "SpaceX CEO Elon Musk visits N&NC and AFSPC (190416-F-ZZ999-006) (cropped).jpg"
+  }
+ ],
+ "bezos": [
+  {
+   "src": "photos/bezos-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_(3x4_cropped_on_Bezos_and_rotated).jpg",
+   "license": "Public domain",
+   "file": "260202-D-PM193-2205 SECWAR Arsenal of Freedom Tour - Florida (3x4 cropped on Bezos and rotated).jpg"
+  },
+  {
+   "src": "photos/bezos-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Prime_Minister,_Shri_Narendra_Modi_presenting_the_USIBC_Global_Leadership_Award_to_Mr._Jeff_Bezos,_in_Washington_DC,_USA_on_June_07,_2016.jpg",
+   "license": "GODL-India",
+   "file": "The Prime Minister, Shri Narendra Modi presenting the USIBC Global Leadership Award to Mr. Jeff Bezos, in Washington DC, USA on June 07, 2016.jpg"
+  },
+  {
+   "src": "photos/bezos-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Secretary_of_Defense_Ash_Carter_meets_with_Jeff_Bezos,_May_5,_2016_(1).jpg",
+   "license": "CC BY 2.0",
+   "file": "Secretary of Defense Ash Carter meets with Jeff Bezos, May 5, 2016 (1).jpg"
+  }
+ ],
+ "gates": [
+  {
+   "src": "photos/gates-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bill_Gates_at_the_European_Commission_-_P067383-987995_(cropped)_5.jpg",
+   "license": "CC BY 4.0",
+   "file": "Bill Gates at the European Commission - P067383-987995 (cropped) 5.jpg"
+  },
+  {
+   "src": "photos/gates-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Prime_Minister,_Shri_Narendra_Modi_meeting_with_Mr._Bill_Gates,_in_Glasgow,_Scotland_on_November_02,_2021_(2).jpg",
+   "license": "GODL-India",
+   "file": "The Prime Minister, Shri Narendra Modi meeting with Mr. Bill Gates, in Glasgow, Scotland on November 02, 2021 (2).jpg"
+  },
+  {
+   "src": "photos/gates-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Steve_Jobs_and_Bill_Gates_(522695099).jpg",
+   "license": "CC BY 2.0",
+   "file": "Steve Jobs and Bill Gates (522695099).jpg"
+  }
+ ],
+ "buffett": [
+  {
+   "src": "photos/buffett-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Warren Buffett at the 2015 SelectUSA Investment Summit (cropped).jpg"
+  },
+  {
+   "src": "photos/buffett-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Barack_Obama_and_Warren_Buffett_in_the_Oval_Office,_July_14,_2010.jpg",
+   "license": "Public domain",
+   "file": "President Barack Obama and Warren Buffett in the Oval Office, July 14, 2010.jpg"
+  },
+  {
+   "src": "photos/buffett-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kathy_Ireland,_Warren_Buffett_and_Bill_Gates_at_the_2015_Berkshire_Hathaway_Shareholders_Meeting.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Kathy Ireland, Warren Buffett and Bill Gates at the 2015 Berkshire Hathaway Shareholders Meeting.jpg"
+  }
+ ],
+ "zuckerberg": [
+  {
+   "src": "photos/zuckerberg-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:P20260929DT-1655_(55561811540)_(cropped_2).jpg",
+   "license": "Public domain",
+   "file": "P20260929DT-1655 (55561811540) (cropped 2).jpg"
+  },
+  {
+   "src": "photos/zuckerberg-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Zuckerberg_meets_Obama.jpg",
+   "license": "Public domain",
+   "file": "Zuckerberg meets Obama.jpg"
+  },
+  {
+   "src": "photos/zuckerberg-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:President_Trump_Meets_with_Mark_Zuckerberg_(48765153148).jpg",
+   "license": "Public domain",
+   "file": "President Trump Meets with Mark Zuckerberg (48765153148).jpg"
+  }
+ ],
+ "jackma": [
+  {
+   "src": "photos/jackma-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:20th_Anniversary_Schwab_Foundation_Gala_Dinner_(44887783681)_(cropped).jpg",
+   "license": "CC BY 2.0",
+   "file": "20th Anniversary Schwab Foundation Gala Dinner (44887783681) (cropped).jpg"
+  },
+  {
+   "src": "photos/jackma-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:31._ISC-Symposium-Jack_Ma-HSGN_028-01561.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "31. ISC-Symposium-Jack Ma-HSGN 028-01561.jpg"
+  },
+  {
+   "src": "photos/jackma-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:2007ChinatrustGlobalLeadersForum_JackMa.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "2007ChinatrustGlobalLeadersForum JackMa.jpg"
+  }
+ ],
+ "kroc": [
+  {
+   "src": "photos/kroc-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ray_Kroc_1978.jpg",
+   "license": "Public domain",
+   "file": "Ray Kroc 1978.jpg"
+  },
+  {
+   "src": "photos/kroc-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ray_Kroc_und_J%C3%BCrgen_Knauss.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Ray Kroc und Jürgen Knauss.jpg"
+  },
+  {
+   "src": "photos/kroc-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ray_Kroc_1976.jpg",
+   "license": "Public domain",
+   "file": "Ray Kroc 1976.jpg"
+  }
+ ],
+ "sanders": [
+  {
+   "src": "photos/sanders-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Colonel_Harland_Sanders_in_character_(3x4_cropped).jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Colonel Harland Sanders in character (3x4 cropped).jpg"
+  },
+  {
+   "src": "photos/sanders-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Old_photos_of_Col._Sanders_inside_a_KFC.jpg",
+   "license": "CC0",
+   "file": "Old photos of Col. Sanders inside a KFC.jpg"
+  }
+ ],
+ "schultz": [
+  {
+   "src": "photos/schultz-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Howard_Schultz_by_Gage_Skidmore.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Howard Schultz by Gage Skidmore.jpg"
+  },
+  {
+   "src": "photos/schultz-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Howard_Schultz_and_Leroy_Petry_180510-D-SW162-2241_(27170721607).jpg",
+   "license": "CC BY 2.0",
+   "file": "Howard Schultz and Leroy Petry 180510-D-SW162-2241 (27170721607).jpg"
+  },
+  {
+   "src": "photos/schultz-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Howard_Schultz_(46934754891).jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Howard Schultz (46934754891).jpg"
+  }
+ ],
+ "branson": [
+  {
+   "src": "photos/branson-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Richard_Branson_Addresses_the_Our_Ocean_Conference_2015_in_Valpara%C3%ADso_(21783214958)_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Richard Branson Addresses the Our Ocean Conference 2015 in Valparaíso (21783214958) (cropped).jpg"
+  },
+  {
+   "src": "photos/branson-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Secretary_Kerry_Sits_With_Sir_Richard_Branson_for_a_Discussion_on_Climate_Change_in_Davos_(24413230022).jpg",
+   "license": "Public domain",
+   "file": "Secretary Kerry Sits With Sir Richard Branson for a Discussion on Climate Change in Davos (24413230022).jpg"
+  },
+  {
+   "src": "photos/branson-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Richard_Branson_UN_Conference_on_Sustainable_Development_2012.jpg",
+   "license": "CC BY 2.0",
+   "file": "Richard Branson UN Conference on Sustainable Development 2012.jpg"
+  }
+ ],
+ "oprah": [
+  {
+   "src": "photos/oprah-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Oprah_Winfrey_2016.jpg",
+   "license": "Public domain",
+   "file": "Oprah Winfrey 2016.jpg"
+  },
+  {
+   "src": "photos/oprah-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Oprah_Winfrey_with_Barack_and_Michelle_Obama.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Oprah Winfrey with Barack and Michelle Obama.jpg"
+  },
+  {
+   "src": "photos/oprah-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Oprah_Winfrey_in_Str%C3%B8get,_Denmark_on_30_September_2009.jpg",
+   "license": "CC BY 3.0",
+   "file": "Oprah Winfrey in Strøget, Denmark on 30 September 2009.jpg"
+  }
+ ],
+ "walton": [
+  {
+   "src": "photos/walton-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sam_Walton_(1992_2)_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Sam Walton (1992 2) (cropped).jpg"
+  },
+  {
+   "src": "photos/walton-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Walton%27s_Five_and_Dime_store,_Bentonville,_Arkansas.jpg",
+   "license": "CC BY-SA 2.5",
+   "file": "Walton's Five and Dime store, Bentonville, Arkansas.jpg"
+  },
+  {
+   "src": "photos/walton-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:SamWalton-1936.jpg",
+   "license": "Public domain",
+   "file": "SamWalton-1936.jpg"
+  }
+ ],
+ "morita": [
+  {
+   "src": "photos/morita-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Morita_Akio.jpg",
+   "license": "Public domain",
+   "file": "Morita Akio.jpg"
+  },
+  {
+   "src": "photos/morita-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Akio_Morita_e_Laudo_Natel_(1972).jpg",
+   "license": "Public domain",
+   "file": "Akio Morita e Laudo Natel (1972).jpg"
+  }
+ ],
+ "matsushita": [
+  {
+   "src": "photos/matsushita-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Formal_Portrait_of_K%C5%8Dnosuke_Matsushita_in_1929.jpg",
+   "license": "Public domain",
+   "file": "Formal Portrait of Kōnosuke Matsushita in 1929.jpg"
+  },
+  {
+   "src": "photos/matsushita-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Los_Angeles_Mayor_Sam_Yorty_Presenting_Matsushita_Day_Certificate_to_Mr._and_Mrs._K%C5%8Dnosuke_Matsushita_at_Los_Angeles_City_Hall.jpg",
+   "license": "Public domain",
+   "file": "Los Angeles Mayor Sam Yorty Presenting Matsushita Day Certificate to Mr. and Mrs. Kōnosuke Matsushita at Los Angeles City Hall.jpg"
+  },
+  {
+   "src": "photos/matsushita-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Konosuke_Matsushita_01.jpg",
+   "license": "Public domain",
+   "file": "Konosuke Matsushita 01.jpg"
+  }
+ ],
+ "lamborghini": [
+  {
+   "src": "photos/lamborghini-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ferruccio_Lamborghini.jpg",
+   "license": "Attribution",
+   "file": "Ferruccio Lamborghini.jpg"
+  },
+  {
+   "src": "photos/lamborghini-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Lamborghini_C553.jpg",
+   "license": "CC BY 2.0",
+   "file": "Lamborghini C553.jpg"
+  },
+  {
+   "src": "photos/lamborghini-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Lamborghini_22PS_1951.jpg",
+   "license": "Public domain",
+   "file": "Lamborghini 22PS 1951.jpg"
+  }
+ ],
+ "porsche": [
+  {
+   "src": "photos/porsche-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-2005-1017-525,_Dr._Ferdinand_Porsche.jpg",
+   "license": "CC BY-SA 3.0 de",
+   "file": "Bundesarchiv Bild 183-2005-1017-525, Dr. Ferdinand Porsche.jpg"
+  },
+  {
+   "src": "photos/porsche-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_typ12.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Porsche typ12.jpg"
+  },
+  {
+   "src": "photos/porsche-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_356_No._1_Roadster_IMG_0814.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Porsche 356 No. 1 Roadster IMG 0814.jpg"
+  }
+ ],
+ "knight": [
+  {
+   "src": "photos/knight-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Philknightfootball.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Philknightfootball.jpg"
+  },
+  {
+   "src": "photos/knight-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Track_runners_1958_-_Phil_Knight_second_from_right.jpg",
+   "license": "Public domain",
+   "file": "Track runners 1958 - Phil Knight second from right.jpg"
+  },
+  {
+   "src": "photos/knight-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Phil_Knight_Hangar_full_side_-_Hillsboro,_Oregon.JPG",
+   "license": "CC BY-SA 4.0",
+   "file": "Phil Knight Hangar full side - Hillsboro, Oregon.JPG"
+  }
+ ],
+ "carnegie": [
+  {
+   "src": "photos/carnegie-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Andrew_Carnegie,_by_Theodore_Marceau_(cropped)_(2).jpg",
+   "license": "Public domain",
+   "file": "Andrew Carnegie, by Theodore Marceau (cropped) (2).jpg"
+  },
+  {
+   "src": "photos/carnegie-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Syracuse_Carnegie_Library.jpg",
+   "license": "CC BY-SA 2.0",
+   "file": "Syracuse Carnegie Library.jpg"
+  },
+  {
+   "src": "photos/carnegie-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Stained-glass_window_of_Andrew_Carnegie_at_the_former_Carnegie_Library,_Victoria_Street,_St_Albans,_June_2023.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Stained-glass window of Andrew Carnegie at the former Carnegie Library, Victoria Street, St Albans, June 2023.jpg"
+  }
+ ],
+ "rockefeller": [
+  {
+   "src": "photos/rockefeller-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Portrait_of_J._D._Rockefeller.jpg",
+   "license": "Public domain",
+   "file": "Portrait of J. D. Rockefeller.jpg"
+  },
+  {
+   "src": "photos/rockefeller-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Rockefeller,_John_D._1911-f_-_DPLA_-_a4c01b82f56a77390a6f7c463d816be0.jpg",
+   "license": "Public domain",
+   "file": "Rockefeller, John D. 1911-f - DPLA - a4c01b82f56a77390a6f7c463d816be0.jpg"
+  },
+  {
+   "src": "photos/rockefeller-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Rockefeller,_John_D,_1922,_Agence_Rol,_BNF_Gallica_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Rockefeller, John D, 1922, Agence Rol, BNF Gallica (cropped).jpg"
+  }
+ ],
+ "esteelauder": [
+  {
+   "src": "photos/esteelauder-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Est%C3%A9e_Lauder_MYER_Sydney_City_2013.jpg",
+   "license": "CC0",
+   "file": "Estée Lauder MYER Sydney City 2013.jpg"
+  },
+  {
+   "src": "photos/esteelauder-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Est%C3%A9e_Lauder_Farmers_Dunedin_2013.jpg",
+   "license": "CC0",
+   "file": "Estée Lauder Farmers Dunedin 2013.jpg"
+  }
+ ],
+ "wozniak": [
+  {
+   "src": "photos/wozniak-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Steve_Wozniak_by_Gage_Skidmore_3_(cropped).jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Steve Wozniak by Gage Skidmore 3 (cropped).jpg"
+  },
+  {
+   "src": "photos/wozniak-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Steve_Wozniak_in_1968_Pegasus.jpg",
+   "license": "Public domain",
+   "file": "Steve Wozniak in 1968 Pegasus.jpg"
+  },
+  {
+   "src": "photos/wozniak-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Steve_Wozniak_by_Gage_Skidmore_2.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Steve Wozniak by Gage Skidmore 2.jpg"
+  }
+ ],
+ "durov": [
+  {
+   "src": "photos/durov-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Pavel_Durov_sitting_portrait_(cropped).jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Pavel Durov sitting portrait (cropped).jpg"
+  },
+  {
+   "src": "photos/durov-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Pavel_Durov_at_HL_2010.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Pavel Durov at HL 2010.jpg"
+  },
+  {
+   "src": "photos/durov-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Pavel_Durov.jpg",
+   "license": "CC BY 2.0",
+   "file": "Pavel Durov.jpg"
+  }
+ ],
+ "huang": [
+  {
+   "src": "photos/huang-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Jensen_Huang_Stanford_2026-04-30_010_(cropped).jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Jensen Huang Stanford 2026-04-30 010 (cropped).jpg"
+  },
+  {
+   "src": "photos/huang-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Josep_Borrell_with_NVIDIA_CEO_and_founder_Jensen_Huang_(2024).jpg",
+   "license": "CC BY 4.0",
+   "file": "Josep Borrell with NVIDIA CEO and founder Jensen Huang (2024).jpg"
+  },
+  {
+   "src": "photos/huang-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Jensen_Huang_at_Computex_Taipei_20160531a.jpg",
+   "license": "CC BY 2.0",
+   "file": "Jensen Huang at Computex Taipei 20160531a.jpg"
+  }
+ ],
+ "armani": [
+  {
+   "src": "photos/armani-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Giorgio_Armani_1997.jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Giorgio Armani 1997.jpg"
+  },
+  {
+   "src": "photos/armani-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Moment_of_silence_for_Giorgio_Armani_20251001_(4).jpg",
+   "license": "CC BY 4.0",
+   "file": "Moment of silence for Giorgio Armani 20251001 (4).jpg"
+  },
+  {
+   "src": "photos/armani-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Moment_of_silence_for_Giorgio_Armani_20251001_(2).jpg",
+   "license": "CC BY 4.0",
+   "file": "Moment of silence for Giorgio Armani 20251001 (2).jpg"
+  }
+ ],
+ "toyoda": [
+  {
+   "src": "photos/toyoda-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kiichiro_Toyoda.jpg",
+   "license": "Public domain",
+   "file": "Kiichiro Toyoda.jpg"
+  }
+ ],
+ "elvis": [
+  {
+   "src": "photos/elvis-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Elvis_Presley_promoting_Jailhouse_Rock.jpg",
+   "license": "Public domain",
+   "file": "Elvis Presley promoting Jailhouse Rock.jpg"
+  },
+  {
+   "src": "photos/elvis-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Juliet_Prowse-Elvis_Presley_in_G.I._Blues.jpg",
+   "license": "Public domain",
+   "file": "Juliet Prowse-Elvis Presley in G.I. Blues.jpg"
+  },
+  {
+   "src": "photos/elvis-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Elvis_and_Priscilla_Presley_after_divorce_hearing.jpg",
+   "license": "CC BY 4.0",
+   "file": "Elvis and Priscilla Presley after divorce hearing.jpg"
+  }
+ ],
+ "mercury": [
+  {
+   "src": "photos/mercury-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Freddie_Mercury_performing_in_New_Haven,_CT,_November_1977.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Freddie Mercury performing in New Haven, CT, November 1977.jpg"
+  },
+  {
+   "src": "photos/mercury-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Michael_Jackson_%26_Freddie_Mercury_backstage,_1982.jpg",
+   "license": "Public domain",
+   "file": "Michael Jackson & Freddie Mercury backstage, 1982.jpg"
+  },
+  {
+   "src": "photos/mercury-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Freddie_Mercury_(1975_Elektra_publicity_photo).jpg",
+   "license": "Public domain",
+   "file": "Freddie Mercury (1975 Elektra publicity photo).jpg"
+  }
+ ],
+ "lennon": [
+  {
+   "src": "photos/lennon-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:John_Lennon_%22Walls_and_Bridges%22_1974_press_photo_2_(color)_(cropped).jpg",
+   "license": "Public domain",
+   "file": "John Lennon \"Walls and Bridges\" 1974 press photo 2 (color) (cropped).jpg"
+  },
+  {
+   "src": "photos/lennon-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Yoko_Ono_and_John_Lennon_at_John_Sinclair_Freedom_Rally.jpg",
+   "license": "Public domain",
+   "file": "Yoko Ono and John Lennon at John Sinclair Freedom Rally.jpg"
+  },
+  {
+   "src": "photos/lennon-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Streetart_Bild_von_John_Lennon_(Prag).jpg",
+   "license": "CC BY-SA 4.0",
+   "file": "Streetart Bild von John Lennon (Prag).jpg"
+  }
+ ],
+ "marley": [
+  {
+   "src": "photos/marley-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bob_Marley_circa_1976_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Bob Marley circa 1976 (cropped).jpg"
+  },
+  {
+   "src": "photos/marley-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bob_Marley_performing_1975_publicity.jpg",
+   "license": "Public domain",
+   "file": "Bob Marley performing 1975 publicity.jpg"
+  },
+  {
+   "src": "photos/marley-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bob_Marley_apartment_in_London.jpg",
+   "license": "CC BY 2.0",
+   "file": "Bob Marley apartment in London.jpg"
+  }
+ ],
+ "sinatra": [
+  {
+   "src": "photos/sinatra-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Frank_Sinatra_(1957_studio_portrait_close-up).jpg",
+   "license": "Public domain",
+   "file": "Frank Sinatra (1957 studio portrait close-up).jpg"
+  },
+  {
+   "src": "photos/sinatra-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sinatra_family_1949.jpg",
+   "license": "Public domain",
+   "file": "Sinatra family 1949.jpg"
+  },
+  {
+   "src": "photos/sinatra-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sinatra_Shore_Crosby_AFRS.jpg",
+   "license": "Public domain",
+   "file": "Sinatra Shore Crosby AFRS.jpg"
+  }
+ ],
+ "louisarmstrong": [
+  {
+   "src": "photos/louisarmstrong-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Louis_Armstrong_in_Color_(restored).jpg",
+   "license": "Public domain",
+   "file": "Louis Armstrong in Color (restored).jpg"
+  },
+  {
+   "src": "photos/louisarmstrong-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Selmer_Trumpet_given_by_King_George_V_to_Louis_Armstrong.jpg",
+   "license": "CC BY-SA 3.0",
+   "file": "Selmer Trumpet given by King George V to Louis Armstrong.jpg"
+  },
+  {
+   "src": "photos/louisarmstrong-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Maud_Cuney_Hare-154-Louis_Armstrong.jpg",
+   "license": "Public domain",
+   "file": "Maud Cuney Hare-154-Louis Armstrong.jpg"
+  }
+ ],
+ "beethoven": [
+  {
+   "src": "photos/beethoven-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Joseph_Karl_Stieler%27s_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg",
+   "license": "Public domain",
+   "file": "Joseph Karl Stieler's Beethoven mit dem Manuskript der Missa solemnis.jpg"
+  },
+  {
+   "src": "photos/beethoven-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Zentralfriedhof_Vienna_-_Beethoven.JPG",
+   "license": "CC BY-SA 3.0",
+   "file": "Zentralfriedhof Vienna - Beethoven.JPG"
+  },
+  {
+   "src": "photos/beethoven-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ludwig_van_Beethoven,_aged_twenty-six_(1796).jpg",
+   "license": "No restrictions",
+   "file": "Ludwig van Beethoven, aged twenty-six (1796).jpg"
+  }
+ ],
+ "mozart": [
+  {
+   "src": "photos/mozart-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Mozart_Family_-_Wolfgang_Amadeus_Mozart_headshot.jpg",
+   "license": "Public domain",
+   "file": "The Mozart Family - Wolfgang Amadeus Mozart headshot.jpg"
+  },
+  {
+   "src": "photos/mozart-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Wolfgang_Amadeus_Mozart_baptism_record.jpg",
+   "license": "Public domain",
+   "file": "Wolfgang Amadeus Mozart baptism record.jpg"
+  },
+  {
+   "src": "photos/mozart-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Wolfgang-amadeus-mozart_1.jpg",
+   "license": "Public domain",
+   "file": "Wolfgang-amadeus-mozart 1.jpg"
+  }
+ ],
+ "tchaikovsky": [
+  {
+   "src": "photos/tchaikovsky-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tchaikovsky_by_Reutlinger_(cropped).jpg",
+   "license": "Public domain",
+   "file": "Tchaikovsky by Reutlinger (cropped).jpg"
+  },
+  {
+   "src": "photos/tchaikovsky-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tchaikovskys_family_in_1848_From_left_to_right_sitting_Alexandra_Andreevna_Tchaikovska_Alexandra_Ippolit_Ilya_Petrovitch_Tchai_Family_2.jpg",
+   "license": "Public domain",
+   "file": "Tchaikovskys family in 1848 From left to right sitting Alexandra Andreevna Tchaikovska Alexandra Ippolit Ilya Petrovitch Tchai Family 2.jpg"
+  },
+  {
+   "src": "photos/tchaikovsky-3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tchaikovsky_with_wife_Antonina_Miliukova.jpg",
+   "license": "Public domain",
+   "file": "Tchaikovsky with wife Antonina Miliukova.jpg"
+  }
+ ],
+ "tsoi": [
+  {
+   "src": "photos/tsoi-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Victor_Tsoi_1986_cropped.jpg",
+   "license": "Public domain",
+   "file": "Victor Tsoi 1986 cropped.jpg"
+  },
+  {
+   "src": "photos/tsoi-2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tsoi_Wall_2022.jpg",
+   "license": "CC0",
+   "file": "Tsoi Wall 2022.jpg"
+  }
+ ],
+ "vysotsky": [
+  {
+   "src": "photos/vysotsky-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80_%D0%92%D1%8B%D1%81%D0%BE%D1%86%D0%BA%D0%B8%D0%B9_-_%D0%BF%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_(cropped).jpg",
+   "license": "CC BY 4.0",
+   "file": "Владимир Высоцкий - портрет (cropped).jpg"
+  }
+ ]
+}

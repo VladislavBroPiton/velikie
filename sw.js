@@ -1,5 +1,5 @@
 // Service worker: офлайн-кэш и ежедневные push-уведомления
-const CACHE = "velikie-v1";
+const CACHE = "velikie-v2";
 const SHELL = ["./", "index.html", "data/people.json", "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png"];
 
 self.addEventListener("install", e => {

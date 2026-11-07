@@ -55,6 +55,11 @@ img{display:block;max-width:100%}
 .card .cb{padding:10px 12px 12px}
 .card h3{font-size:15px;line-height:1.25;font-weight:800}
 .card span{display:block;margin-top:3px;font-size:12px;color:var(--muted)}
+.section-title em{float:right;font-style:normal;letter-spacing:.04em;text-transform:none;font-weight:600;color:var(--gold-dim)}
+.search{padding:0 var(--pad) 12px}
+.search input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-size:16px;outline:none}
+.search input:focus{border-color:var(--gold-dim)}
+.card.read h3::after{content:" ✓";color:var(--gold)}
 .empty{grid-column:1/-1;color:var(--muted);padding:30px 0;text-align:center}
 
 /* Страница человека */
@@ -149,10 +154,13 @@ function topBar() {
     <button class="icon-btn ${on ? "on" : ""}" onclick="go('#/settings')" aria-label="Уведомления">${ICONS.bell}</button></header>`;
 }
 
+let query = "";
+let homeScroll = 0;
+const read = new Set(JSON.parse(localStorage.getItem("read") || "[]"));
+
 function renderHome() {
   const p = PEOPLE[todayIndex()];
   const fields = ["Все", ...new Set(PEOPLE.map(x => x.field)), "Избранное"];
-  const list = PEOPLE.filter(x => filter === "Все" || (filter === "Избранное" ? favs.has(x.id) : x.field === filter));
   $app.innerHTML = topBar() + `
     <article class="hero" onclick="go('#/p/${p.id}')">
       <img src="${p.photos[0].src}" alt="${esc(p.name)}">
@@ -163,21 +171,34 @@ function renderHome() {
         <span class="btn">Читать историю · ${readMin(p)} мин ${ICONS.arrow}</span>
       </div>
     </article>
-    <div class="section-title">Все истории</div>
+    <div class="section-title">Все истории <em>Прочитано ${read.size} из ${PEOPLE.length}</em></div>
+    <div class="search"><input id="q" type="search" placeholder="Поиск по имени" value="${esc(query)}" autocomplete="off"></div>
     <div class="chips">${fields.map(f => `<button class="chip ${f === filter ? "on" : ""}" onclick="setFilter('${f}')">${f}</button>`).join("")}</div>
-    <div class="grid">${list.length ? list.map(x => `
-      <button class="card" onclick="go('#/p/${x.id}')">
+    <div class="grid" id="grid"></div>`;
+  document.getElementById("q").addEventListener("input", e => { query = e.target.value; renderList(); });
+  renderList();
+  if (homeScroll) { window.scrollTo(0, homeScroll); homeScroll = 0; }
+}
+function renderList() {
+  const q = query.trim().toLowerCase().replace(/ё/g, "е");
+  const list = PEOPLE.filter(x =>
+    (filter === "Все" || (filter === "Избранное" ? favs.has(x.id) : x.field === filter)) &&
+    (!q || x.name.toLowerCase().replace(/ё/g, "е").includes(q)));
+  const empty = filter === "Избранное" && !q ? "Здесь появятся истории, которые вы отметите звёздочкой" : "Никого не нашлось";
+  document.getElementById("grid").innerHTML = list.length ? list.map(x => `
+      <button class="card ${read.has(x.id) ? "read" : ""}" onclick="openPerson('${x.id}')">
         <div class="ph"><img loading="lazy" src="${x.photos[0].src}" alt=""></div>
         <div class="cb"><h3>${esc(x.name)}</h3><span>${esc(x.field)} · ${esc(x.years)}</span></div>
-      </button>`).join("") : `<div class="empty">Здесь появятся истории, которые вы отметите звёздочкой</div>`}
-    </div>`;
+      </button>`).join("") : `<div class="empty">${empty}</div>`;
 }
-function setFilter(f) { filter = f; renderHome(); }
+function openPerson(id) { homeScroll = window.scrollY; go("#/p/" + id); }
+function setFilter(f) { filter = f; const y = window.scrollY; renderHome(); window.scrollTo(0, y); }
 
 function renderPerson(id) {
   const i = PEOPLE.findIndex(x => x.id === id);
   if (i < 0) return go("#/");
   const p = PEOPLE[i], n = PEOPLE[(i + 1) % PEOPLE.length];
+  read.add(p.id); localStorage.setItem("read", JSON.stringify([...read]));
   $app.innerHTML = `
     <div class="gallery">
       <button class="icon-btn back" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
