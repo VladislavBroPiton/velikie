@@ -370,7 +370,101 @@ body.paper .speak{background:rgba(185,138,46,.14);box-shadow:0 0 0 8px rgba(185,
 #award small{display:block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 #award b{font-size:15px}
 
+/* Плавное появление фото: пока грузится — подложка в цвет рубрики */
+.hero,.card .ph,.gallery{background:radial-gradient(120% 80% at 50% 25%,color-mix(in srgb,var(--fc,#e9b44c) 26%,#1b1b1e) 0,#121214 75%)}
+.slides img{background:none}
+img.fade{opacity:0;transition:opacity .6s ease}
+img.fade.ld{opacity:1}
+
+/* Режим «сторис» */
+#stories{position:fixed;inset:0;z-index:65;background:#000;display:none;touch-action:none;user-select:none;-webkit-user-select:none}
+#stories.open{display:block}
+.sbars{position:absolute;left:10px;right:10px;top:calc(10px + env(safe-area-inset-top));z-index:3;display:flex;gap:4px}
+.sbars i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.28);overflow:hidden}
+.sbars b{display:block;height:100%;width:0;background:#fff}
+.sbars i.past b{width:100%}
+.sbars i.now b{animation:sbar var(--t) linear forwards}
+#stories.paused .sbars i.now b,#stories.paused .sl img{animation-play-state:paused}
+@keyframes sbar{to{width:100%}}
+#stories .x{position:absolute;top:calc(24px + env(safe-area-inset-top));right:10px;z-index:4;background:rgba(10,10,11,.45);border-color:rgba(255,255,255,.15)}
+#stories .who{position:absolute;top:calc(28px + env(safe-area-inset-top));left:16px;z-index:4;display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;pointer-events:none}
+#stories .who img{width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:center 20%;box-shadow:0 0 0 2px var(--fc)}
+.sl{position:absolute;inset:0;overflow:hidden;--fc:#e9b44c}
+.sl>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:var(--photo) brightness(.85);animation:skb 9s ease-out forwards}
+@keyframes skb{from{transform:scale(1.12)}to{transform:scale(1)}}
+.sl::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6) 0,rgba(0,0,0,0) 20%,rgba(10,10,11,0) 32%,rgba(10,10,11,.9) 64%,#0a0a0b 100%)}
+.sl .tint{z-index:1}
+.sc{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:0 26px calc(46px + env(safe-area-inset-bottom));animation:sin .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes sin{from{opacity:0;transform:translateY(22px)}}
+.sc h2{font:900 50px/1.02 var(--serif);margin:14px 0 10px}
+.sc .yrs{color:var(--gold);font-weight:700;font-size:15px;letter-spacing:.06em}
+.sc p{margin-top:12px;font-size:18px;line-height:1.5;color:#e2dfd8}
+.slabel{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.sf{display:grid;gap:18px}
+.sf b{display:block;font:900 46px/1 var(--serif);color:var(--gold)}
+.sf span{display:block;margin-top:4px;font-size:16px;color:#d6d3cc}
+.sc .big{font:italic 700 31px/1.32 var(--serif);color:#f6e4b8}
+.sc .q{font:italic 600 30px/1.36 var(--serif);color:#f6efe0}
+.sc .q::before{content:"“";display:block;height:56px;font:900 110px/1 var(--serif);color:var(--gold);opacity:.6}
+.sc .ls{font:700 26px/1.38 var(--serif);color:#fff}
+.sc .path{margin-top:0}
+.sc .path span{font-size:17px}
+.sc .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.sc .acts .btn{justify-content:center;margin:0;padding:14px 10px}
+
+/* Свайп между историями */
+#swipe{position:fixed;top:50%;z-index:30;max-width:70vw;overflow:hidden;text-overflow:ellipsis;padding:10px 16px;border-radius:999px;background:rgba(20,20,22,.92);border:1px solid var(--gold-dim);color:var(--gold);font-size:14px;font-weight:700;white-space:nowrap;opacity:0;pointer-events:none;transform:translateY(-50%)}
+#swipe.r{right:12px}#swipe.l{left:12px}
+
+/* Темы чтения: три кнопки-образца */
+.rd{flex-wrap:wrap;width:min(330px,92vw);justify-content:center}
+.rd .z{flex:1 1 40%}
+.rd .th{flex:1 1 28%;padding:0 8px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px}
+.rd .th span{width:13px;height:13px;flex:none;border-radius:50%;border:1px solid #5a5850}
+.th-dark span{background:#0a0a0b}.th-paper span{background:#f3ead7}.th-night span{background:#4a3519}
+/* «Ночь»: тёплый тёмный фон и приглушённый текст */
+body.night{background:#0d0a07}
+body.night .story p,body.night .path span{color:#b9aa92}
+body.night .story mark,body.night .story.lead p:first-child::first-letter,body.night .path b,body.night .path h4,body.night .links h4,body.night .fact b{color:#bf9046}
+body.night .fact,body.night .lk button,body.night .done,body.night .next{background:#15110c;border-color:#2a2219}
+body.night .fact span,body.night .lk span,body.night .done p{color:#8a7d68}
+body.night .lk strong,body.night .done h3,body.night .next strong{color:#d8c8ac}
+body.night .qslide{background:#110d09;border-color:#2a2219}
+body.night .qslide p{color:#cdbb9c}
+body.night .lesson{filter:brightness(.8) sepia(.2)}
+body.night .gallery img{filter:var(--photo) brightness(.68)}
+body.night .progress{opacity:.55}
+body.night .speak{background:rgba(191,144,70,.1);box-shadow:0 0 0 8px rgba(191,144,70,.1)}
+
+/* Золотые искры */
+.sparks{position:fixed;z-index:80;width:0;height:0;pointer-events:none}
+.sparks i{position:absolute;left:0;top:0;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;background:radial-gradient(circle,#fff8e0 0,#f3c862 45%,rgba(233,180,76,0) 72%);opacity:0;animation:spark var(--t) cubic-bezier(.12,.75,.3,1) var(--d) forwards}
+.sparks i.st{border-radius:0;background:#f8d988;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
+@keyframes spark{0%{opacity:1;transform:translate(0,0) scale(1) rotate(0)}70%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.3) rotate(160deg)}}
+.done .ok.burst{animation:okb .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes okb{40%{transform:scale(1.25)}}
+
+/* Календарь чтения */
+.cal{margin:14px var(--pad) 0;padding:16px 16px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.cal h4{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.cal .m,.cal .g{display:grid;grid-template-columns:repeat(16,1fr);gap:4px}
+.cal .m span{font-size:10px;line-height:1;height:14px;color:var(--muted);white-space:nowrap;overflow:visible}
+.cal .g{grid-template-rows:repeat(7,auto);grid-auto-flow:column}
+.cal .g i{aspect-ratio:1;border-radius:4px;background:#1f1f23}
+.cal .g i.on{background:linear-gradient(135deg,#f6d58c,var(--gold));box-shadow:0 0 8px rgba(233,180,76,.45)}
+.cal .g i.today{outline:1.5px solid var(--gold-dim);outline-offset:1px}
+.cal .g i.fut{visibility:hidden}
+.cal p{margin-top:12px;font-size:12px;color:var(--muted)}
+
+/* Цитата: две кнопки */
+.qacts{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:20px}
+.qacts .share{margin-top:0}
+.cover .go{gap:14px}
+.cover .go .down{letter-spacing:.12em;font-size:12px}
+.cover .go .down i{width:32px;height:32px}
+
 @media (prefers-reduced-motion:reduce){
+  .sl>img,.sc,.done .ok.burst{animation:none}
   .hero img,.down i,#splash img,.pop svg,.roll svg{animation:none}
   .dock,#award{transition:none}
 }
@@ -384,6 +478,8 @@ body.paper .speak{background:rgba(185,138,46,.14);box-shadow:0 0 0 8px rgba(185,
 <nav class="dock" id="dock"></nav>
 <div class="rd" id="rd"></div>
 <div id="award"></div>
+<div id="stories"></div>
+<div id="swipe"></div>
 <div id="viewer"><button class="icon-btn x" onclick="closeViewer()" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><img id="vimg" alt=""><div class="hint">Двойной тап — приблизить, двумя пальцами — масштаб</div></div>
 
 <script>
@@ -411,6 +507,8 @@ const ICONS = {
   medal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 2l3 7M16.5 2l-3 7"/><circle cx="12" cy="15" r="6.5"/><path d="M12 11.6l1.1 2.1 2.3.3-1.7 1.6.4 2.3-2.1-1.1-2.1 1.1.4-2.3-1.7-1.6 2.3-.3z" fill="currentColor" stroke="none"/></svg>',
   ear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18v-5.5a8.5 8.5 0 0 1 17 0V18"/><path d="M20.5 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3.5 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2h-3z"/></svg>',
   stop: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z"/></svg>',
   lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h14"/></svg>'
 };
@@ -543,7 +641,7 @@ function heroHtml() {
         <h1>Откроется в&nbsp;13:00</h1>
         <p>Новый герой приходит каждый день вместе с уведомлением. До встречи осталось:</p>
         <div class="count" id="cd">${countHtml(left)}</div>
-        <button class="btn ghost" onclick="event.stopPropagation(); openPerson('${y.id}')">Пока — вчерашний герой ${ICONS.arrow}</button>
+        <button class="btn ghost" onclick="event.stopPropagation(); openPerson('${y.id}')">Вчерашний герой ${ICONS.arrow}</button>
       </div>
     </article>`;
   }
@@ -612,6 +710,7 @@ function renderHome() {
   if (homeScroll) { window.scrollTo(0, homeScroll); homeScroll = 0; }
 }
 function renderList() {
+  setTimeout(() => fadeImgs(document.getElementById("grid")));
   const q = query.trim().toLowerCase().replace(/ё/g, "е");
   const list = PEOPLE.filter(x =>
     (filter === "Все" || (filter === "Избранное" ? favs.has(x.id) : x.field === filter)) &&
@@ -631,7 +730,8 @@ function setFilter(f) { filter = f; const y = window.scrollY; renderHome(); wind
 
 function quoteSlide(p, k) {
   return `<figure class="qslide"><p>${esc(nbsp(p.quotes[k]))}</p><small>${esc(p.name)}</small>
-    <button class="share" onclick="shareQuote('${p.id}', ${k})">${ICONS.share}Поделиться цитатой</button></figure>`;
+    <div class="qacts"><button class="share" onclick="shareQuote('${p.id}', ${k})">${ICONS.share}Поделиться</button>
+    <button class="share" onclick="shareWallpaper('${p.id}', ${k})">${ICONS.phone}Обои</button></div></figure>`;
 }
 // абзац с выделенной фразой
 function para(t, hl) {
@@ -665,6 +765,7 @@ function renderPerson(id) {
         <div class="go">
           <button class="down" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})"><i>${ICONS.down}</i>Читать</button>
           <button class="down" data-listen onclick="listen()"><i>${ICONS.ear}</i><span>Слушать</span></button>
+          <button class="down" onclick="openStories()"><i>${ICONS.bolt}</i>Кратко</button>
         </div>
       </div>
       <i class="line"></i>
@@ -774,22 +875,23 @@ function stopTts() {
 
 /* ---------- Режим чтения: размер текста и «бумага» ---------- */
 const FZ = [0.9, 1, 1.12, 1.25, 1.4];
-const rd = Object.assign({z: 1, paper: false}, JSON.parse(localStorage.getItem("rd") || "{}"));
+const rd = Object.assign({z: 1, t: "dark"}, JSON.parse(localStorage.getItem("rd") || "{}"));
+if ("paper" in rd) { if (rd.paper) rd.t = "paper"; delete rd.paper; }
+const THEMES = [["dark", "Тёмная"], ["paper", "Бумага"], ["night", "Ночь"]];
 const $rd = document.getElementById("rd");
 function applyRd() {
   document.body.style.setProperty("--fz", FZ[rd.z]);
-  document.body.classList.toggle("paper", rd.paper && !!current);
+  THEMES.forEach(([k]) => k !== "dark" && document.body.classList.toggle(k, rd.t === k && !!current));
   localStorage.setItem("rd", JSON.stringify(rd));
   $rd.innerHTML = `<button class="z" onclick="rdSet('z', -1)" ${rd.z ? "" : "disabled"}><small>A</small>−</button>
-    <button class="z" onclick="rdSet('z', 1)" ${rd.z < FZ.length - 1 ? "" : "disabled"}>A+</button><i></i>
-    <button class="${rd.paper ? "" : "on"}" onclick="rdSet('paper', false)">Тёмная</button>
-    <button class="${rd.paper ? "on" : ""}" onclick="rdSet('paper', true)">Бумага</button>`;
+    <button class="z" onclick="rdSet('z', 1)" ${rd.z < FZ.length - 1 ? "" : "disabled"}>A+</button>
+    ${THEMES.map(([k, l]) => `<button class="th th-${k} ${rd.t === k ? "on" : ""}" onclick="rdSet('t', '${k}')"><span></span>${l}</button>`).join("")}`;
 }
 function rdSet(k, v) {
   // при смене размера держим на экране тот же абзац
   const anchor = [...document.querySelectorAll(".story p")].find(p => p.getBoundingClientRect().bottom > 80);
   const top = anchor && anchor.getBoundingClientRect().top;
-  if (k === "z") rd.z = Math.min(FZ.length - 1, Math.max(0, rd.z + v)); else rd.paper = v;
+  if (k === "z") rd.z = Math.min(FZ.length - 1, Math.max(0, rd.z + v)); else rd.t = v;
   applyRd();
   if (anchor) scrollBy(0, anchor.getBoundingClientRect().top - top);
 }
@@ -852,6 +954,7 @@ function showAward() {
   el.innerHTML = `${medalHtml(a)}<div><small>Новая награда</small><b>${esc(a.t)}</b></div>`;
   el.onclick = () => go("#/awards");
   requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("show")));
+  setTimeout(() => sparks(el.querySelector(".medal"), true), 380);
   if (navigator.vibrate && navigator.userActivation?.hasBeenActive) navigator.vibrate([20, 60, 30]);
   setTimeout(() => { el.classList.remove("show"); setTimeout(() => { awardQ.shift(); showAward(); }, 600); }, 2800);
 }
@@ -864,6 +967,7 @@ function renderAwards() {
       <div class="fact"><b>${streakNow()}</b><span>дней подряд сейчас</span></div>
       <div class="fact"><b>${streakBest()}</b><span>лучшая серия</span></div>
     </div>
+    ${calHtml()}
     <div class="awards">${AWARDS.map(a => {
       const n = need(a), v = Math.min(a.v(), n), ok = v >= n;
       return `<div class="aw ${ok ? "" : "off"}">${medalHtml(a)}<b>${esc(a.t)}</b><span>${esc(a.d)}</span>
@@ -909,6 +1013,198 @@ function mapList() {
       <div><strong>${esc(x.name)}</strong><span>${esc(x.field)} · ${esc(x.years)}</span></div></button>`).join("");
 }
 
+/* ---------- Плавное появление фото ---------- */
+function fadeImgs(root) {
+  // уже загруженные (из кэша) показываем сразу, остальные проявляются по мере загрузки
+  root.querySelectorAll("img:not(.fade)").forEach(i => {
+    if (i.complete && i.naturalWidth) return;
+    i.classList.add("fade");
+    const on = () => i.classList.add("ld");
+    i.addEventListener("load", on, {once: true}); i.addEventListener("error", on, {once: true});
+  });
+}
+
+/* ---------- Режим «сторис»: коротко за полминуты ---------- */
+const $st = document.getElementById("stories");
+let ST = null, stAfter = null, stHold = 0;
+function storySlides(p) {
+  const f = FACTS[p.id] || [], ex = EXTRA[p.id] || {}, ph = k => p.photos[k % p.photos.length].src, s = [];
+  s.push({img: ph(0), t: 5, html: `<span class="tag">${esc(p.field)}</span><h2>${esc(p.name)}</h2><div class="yrs">${esc(p.years)}</div><p>${esc(nbsp(p.teaser))}</p>`});
+  if (f.length) s.push({img: ph(1), t: 6, html: `<div class="slabel">В цифрах</div><div class="sf">${f.map(x => `<div><b>${esc(x.v)}</b><span>${esc(x.l)}</span></div>`).join("")}</div>`});
+  if (ex.timeline && ex.timeline.length) s.push({img: ph(2), t: 7, html: `<div class="slabel">Путь</div><div class="path"><ol>${ex.timeline.map(e => `<li><b>${esc(e.y)}</b><span>${esc(e.t)}</span></li>`).join("")}</ol></div>`});
+  if (ex.highlight) s.push({img: ph(1), t: 6, html: `<div class="slabel">Главное</div><p class="big">${esc(nbsp(ex.highlight))}</p>`});
+  if (p.quotes[0]) s.push({img: ph(0), t: 6, html: `<p class="q">${esc(nbsp(p.quotes[0]))}</p><div class="slabel" style="margin:18px 0 0">${esc(p.name)}</div>`});
+  s.push({img: ph(2), t: 8, last: true, html: `<div class="slabel">Урок</div><p class="ls">${esc(nbsp(p.lesson))}</p>
+    <div class="acts"><button class="btn ghost" onclick="stFull()">Читать полностью</button><button class="btn" onclick="stNext()">Дальше ${ICONS.arrow}</button></div>`});
+  return s;
+}
+function openStories() {
+  if (!current) return;
+  if (tts) stopTts();
+  ST = {p: current, s: storySlides(current), i: 0};
+  $st.style.setProperty("--fc", fc(current.field));
+  $st.innerHTML = `<div class="sbars">${ST.s.map(() => "<i><b></b></i>").join("")}</div>
+    <div class="who"><img src="${current.photos[0].src}" alt="">${esc(current.name)}</div>
+    <button class="icon-btn x" onclick="closeStories()" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="sl" id="sl"></div>`;
+  $st.classList.add("open"); $st.classList.remove("paused");
+  history.pushState({stories: 1}, "");
+  stShow(0);
+}
+function stShow(i) {
+  ST.i = i;
+  const sl = ST.s[i];
+  document.getElementById("sl").innerHTML = `<img src="${sl.img}" alt=""><i class="tint"></i><div class="sc">${sl.html}</div>`;
+  [...$st.querySelectorAll(".sbars i")].forEach((b, k) => {
+    b.className = k < i ? "past" : k === i ? "now" : "";
+    b.style.setProperty("--t", sl.t + "s");
+  });
+  const bar = $st.querySelectorAll(".sbars i")[i].firstChild;
+  bar.onanimationend = () => { if (ST && ST.i === i && !sl.last) stShow(i + 1); };
+}
+function stMove(d) { if (!ST) return; const i = ST.i + d; if (i >= 0 && i < ST.s.length) stShow(i); }
+function closeStories(fromPop) {
+  if (!$st.classList.contains("open")) return;
+  $st.classList.remove("open"); ST = null; $st.innerHTML = "";
+  if (!fromPop) history.back();
+}
+function stFull() { stAfter = () => document.getElementById("story").scrollIntoView({behavior: "smooth"}); closeStories(); }
+function stNext() {
+  const i = PEOPLE.indexOf(ST.p), n = PEOPLE[(i + 1) % PEOPLE.length];
+  stAfter = () => go("#/p/" + n.id); closeStories();
+}
+$st.addEventListener("pointerdown", e => {
+  if (e.target.closest("button")) return;
+  stHold = setTimeout(() => { stHold = -1; $st.classList.add("paused"); }, 220);
+});
+$st.addEventListener("pointerup", e => {
+  if (e.target.closest("button")) return;
+  if (stHold === -1) { $st.classList.remove("paused"); stHold = 0; return; }   // отпустили после удержания
+  clearTimeout(stHold); stHold = 0;
+  stMove(e.clientX < innerWidth / 3 ? -1 : 1);
+});
+$st.addEventListener("pointercancel", () => { clearTimeout(stHold); stHold = 0; $st.classList.remove("paused"); });
+
+/* ---------- Свайп между историями ---------- */
+const $sw = document.getElementById("swipe");
+let sw = null;
+const swNeighbor = dx => { const N = PEOPLE.length, i = PEOPLE.indexOf(current); return PEOPLE[(i + (dx < 0 ? 1 : -1) + N) % N]; };
+addEventListener("touchstart", e => {
+  sw = null;
+  if (!current || e.touches.length > 1 || e.target.closest(".slides,.lk,#viewer,#stories,.rd,.dock,.qacts")) return;
+  sw = {x: e.touches[0].clientX, y: e.touches[0].clientY, dx: 0, h: null};
+}, {passive: true});
+addEventListener("touchmove", e => {
+  if (!sw) return;
+  const dx = e.touches[0].clientX - sw.x, dy = e.touches[0].clientY - sw.y;
+  if (sw.h === null && Math.hypot(dx, dy) > 12) sw.h = Math.abs(dx) > Math.abs(dy) * 1.8;
+  if (!sw.h) return;
+  sw.dx = dx;
+  const n = swNeighbor(dx);
+  $app.style.transition = "none"; $app.style.transform = `translateX(${dx * 0.3}px)`;
+  $sw.className = dx < 0 ? "r" : "l";
+  $sw.textContent = dx < 0 ? `${n.name} →` : `← ${n.name}`;
+  $sw.style.opacity = Math.min(1, Math.abs(dx) / 90);
+}, {passive: true});
+addEventListener("touchend", () => {
+  if (!sw) return;
+  const {dx, h} = sw; sw = null;
+  $app.style.transition = "transform .25s"; $app.style.transform = ""; $sw.style.opacity = 0;
+  if (h && Math.abs(dx) > 90 && current) {
+    if (navigator.vibrate) navigator.vibrate(10);
+    go("#/p/" + swNeighbor(dx).id);
+  }
+});
+
+/* ---------- Золотые искры ---------- */
+function sparks(el, big) {
+  if (reduced || !el) return;
+  const r = el.getBoundingClientRect(), box = document.createElement("div");
+  box.className = "sparks";
+  box.style.left = r.left + r.width / 2 + "px"; box.style.top = r.top + r.height / 2 + "px";
+  const n = big ? 34 : 24;
+  for (let k = 0; k < n; k++) {
+    const a = Math.random() * Math.PI * 2, d = (big ? 70 : 50) + Math.random() * (big ? 150 : 100);
+    const s = document.createElement("i");
+    if (k % 4 === 0) s.className = "st";
+    s.style.cssText = `--x:${Math.cos(a) * d}px;--y:${Math.sin(a) * d + 30}px;--s:${(k % 4 ? 5 : 11) + Math.random() * 6}px;--d:${Math.random() * 0.15}s;--t:${0.8 + Math.random() * 0.6}s`;
+    box.append(s);
+  }
+  document.body.append(box);
+  setTimeout(() => box.remove(), 1800);
+}
+let doneObs = null;
+function watchDone() {
+  if (doneObs) doneObs.disconnect();
+  const ok = document.querySelector("#done .ok");
+  if (!ok || !("IntersectionObserver" in window)) return;
+  doneObs = new IntersectionObserver(es => {
+    if (!es[0].isIntersecting) return;
+    doneObs.disconnect();
+    ok.classList.add("burst"); sparks(ok);
+    if (navigator.vibrate && navigator.userActivation?.hasBeenActive) navigator.vibrate(15);
+  }, {threshold: 0.9});
+  doneObs.observe(ok);
+}
+
+/* ---------- Календарь дней чтения ---------- */
+function calHtml() {
+  const W = 16, MN = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+  const today = new Date(); today.setHours(12, 0, 0, 0);
+  const start = new Date(today); start.setDate(today.getDate() - (today.getDay() + 6) % 7 - (W - 1) * 7);
+  let cells = "", months = "", last = -1;
+  for (let w = 0; w < W; w++) {
+    let lab = "";
+    for (let d = 0; d < 7; d++) {
+      const x = new Date(start); x.setDate(start.getDate() + w * 7 + d);
+      const k = dayKey(x);
+      if (d === 0 && x.getMonth() !== last && (w === 0 || x.getDate() <= 7)) { lab = MN[x.getMonth()]; last = x.getMonth(); }
+      cells += `<i class="${days.has(k) ? "on" : ""} ${k === dayKey() ? "today" : ""} ${x > today ? "fut" : ""}"></i>`;
+    }
+    months += `<span>${lab}</span>`;
+  }
+  return `<div class="cal"><h4>Дни чтения</h4><div class="m">${months}</div><div class="g">${cells}</div>
+    <p>Золотом — дни, когда вы читали. Всего таких дней: ${days.size}</p></div>`;
+}
+
+/* ---------- Обои с цитатой для экрана блокировки ---------- */
+async function shareWallpaper(id, k) {
+  const p = PEOPLE.find(x => x.id === id);
+  toast("Готовлю обои…");
+  const W = 1080, H = 2340, c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const ctx = c.getContext("2d");
+  await Promise.all([document.fonts.load('italic 600 60px "Playfair Display"'), document.fonts.load('900 60px "Playfair Display"')]);
+  const img = new Image(); img.src = p.photos[0].src; await img.decode();
+  const sc = Math.max(W / img.width, H / img.height), iw = img.width * sc, ih = img.height * sc;
+  ctx.fillStyle = "#0a0a0b"; ctx.fillRect(0, 0, W, H);
+  ctx.filter = "grayscale(.3) sepia(.25) contrast(1.05) brightness(.7)";
+  ctx.drawImage(img, (W - iw) / 2, (H - ih) * 0.22, iw, ih);
+  ctx.filter = "none";
+  // лёгкий оттенок рубрики
+  ctx.globalCompositeOperation = "soft-light"; ctx.globalAlpha = 0.35;
+  ctx.fillStyle = fc(p.field); ctx.fillRect(0, 0, W, H);
+  ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+  // сверху чуть темнее — под часы, снизу плотно — под текст
+  const gt = ctx.createLinearGradient(0, 0, 0, 560);
+  gt.addColorStop(0, "rgba(10,10,11,.55)"); gt.addColorStop(1, "rgba(10,10,11,0)");
+  ctx.fillStyle = gt; ctx.fillRect(0, 0, W, 560);
+  const g = ctx.createLinearGradient(0, H * 0.38, 0, H);
+  g.addColorStop(0, "rgba(10,10,11,0)"); g.addColorStop(0.42, "rgba(10,10,11,.86)"); g.addColorStop(1, "#0a0a0b");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.textAlign = "center";
+  const t = fit(ctx, "«" + nbsp(p.quotes[k]) + "»", s => `italic 600 ${s}px "Playfair Display"`, 78, W - 190, 620, 42);
+  let y = H * 0.68 - t.lines.length * t.lh / 2 + t.size * 0.8;
+  ctx.fillStyle = "#f6efe0";
+  t.lines.forEach(l => { ctx.fillText(l, W / 2, y); y += t.lh; });
+  ctx.fillStyle = "#e9b44c"; ctx.fillRect(W / 2 - 40, y + 4, 80, 4);
+  ctx.font = '800 34px system-ui, sans-serif'; ctx.letterSpacing = "6px";
+  ctx.fillText(p.name.toUpperCase(), W / 2, y + 80);
+  ctx.font = '900 24px system-ui, sans-serif'; ctx.letterSpacing = "12px"; ctx.fillStyle = "rgba(233,180,76,.55)";
+  ctx.fillText("ВЕЛИКИЕ", W / 2 + 6, H - 170); ctx.letterSpacing = "0px";
+  await shareCanvas(c, p);
+}
+
 let current = null;
 function toggleFav(id) {
   favs.has(id) ? favs.delete(id) : favs.add(id);
@@ -935,6 +1231,7 @@ function updateProgress() {
   const doneTop = done ? done.getBoundingClientRect().top : 1e9;
   $dock.classList.toggle("show", scrollY > innerHeight * 0.75 && doneTop > innerHeight - 40);
   if (!$dock.classList.contains("show")) rdToggle(false);
+  else if (!localStorage.getItem("swhint")) { localStorage.setItem("swhint", 1); toast("Свайп влево — следующая история"); }
   clearTimeout(saveT);
   saveT = setTimeout(() => {
     if (!current) return;
@@ -961,7 +1258,10 @@ function closeViewer(fromPop) {
   $viewer.classList.remove("open");
   if (!fromPop) history.back();
 }
-addEventListener("popstate", () => closeViewer(true));
+addEventListener("popstate", () => {
+  closeViewer(true); closeStories(true);
+  const f = stAfter; stAfter = null; if (f) f();
+});
 function zoomAt(cx, cy, s) {
   s = Math.min(5, Math.max(1, s));
   vs.x = cx - (cx - vs.x) * s / vs.s; vs.y = cy - (cy - vs.y) * s / vs.s; vs.s = s;
@@ -1177,6 +1477,7 @@ function render() {
   const h = location.hash || "#/";
   rendered = h;
   if (tts) stopTts();
+  if (ST) closeStories(true);
   if (h.startsWith("#/p/")) renderPerson(decodeURIComponent(h.slice(4)));
   else if (h === "#/settings") { current = null; renderSettings(); }
   else if (h === "#/map") { current = null; renderMap(); }
@@ -1192,6 +1493,10 @@ function render() {
   }
   applyRd();
   updateProgress();
+  fadeImgs($app);
+  if (current) {
+    watchDone();
+  }
 }
 function route() {
   if (!document.startViewTransition || reduced || !rendered) return render();
