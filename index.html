@@ -85,8 +85,8 @@ img{display:block;max-width:100%}
 .card .ph::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,0) 38%,rgba(10,10,11,.94) 100%)}
 .card .cb{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:12px}
 .card h3{font:800 18px/1.15 var(--serif);text-shadow:0 1px 12px rgba(0,0,0,.6)}
-.card .tag{margin-bottom:6px;font-size:10px;padding:3px 7px 3px 6px;border-radius:6px;background:rgba(10,10,11,.72)}
-.card .tag::before{box-shadow:none}
+.card .tag{position:absolute;top:9px;left:9px;z-index:2;gap:5px;font-size:9px;letter-spacing:.1em;padding:4px 9px 4px 7px;border-radius:999px;background:rgba(10,10,11,.66);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
+.card .tag::before{width:5px;height:5px;box-shadow:none}
 .card .yrs{display:block;margin-top:4px;font-size:12px;color:#b9b6ae}
 .card.read::after{content:"✓";position:absolute;top:10px;right:10px;z-index:2;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#0a0a0b;font-size:13px;font-weight:900}
 .search{padding:0 var(--pad) 12px}
@@ -456,7 +456,8 @@ const nbsp = s => s.replace(/ —/g, " —");
 function cardHtml(x, lazy = true) {
   return `<button class="card ${read.has(x.id) ? "read" : ""}" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}', this)">
         <div class="ph grain"><img ${lazy ? 'loading="lazy"' : ""} src="${x.photos[0].src}" alt="" data-id="${x.id}"><i class="tint"></i></div>
-        <div class="cb"><span class="tag">${esc(x.field)}</span><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span></div>
+        <span class="tag">${esc(x.field)}</span>
+        <div class="cb"><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span></div>
       </button>`;
 }
 
