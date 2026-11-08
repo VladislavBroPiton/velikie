@@ -85,7 +85,8 @@ img{display:block;max-width:100%}
 .card .ph::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,0) 38%,rgba(10,10,11,.94) 100%)}
 .card .cb{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:12px}
 .card h3{font:800 18px/1.15 var(--serif);text-shadow:0 1px 12px rgba(0,0,0,.6)}
-.card .tag{margin-bottom:6px;font-size:10px}
+.card .tag{margin-bottom:6px;font-size:10px;padding:3px 7px 3px 6px;border-radius:6px;background:rgba(10,10,11,.72)}
+.card .tag::before{box-shadow:none}
 .card .yrs{display:block;margin-top:4px;font-size:12px;color:#b9b6ae}
 .card.read::after{content:"✓";position:absolute;top:10px;right:10px;z-index:2;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#0a0a0b;font-size:13px;font-weight:900}
 .search{padding:0 var(--pad) 12px}
@@ -166,12 +167,99 @@ textarea{width:100%;height:110px;margin-top:12px;padding:10px;border-radius:10px
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
 .toast.show{opacity:1}
 
+/* Неделя: круглые портреты прошлых дней */
+.h2{margin:30px var(--pad) 14px;font:800 22px/1.15 var(--serif)}
+.h2 small{display:block;margin-top:4px;font:600 13px/1.3 system-ui,sans-serif;color:var(--muted)}
+.week{display:flex;gap:14px;overflow-x:auto;padding:2px var(--pad) 4px;scrollbar-width:none}
+.week::-webkit-scrollbar,.shelf::-webkit-scrollbar{display:none}
+.wk{flex:none;width:74px;text-align:center}
+.wk .ring{width:74px;height:74px;padding:3px;border-radius:50%;background:conic-gradient(var(--gold),#f6d58c,var(--gold-dim),var(--gold))}
+.wk.read .ring{background:var(--line)}
+.wk img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 20%;border:3px solid var(--bg);filter:var(--photo)}
+.wk b{display:block;margin-top:6px;font-size:12px;line-height:1.2;font-weight:700}
+.wk span{display:block;font-size:11px;color:var(--muted)}
+
+/* Продолжить чтение */
+.resume{display:flex;align-items:center;gap:14px;width:calc(100% - 2 * var(--pad));margin:26px var(--pad) 0;padding:12px;border-radius:16px;background:var(--card);border:1px solid var(--line);text-align:left}
+.resume img{width:54px;height:54px;flex:none;border-radius:12px;object-fit:cover;filter:var(--photo)}
+.resume div{flex:1;min-width:0}
+.resume small{display:block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.resume strong{display:block;font:800 18px/1.2 var(--serif);margin:2px 0 8px}
+.resume .bar{height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.resume .bar i{display:block;height:100%;background:var(--gold)}
+
+/* Цитата дня */
+.qday{display:block;width:calc(100% - 2 * var(--pad));margin:30px var(--pad) 0;padding:26px 22px 22px;border-radius:20px;text-align:left;background:radial-gradient(110% 120% at 0 0,#24190a 0,#121110 60%,var(--card) 100%);border:1px solid #3a2f17;position:relative;overflow:hidden}
+.qday::before{content:"“";position:absolute;top:-34px;right:10px;font:900 150px/1 var(--serif);color:var(--gold);opacity:.18}
+.qday small{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.qday p{font:italic 600 21px/1.4 var(--serif);color:#f6efe0}
+.qday span{display:block;margin-top:12px;font-size:13px;color:var(--muted)}
+
+/* Полки-подборки */
+.shelf{display:flex;gap:10px;overflow-x:auto;padding:0 var(--pad) 4px;scroll-padding-inline:var(--pad);scroll-snap-type:x proximity;scrollbar-width:none}
+.shelf .card{flex:none;width:138px;scroll-snap-align:start}
+.shelf .card h3{font-size:16px}
+
+/* Обложка: свечение в цвет рубрики */
+.gallery::after{background:radial-gradient(130% 45% at 50% 100%,color-mix(in srgb,var(--fc) 30%,transparent) 0,transparent 70%),linear-gradient(180deg,rgba(10,10,11,.55) 0,rgba(10,10,11,0) 18%,rgba(10,10,11,0) 40%,rgba(10,10,11,.85) 72%,#0a0a0b 100%)}
+.gallery .line{position:absolute;left:var(--pad);bottom:0;z-index:3;width:56px;height:3px;border-radius:2px;background:var(--fc);box-shadow:0 0 14px var(--fc)}
+.slides img{cursor:zoom-in}
+
+/* Выделенная фраза */
+.story mark{background:none;color:var(--gold);font:italic 700 1.12em/1.5 var(--serif)}
+
+/* Лента жизни */
+.path{margin-top:34px}
+.path h4,.done h4{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.path ol{list-style:none;position:relative}
+.path ol::before{content:"";position:absolute;left:70px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold-dim),var(--line))}
+.path li{position:relative;display:flex;gap:28px;align-items:baseline;padding:0 0 18px}
+.path li:last-child{padding-bottom:0}
+.path li::before{content:"";position:absolute;left:65px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.path li:last-child::before{background:var(--gold);box-shadow:0 0 12px rgba(233,180,76,.6)}
+.path b{flex:none;width:58px;text-align:right;font:800 17px/1.3 var(--serif);color:var(--gold)}
+.path span{font-size:16px;line-height:1.4;color:#e6e3dc}
+
+/* Финальный экран */
+.done{margin-top:40px;padding:34px 22px 24px;border-radius:24px;text-align:center;background:linear-gradient(180deg,#15130f,#0f0f11);border:1px solid var(--line)}
+.done .ok{width:64px;height:64px;margin:0 auto 16px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#0a0a0b;box-shadow:0 0 0 8px rgba(233,180,76,.12),0 0 40px rgba(233,180,76,.35)}
+.done .ok svg{width:30px;height:30px}
+.done h3{font:900 30px/1.1 var(--serif)}
+.done p{margin-top:8px;color:var(--muted);font-size:14px}
+.done .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.done .acts button{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border-radius:14px;border:1px solid var(--line);font-weight:700;font-size:14px}
+.done .acts svg{width:18px;height:18px}
+.done .acts .on{color:var(--gold);border-color:var(--gold-dim)}
+.done .acts .on svg{fill:currentColor}
+.done .next{margin-top:12px;background:#1a1a1d}
+
+/* Звезда вспыхивает */
+.pop svg{animation:pop .5s cubic-bezier(.2,1.6,.4,1);filter:drop-shadow(0 0 8px rgba(233,180,76,.9))}
+@keyframes pop{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+
+/* Нижняя панель при чтении */
+.dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));z-index:15;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(20,20,22,.82);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 30px rgba(0,0,0,.5);transform:translate(-50%,140%);transition:transform .3s}
+.dock.show{transform:translate(-50%,0)}
+.dock button{width:48px;height:44px;display:grid;place-items:center;border-radius:999px}
+.dock button.on{color:var(--gold)}
+.dock button.on svg{fill:currentColor}
+.dock svg{width:21px;height:21px}
+.person{padding-bottom:90px}
+
+/* Фото на весь экран */
+#viewer{position:fixed;inset:0;z-index:60;background:#000;display:none;touch-action:none;overflow:hidden}
+#viewer.open{display:block}
+#viewer img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:0 0;will-change:transform}
+#viewer .x{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:2;background:rgba(10,10,11,.6);border-color:rgba(255,255,255,.15)}
+#viewer .hint{position:absolute;left:0;right:0;bottom:calc(20px + env(safe-area-inset-bottom));text-align:center;font-size:12px;color:rgba(255,255,255,.5)}
+
 /* Плавный переход между экранами: фото из карточки «вырастает» в обложку */
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
 ::view-transition-group(photo){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
 ::view-transition-old(photo),::view-transition-new(photo){height:100%;object-fit:cover}
 @media (prefers-reduced-motion:reduce){
-  .hero img,.down i,#splash img{animation:none}
+  .hero img,.down i,#splash img,.pop svg{animation:none}
+  .dock{transition:none}
 }
 </style>
 </head>
@@ -180,6 +268,8 @@ textarea{width:100%;height:110px;margin-top:12px;padding:10px;border-radius:10px
 <div class="progress" id="prog"></div>
 <div class="wrap" id="app"></div>
 <div class="toast" id="toast"></div>
+<nav class="dock" id="dock"></nav>
+<div id="viewer"><button class="icon-btn x" onclick="closeViewer()" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><img id="vimg" alt=""><div class="hint">Двойной тап — приблизить, двумя пальцами — масштаб</div></div>
 
 <script>
 // Публичный ключ VAPID (пара к секрету VAPID_PRIVATE в GitHub)
@@ -199,10 +289,11 @@ const ICONS = {
   arrow: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.7 7-7 0-4-3-6.5-4-10-2.5 2-3.5 4-3.5 6.5C10 10 9 8.5 9 7c-2 2-4 4.6-4 8 0 4.3 3 7 7 7z"/></svg>'
 };
 
-let PEOPLE = [], FACTS = {};
+let PEOPLE = [], FACTS = {}, EXTRA = {}, SHELVES = [];
 let filter = "Все";
 const $app = document.getElementById("app");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -233,7 +324,58 @@ function topBar(over) {
 let query = "";
 let homeScroll = 0;
 let lastId = null;   // чья история была открыта — для обратного перехода
+let resumeTo = null; // доля прокрутки, к которой вернуться при «Продолжить чтение»
 const read = new Set(JSON.parse(localStorage.getItem("read") || "[]"));
+// где остановились в каждой истории: {id: {r: доля 0..1, t: время}}
+const prog = JSON.parse(localStorage.getItem("prog") || "{}");
+const saveProg = () => localStorage.setItem("prog", JSON.stringify(prog));
+const nbsp = s => s.replace(/ —/g, " —");
+
+function cardHtml(x, lazy = true) {
+  return `<button class="card ${read.has(x.id) ? "read" : ""}" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}', this)">
+        <div class="ph grain"><img ${lazy ? 'loading="lazy"' : ""} src="${x.photos[0].src}" alt="" data-id="${x.id}"></div>
+        <div class="cb"><span class="tag">${esc(x.field)}</span><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span></div>
+      </button>`;
+}
+
+function weekHtml() {
+  // прошлые 6 дней — кого показывало уведомление
+  const t = todayIndex(), N = PEOPLE.length, days = ["вчера", "2 дня назад", "3 дня назад", "4 дня назад", "5 дней назад", "6 дней назад"];
+  return `<div class="h2">На этой неделе<small>Герои прошлых дней — если что-то пропустили</small></div>
+    <div class="week">${days.map((d, k) => {
+      const x = PEOPLE[(t - k - 1 + N) % N];
+      return `<button class="wk ${read.has(x.id) ? "read" : ""}" onclick="openPerson('${x.id}', this)">
+        <div class="ring"><img loading="lazy" src="${x.photos[0].src}" alt="" data-id="${x.id}"></div>
+        <b>${esc(x.name.split(" ").slice(-1)[0])}</b><span>${d}</span></button>`;
+    }).join("")}</div>`;
+}
+
+function resumeHtml() {
+  const open = Object.entries(prog).filter(([id, v]) => v.r > 0.08 && v.r < 0.9 && PEOPLE.some(x => x.id === id))
+    .sort((a, b) => b[1].t - a[1].t)[0];
+  if (!open) return "";
+  const x = PEOPLE.find(p => p.id === open[0]);
+  return `<button class="resume" onclick="resume('${x.id}')">
+      <img src="${x.photos[0].src}" alt="">
+      <div><small>Продолжить чтение</small><strong>${esc(x.name)}</strong><div class="bar"><i style="width:${Math.round(open[1].r * 100)}%"></i></div></div>
+      ${ICONS.arrow}</button>`;
+}
+function resume(id) { resumeTo = prog[id].r; homeScroll = window.scrollY; go("#/p/" + id); }
+
+function quoteDayHtml() {
+  // цитата дня — другой человек, не «человек дня»
+  const N = PEOPLE.length, t = todayIndex(), x = PEOPLE[(t * 53 + 71) % N === t ? (t + 1) % N : (t * 53 + 71) % N];
+  return `<button class="qday" onclick="openPerson('${x.id}')">
+      <small>Цитата дня</small><p>${esc(nbsp(x.quotes[t % x.quotes.length]))}</p><span>— ${esc(x.name)}</span></button>`;
+}
+
+function shelvesHtml() {
+  return SHELVES.map(s => {
+    const list = s.ids.map(id => PEOPLE.find(x => x.id === id)).filter(Boolean);
+    return `<div class="h2">${esc(s.title)}<small>${list.length} историй</small></div>
+      <div class="shelf">${list.map(x => cardHtml(x)).join("")}</div>`;
+  }).join("");
+}
 
 function renderHome() {
   const p = PEOPLE[todayIndex()];
@@ -248,7 +390,11 @@ function renderHome() {
         <span class="btn">Читать историю · ${readMin(p)} мин ${ICONS.arrow}</span>
       </div>
     </article>
-    <div class="section-title">Все истории<em>Прочитано ${read.size} из ${PEOPLE.length}</em></div>
+    ${resumeHtml()}
+    ${weekHtml()}
+    ${quoteDayHtml()}
+    ${shelvesHtml()}
+    <div class="section-title" style="margin-top:40px">Все истории<em>Прочитано ${read.size} из ${PEOPLE.length}</em></div>
     <div class="search"><input id="q" type="search" placeholder="Поиск по имени" value="${esc(query)}" autocomplete="off"></div>
     <div class="chips">${fields.map(f => `<button class="chip ${f === filter ? "on" : ""}" ${FC[f] ? `style="--fc:${FC[f]}"` : ""} onclick="setFilter('${f}')">${f}</button>`).join("")}</div>
     <div class="grid" id="grid"></div>`;
@@ -262,37 +408,42 @@ function renderList() {
     (filter === "Все" || (filter === "Избранное" ? favs.has(x.id) : x.field === filter)) &&
     (!q || x.name.toLowerCase().replace(/ё/g, "е").includes(q)));
   const empty = filter === "Избранное" && !q ? "Здесь появятся истории, которые вы отметите звёздочкой" : "Никого не нашлось";
-  document.getElementById("grid").innerHTML = list.length ? list.map(x => `
-      <button class="card ${read.has(x.id) ? "read" : ""}" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}', this)">
-        <div class="ph grain"><img loading="lazy" src="${x.photos[0].src}" alt="" data-id="${x.id}"></div>
-        <div class="cb"><span class="tag">${esc(x.field)}</span><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span></div>
-      </button>`).join("") : `<div class="empty">${empty}</div>`;
+  document.getElementById("grid").innerHTML = list.length ? list.map(x => cardHtml(x)).join("") : `<div class="empty">${empty}</div>`;
 }
 function openPerson(id, el) {
   homeScroll = window.scrollY;
   const img = el && el.querySelector("img");
   if (img) img.style.viewTransitionName = "photo";
+  lastId = id; lastEl = img;
   go("#/p/" + id);
 }
+let lastEl = null;
 function setFilter(f) { filter = f; const y = window.scrollY; renderHome(); window.scrollTo(0, y); }
 
 function quoteSlide(p, k) {
-  return `<figure class="qslide"><p>${esc(p.quotes[k]).replace(/ —/g, " —")}</p><small>${esc(p.name)}</small>
+  return `<figure class="qslide"><p>${esc(nbsp(p.quotes[k]))}</p><small>${esc(p.name)}</small>
     <button class="share" onclick="shareQuote('${p.id}', ${k})">${ICONS.share}Поделиться цитатой</button></figure>`;
 }
+// абзац с выделенной фразой
+function para(t, hl) {
+  const e = esc(t);
+  if (hl) { const h = esc(hl); if (e.includes(h)) return `<p>${e.replace(h, `<mark>${h}</mark>`)}</p>`; }
+  return `<p>${e}</p>`;
+}
+const favBtnAttr = id => `data-fav class="${favs.has(id) ? "on" : ""}"`;
 
 function renderPerson(id) {
   const i = PEOPLE.findIndex(x => x.id === id);
   if (i < 0) return go("#/");
   const p = PEOPLE[i], n = PEOPLE[(i + 1) % PEOPLE.length];
-  lastId = p.id;
+  lastId = p.id; current = p;
   read.add(p.id); localStorage.setItem("read", JSON.stringify([...read]));
-  const facts = FACTS[p.id] || [];
+  const facts = FACTS[p.id] || [], ex = EXTRA[p.id] || {}, hl = ex.highlight, tl = ex.timeline || [];
   $app.innerHTML = `
-    <div class="gallery grain">
+    <div class="gallery grain" style="--fc:${fc(p.field)}">
       <button class="icon-btn back" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
-      <button class="icon-btn fav ${favs.has(p.id) ? "on" : ""}" onclick="toggleFav('${p.id}', this)" aria-label="В избранное">${ICONS.star}</button>
-      <div class="slides" id="slides">${p.photos.map((ph, k) => `<img ${k ? 'loading="lazy"' : 'style="view-transition-name:photo"'} src="${ph.src}" alt="${esc(p.name)}">`).join("")}</div>
+      <button class="icon-btn fav ${favs.has(p.id) ? "on" : ""}" data-fav onclick="toggleFav('${p.id}')" aria-label="В избранное">${ICONS.star}</button>
+      <div class="slides" id="slides">${p.photos.map((ph, k) => `<img ${k ? 'loading="lazy"' : 'style="view-transition-name:photo"'} src="${ph.src}" alt="${esc(p.name)}" onclick="openViewer(${k})">`).join("")}</div>
       ${p.photos.length > 1 ? `<div class="dots" id="dots">${p.photos.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</div>` : ""}
       <div class="cover" style="--fc:${fc(p.field)}">
         <span class="tag">${esc(p.field)}</span>
@@ -301,43 +452,130 @@ function renderPerson(id) {
         <div class="role">${esc(p.role)}</div>
         <button class="down" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})"><i>${ICONS.down}</i>Читать</button>
       </div>
+      <i class="line"></i>
     </div>
     <section class="person" id="story">
       ${facts.length ? `<div class="facts">${facts.map(f => `<div class="fact"><b class="${f.v.length > 5 ? "sm" : ""}">${esc(f.v)}</b><span>${esc(f.l)}</span></div>`).join("")}</div>` : ""}
-      <div class="story lead">${p.story.slice(0, 3).map(t => `<p>${esc(t)}</p>`).join("")}</div>
+      <div class="story lead">${p.story.slice(0, 3).map(t => para(t, hl)).join("")}</div>
       ${quoteSlide(p, 0)}
-      <div class="story">${p.story.slice(3).map(t => `<p>${esc(t)}</p>`).join("")}</div>
+      <div class="story">${p.story.slice(3).map(t => para(t, hl)).join("")}</div>
       ${p.quotes[1] ? quoteSlide(p, 1) : ""}
+      ${tl.length ? `<div class="path"><h4>Путь</h4><ol>${tl.map(e => `<li><b>${esc(e.y)}</b><span>${esc(e.t)}</span></li>`).join("")}</ol></div>` : ""}
       <div class="lesson"><div class="lh"><i>${ICONS.flame}</i><b>Урок на сегодня</b></div><p>${esc(p.lesson)}</p></div>
-      <button class="next" onclick="go('#/p/${n.id}')">
-        <img src="${n.photos[0].src}" alt="">
-        <div><small>Следующая история</small><strong>${esc(n.name)}</strong></div>
-      </button>
+      <div class="done" id="done">
+        <div class="ok">${ICONS.check}</div>
+        <h3>История прочитана</h3>
+        <p>Прочитано ${read.size} из ${PEOPLE.length}</p>
+        <div class="acts">
+          <button ${favBtnAttr(p.id)} onclick="toggleFav('${p.id}')">${ICONS.star}<span>В избранное</span></button>
+          <button onclick="shareStory('${p.id}')">${ICONS.share}Поделиться</button>
+        </div>
+        <button class="next" onclick="go('#/p/${n.id}')">
+          <img src="${n.photos[0].src}" alt="">
+          <div><small>Следующая история</small><strong>${esc(n.name)}</strong></div>
+        </button>
+      </div>
       <div class="credits">Фото: Wikimedia Commons — ${p.photos.map((ph, k) => `<a href="${ph.page}" target="_blank" rel="noopener">${k + 1}</a> (${esc(ph.license || "свободная лицензия")})`).join(", ")}</div>
     </section>`;
-  window.scrollTo(0, 0);
+  $dock.innerHTML = `<button onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
+    <button ${favBtnAttr(p.id)} onclick="toggleFav('${p.id}')" aria-label="В избранное">${ICONS.star}</button>
+    <button onclick="shareStory('${p.id}')" aria-label="Поделиться">${ICONS.share}</button>
+    <button onclick="go('#/p/${n.id}')" aria-label="Следующая история">${ICONS.arrow}</button>`;
+  if (resumeTo != null) {
+    const r = resumeTo; resumeTo = null;
+    requestAnimationFrame(() => window.scrollTo(0, r * (document.documentElement.scrollHeight - innerHeight)));
+  } else window.scrollTo(0, 0);
   const s = document.getElementById("slides"), dots = [...document.querySelectorAll("#dots i")];
   s.addEventListener("scroll", () => {
     const k = Math.round(s.scrollLeft / s.clientWidth);
     dots.forEach((d, j) => d.classList.toggle("on", j === k));
   }, {passive: true});
 }
-function toggleFav(id, el) {
+let current = null;
+function toggleFav(id) {
   favs.has(id) ? favs.delete(id) : favs.add(id);
-  saveFavs(); el.classList.toggle("on", favs.has(id));
-  toast(favs.has(id) ? "Добавлено в избранное" : "Убрано из избранного");
+  saveFavs();
+  const on = favs.has(id);
+  document.querySelectorAll("[data-fav]").forEach(b => {
+    b.classList.toggle("on", on);
+    if (on && !reduced) { b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
+  });
+  if (navigator.vibrate) navigator.vibrate(on ? 18 : 8);
+  toast(on ? "Добавлено в избранное" : "Убрано из избранного");
 }
 
-/* ---------- Полоса прогресса чтения ---------- */
-const $prog = document.getElementById("prog");
+/* ---------- Полоса чтения, нижняя панель, запоминание места ---------- */
+const $prog = document.getElementById("prog"), $dock = document.getElementById("dock");
+let saveT = 0;
 function updateProgress() {
-  if (!location.hash.startsWith("#/p/")) { $prog.style.width = 0; return; }
-  const max = document.documentElement.scrollHeight - innerHeight;
-  $prog.style.width = (max > 0 ? Math.min(1, scrollY / max) * 100 : 0) + "%";
+  if (!location.hash.startsWith("#/p/") || !current) { $prog.style.width = 0; $dock.classList.remove("show"); return; }
+  const max = document.documentElement.scrollHeight - innerHeight, r = max > 0 ? Math.min(1, scrollY / max) : 0;
+  $prog.style.width = r * 100 + "%";
+  // панель — после обложки и пока не виден финальный экран
+  const done = document.getElementById("done");
+  const doneTop = done ? done.getBoundingClientRect().top : 1e9;
+  $dock.classList.toggle("show", scrollY > innerHeight * 0.75 && doneTop > innerHeight - 40);
+  clearTimeout(saveT);
+  saveT = setTimeout(() => {
+    if (!current) return;
+    if (doneTop < innerHeight) delete prog[current.id];  // дочитали
+    else if (r > 0.08) prog[current.id] = {r, t: Date.now()};
+    saveProg();
+  }, 300);
 }
 addEventListener("scroll", updateProgress, {passive: true});
 
-/* ---------- Цитата картинкой для сторис ---------- */
+/* ---------- Фото на весь экран: двойной тап и щипок ---------- */
+const $viewer = document.getElementById("viewer"), $vimg = document.getElementById("vimg");
+let vs = {s: 1, x: 0, y: 0};
+const pts = new Map();
+let pinch = null, lastTap = 0, drag = null;
+function applyV() { $vimg.style.transform = `translate(${vs.x}px,${vs.y}px) scale(${vs.s})`; }
+function openViewer(k) {
+  if (!current) return;
+  $vimg.src = current.photos[k].src; vs = {s: 1, x: 0, y: 0}; applyV();
+  $viewer.classList.add("open"); history.pushState({viewer: 1}, "");
+}
+function closeViewer(fromPop) {
+  if (!$viewer.classList.contains("open")) return;
+  $viewer.classList.remove("open");
+  if (!fromPop) history.back();
+}
+addEventListener("popstate", () => closeViewer(true));
+function zoomAt(cx, cy, s) {
+  s = Math.min(5, Math.max(1, s));
+  vs.x = cx - (cx - vs.x) * s / vs.s; vs.y = cy - (cy - vs.y) * s / vs.s; vs.s = s;
+  if (s === 1) vs.x = vs.y = 0;
+  applyV();
+}
+$vimg.addEventListener("pointerdown", e => {
+  $vimg.setPointerCapture(e.pointerId);
+  pts.set(e.pointerId, {x: e.clientX, y: e.clientY});
+  if (pts.size === 2) {
+    const [a, b] = [...pts.values()];
+    pinch = {d: Math.hypot(a.x - b.x, a.y - b.y), s: vs.s}; drag = null;
+  } else {
+    drag = {x: e.clientX - vs.x, y: e.clientY - vs.y};
+    const now = Date.now();
+    if (now - lastTap < 300) { zoomAt(e.clientX, e.clientY, vs.s > 1 ? 1 : 2.5); drag = null; }
+    lastTap = now;
+  }
+});
+$vimg.addEventListener("pointermove", e => {
+  if (!pts.has(e.pointerId)) return;
+  pts.set(e.pointerId, {x: e.clientX, y: e.clientY});
+  if (pinch && pts.size === 2) {
+    const [a, b] = [...pts.values()];
+    zoomAt((a.x + b.x) / 2, (a.y + b.y) / 2, pinch.s * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d);
+  } else if (drag && vs.s > 1) { vs.x = e.clientX - drag.x; vs.y = e.clientY - drag.y; applyV(); }
+});
+["pointerup", "pointercancel"].forEach(t => $vimg.addEventListener(t, e => {
+  pts.delete(e.pointerId);
+  if (pts.size < 2) pinch = null;
+  if (!pts.size) drag = null;
+}));
+
+/* ---------- Картинки для сторис: цитата и история ---------- */
 function wrapLines(ctx, text, maxW) {
   const lines = []; let line = "";
   for (const w of text.split(" ")) {
@@ -347,17 +585,24 @@ function wrapLines(ctx, text, maxW) {
   if (line) lines.push(line);
   return lines;
 }
-async function shareQuote(id, k) {
-  const p = PEOPLE.find(x => x.id === id);
-  toast("Готовлю картинку…");
+// подбирает размер шрифта, чтобы текст влез в высоту maxH; возвращает {lines, size, lh}
+function fit(ctx, text, font, start, maxW, maxH, min = 34) {
+  let size = start, lines;
+  for (;;) {
+    ctx.font = font(size); lines = wrapLines(ctx, text, maxW);
+    if (lines.length * size * 1.35 <= maxH || size <= min) break;
+    size -= 4;
+  }
+  return {lines, size, lh: size * 1.35};
+}
+async function canvasBase(p, photoShare) {
   const W = 1080, H = 1920, c = document.createElement("canvas");
   c.width = W; c.height = H;
   const ctx = c.getContext("2d");
   await Promise.all([document.fonts.load('italic 600 60px "Playfair Display"'), document.fonts.load('900 60px "Playfair Display"')]);
   const img = new Image(); img.src = p.photos[0].src;
   await img.decode();
-  // фото «обложкой» в верхние две трети
-  const ph = H * 0.64, sc = Math.max(W / img.width, ph / img.height);
+  const ph = H * photoShare, sc = Math.max(W / img.width, ph / img.height);
   const iw = img.width * sc, ih = img.height * sc;
   ctx.fillStyle = "#0a0a0b"; ctx.fillRect(0, 0, W, H);
   ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, ph); ctx.clip();
@@ -370,22 +615,12 @@ async function shareQuote(id, k) {
   const gt = ctx.createLinearGradient(0, 0, 0, 260);
   gt.addColorStop(0, "rgba(10,10,11,.7)"); gt.addColorStop(1, "rgba(10,10,11,0)");
   ctx.fillStyle = gt; ctx.fillRect(0, 0, W, 260);
-  // логотип
   ctx.textAlign = "center"; ctx.fillStyle = "#e9b44c";
   ctx.font = '900 34px system-ui, sans-serif';
   ctx.letterSpacing = "12px"; ctx.fillText("ВЕЛИКИЕ", W / 2 + 6, 110); ctx.letterSpacing = "0px";
-  // цитата: подбираем размер, чтобы влезла
-  let size = 72, lines;
-  do { ctx.font = `italic 600 ${size}px "Playfair Display"`; lines = wrapLines(ctx, "«" + p.quotes[k].replace(/ —/g, " —") + "»", W - 160); size -= 4; }
-  while (lines.length * size * 1.35 > H * 0.32 && size > 36);
-  size += 4;
-  // цитата по центру полосы между низом фото и подписью
-  const lh = size * 1.35, total = lines.length * lh, top = ph - 80, bottom = H - 240;
-  let y = top + (bottom - top - total) / 2 + size;
-  ctx.fillStyle = "#f6efe0";
-  lines.forEach(l => { ctx.fillText(l, W / 2, y); y += lh; });
-  ctx.fillStyle = "#e9b44c"; ctx.font = '800 34px system-ui, sans-serif';
-  ctx.letterSpacing = "6px"; ctx.fillText(p.name.toUpperCase(), W / 2, Math.min(y + 50, H - 120)); ctx.letterSpacing = "0px";
+  return {c, ctx, W, H, ph};
+}
+async function shareCanvas(c, p) {
   const blob = await new Promise(r => c.toBlob(r, "image/jpeg", 0.9));
   const file = new File([blob], `velikie-${p.id}.jpg`, {type: "image/jpeg"});
   try {
@@ -398,6 +633,52 @@ async function shareQuote(id, k) {
   a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
   toast("Картинка сохранена");
+}
+async function shareQuote(id, k) {
+  const p = PEOPLE.find(x => x.id === id);
+  toast("Готовлю картинку…");
+  const {c, ctx, W, H, ph} = await canvasBase(p, 0.64);
+  const t = fit(ctx, "«" + nbsp(p.quotes[k]) + "»", s => `italic 600 ${s}px "Playfair Display"`, 72, W - 160, H * 0.32, 36);
+  const top = ph - 80, bottom = H - 240;
+  let y = top + (bottom - top - t.lines.length * t.lh) / 2 + t.size;
+  ctx.fillStyle = "#f6efe0";
+  t.lines.forEach(l => { ctx.fillText(l, W / 2, y); y += t.lh; });
+  ctx.fillStyle = "#e9b44c"; ctx.font = '800 34px system-ui, sans-serif';
+  ctx.letterSpacing = "6px"; ctx.fillText(p.name.toUpperCase(), W / 2, Math.min(y + 50, H - 120)); ctx.letterSpacing = "0px";
+  await shareCanvas(c, p);
+}
+async function shareStory(id) {
+  const p = PEOPLE.find(x => x.id === id);
+  toast("Готовлю картинку…");
+  const {c, ctx, W, H, ph} = await canvasBase(p, 0.6);
+  const col = fc(p.field), L = 90;
+  // сначала меряем блок текста, чтобы прижать его к низу картинки
+  const nm = fit(ctx, p.name, s => `900 ${s}px "Playfair Display"`, 104, W - 2 * L, 260, 60);
+  const ls = fit(ctx, nbsp(p.lesson), s => `700 ${s}px "Playfair Display"`, 54, W - 2 * L, 520, 32);
+  const total = 30 + nm.lines.length * nm.size * 1.05 + 60 + 80 + 30 + ls.lines.length * ls.lh;
+  let y = Math.max(ph - 60, H - 170 - total);
+  ctx.textAlign = "left";
+  // рубрика с цветной точкой
+  ctx.fillStyle = col; ctx.beginPath(); ctx.arc(L + 9, y - 12, 9, 0, 7); ctx.fill();
+  ctx.font = '800 30px system-ui, sans-serif'; ctx.letterSpacing = "6px";
+  ctx.fillText(p.field.toUpperCase(), L + 34, y); ctx.letterSpacing = "0px";
+  y += 30;
+  ctx.fillStyle = "#f2f0eb"; ctx.font = `900 ${nm.size}px "Playfair Display"`;
+  nm.lines.forEach(l => { y += nm.size * 1.05; ctx.fillText(l, L, y); });
+  ctx.fillStyle = "#e9b44c"; ctx.font = '700 32px system-ui, sans-serif';
+  y += 60; ctx.fillText(p.years, L, y);
+  // урок
+  y += 80;
+  ctx.fillStyle = "#e9b44c"; ctx.fillRect(L, y - 10, 70, 5);
+  ctx.font = '800 26px system-ui, sans-serif'; ctx.letterSpacing = "5px";
+  ctx.fillText("УРОК", L + 90, y); ctx.letterSpacing = "0px";
+  y += 30;
+  ctx.fillStyle = "#f6efe0"; ctx.font = `700 ${ls.size}px "Playfair Display"`;
+  ls.lines.forEach(l => { y += ls.lh; ctx.fillText(l, L, y); });
+  // подпись внизу
+  ctx.textAlign = "center"; ctx.fillStyle = "#6c6a64"; ctx.font = '600 26px system-ui, sans-serif';
+  ctx.fillText("Истории великих людей", W / 2, H - 80);
+  await shareCanvas(c, p);
 }
 
 /* ---------- Уведомления ---------- */
@@ -473,11 +754,14 @@ function render() {
   const h = location.hash || "#/";
   rendered = h;
   if (h.startsWith("#/p/")) renderPerson(decodeURIComponent(h.slice(4)));
-  else if (h === "#/settings") renderSettings();
+  else if (h === "#/settings") { current = null; renderSettings(); }
   else {
+    current = null;
     renderHome();
-    // при возврате фото «садится» обратно в карточку
-    const back = lastId && $app.querySelector(`img[data-id="${lastId}"]`);
+    // при возврате фото «садится» обратно в ту карточку, что видна на экране
+    const back = lastId && [...$app.querySelectorAll(`img[data-id="${lastId}"]`)].find(im => {
+      const r = im.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth;
+    });
     if (back) back.style.viewTransitionName = "photo";
   }
   updateProgress();
@@ -493,9 +777,9 @@ window.addEventListener("hashchange", route);
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
 Promise.all([
   fetch("data/people.json").then(r => r.json()),
-  fetch("data/facts.json").then(r => r.ok ? r.json() : {}).catch(() => ({}))
-]).then(([d, f]) => {
-  PEOPLE = d; FACTS = f; render();
+  ...["facts", "extra", "shelves"].map(n => fetch(`data/${n}.json`).then(r => r.ok ? r.json() : null).catch(() => null))
+]).then(([d, f, e, sh]) => {
+  PEOPLE = d; FACTS = f || {}; EXTRA = e || {}; SHELVES = sh || []; render();
   const sp = document.getElementById("splash");
   sp.classList.add("hide"); setTimeout(() => sp.remove(), 600);
 });
