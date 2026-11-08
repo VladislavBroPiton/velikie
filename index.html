@@ -257,9 +257,122 @@ textarea{width:100%;height:110px;margin-top:12px;padding:10px;border-radius:10px
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
 ::view-transition-group(photo){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
 ::view-transition-old(photo),::view-transition-new(photo){height:100%;object-fit:cover}
+/* Лёгкий оттенок рубрики поверх фото */
+.tint{position:absolute;inset:0;background:var(--fc);mix-blend-mode:soft-light;opacity:.4;pointer-events:none}
+.gallery .tint{opacity:.28}
+
+/* Приветствие */
+.hello{position:absolute;z-index:3;left:var(--pad);right:var(--pad);top:calc(70px + env(safe-area-inset-top));pointer-events:none;text-shadow:0 1px 14px rgba(0,0,0,.8)}
+.hello b{display:block;font:800 24px/1.2 var(--serif)}
+.hello span{display:block;margin-top:4px;font-size:14px;line-height:1.4;color:#d6d3cc}
+.hero .top-shade{position:absolute;inset:0 0 auto;height:200px;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,.8),rgba(10,10,11,0));pointer-events:none}
+
+/* «Человек дня» до 13:00 */
+.hero.locked{cursor:default}
+.hero.locked img{filter:var(--photo) blur(24px) brightness(.6);transform:scale(1.2);animation:none}
+.hero.locked .lock{display:inline-grid;place-items:center;width:30px;height:30px;margin-left:8px;vertical-align:middle;border-radius:50%;background:rgba(233,180,76,.15);color:var(--gold)}
+.hero.locked .lock svg{width:16px;height:16px}
+.count{display:flex;gap:10px;margin:18px 0 2px}
+.count div{width:78px;padding:12px 0 9px;border-radius:14px;background:rgba(20,20,22,.6);border:1px solid rgba(233,180,76,.35);text-align:center;backdrop-filter:blur(6px)}
+.count b{display:block;font:900 34px/1 var(--serif);color:var(--gold);font-variant-numeric:tabular-nums lining-nums}
+.count span{display:block;margin-top:6px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Быстрые действия */
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:26px var(--pad) 0}
+.quick button{display:grid;justify-items:center;gap:8px;padding:16px 6px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);font-size:14px;font-weight:700;line-height:1.2}
+.quick i{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:rgba(233,180,76,.12);color:var(--gold)}
+.quick svg{width:23px;height:23px}
+.quick small{display:block;margin-top:2px;font-size:11px;font-weight:500;color:var(--muted)}
+.roll svg{animation:roll .45s cubic-bezier(.3,1.4,.5,1)}
+@keyframes roll{from{transform:rotate(-200deg) scale(.6)}to{transform:none}}
+.resume.later small{color:var(--fc,var(--gold))}
+
+/* Карта */
+.mapwrap{overflow-x:auto;scrollbar-width:none;margin-top:8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(80% 90% at 55% 40%,#15130f,var(--bg))}
+.mapwrap::-webkit-scrollbar{display:none}
+.map{position:relative;width:1400px;height:700px;background:url(data/map.svg) 0 0/100% 100% no-repeat}
+.pin{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;background:var(--fc);box-shadow:0 0 0 3px rgba(10,10,11,.75),0 0 16px var(--fc);display:grid;place-items:center;font:800 10px/1 system-ui,sans-serif;color:#0a0a0b}
+.pin::after{content:"";position:absolute;inset:-9px}
+.pin.on{box-shadow:0 0 0 3px #0a0a0b,0 0 0 5px #fff,0 0 22px var(--fc);z-index:2}
+.mhint{margin:10px var(--pad) 0;font-size:13px;color:var(--muted)}
+.msel{padding:6px var(--pad) 40px}
+.msel h3{font:800 22px/1.2 var(--serif);margin:14px 0 12px}
+.mrow{display:flex;align-items:center;gap:14px;width:100%;padding:10px 0;border-bottom:1px solid var(--line);text-align:left}
+.mrow img{width:52px;height:52px;flex:none;border-radius:50%;object-fit:cover;object-position:center 20%;filter:var(--photo);box-shadow:0 0 0 2px var(--fc)}
+.mrow strong{display:block;font:800 17px/1.2 var(--serif)}
+.mrow span{display:block;margin-top:2px;font-size:13px;color:var(--muted)}
+
+/* Связи */
+.links{margin-top:34px}
+.links h4{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.lk{display:flex;gap:10px;overflow-x:auto;margin:0 calc(-1 * var(--pad));padding:0 var(--pad) 4px;scroll-padding-inline:var(--pad);scroll-snap-type:x proximity;scrollbar-width:none}
+.lk::-webkit-scrollbar{display:none}
+.lk button{flex:none;width:250px;display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;background:var(--card);border:1px solid var(--line);text-align:left;scroll-snap-align:start}
+.lk img{width:50px;height:50px;flex:none;border-radius:50%;object-fit:cover;object-position:center 20%;filter:var(--photo);box-shadow:0 0 0 2px var(--fc)}
+.lk strong{display:block;font:800 16px/1.2 var(--serif)}
+.lk span{display:block;margin-top:4px;font-size:13px;line-height:1.35;color:var(--muted)}
+
+/* Обложка: кнопки «Читать» и «Слушать» */
+.cover .go{display:flex;gap:26px}
+.down.on{color:#fff}
+.down.on i{border-color:#fff;animation:none}
+
+/* Озвучка: текущий абзац */
+.story p,.lesson p{transition:background .3s,box-shadow .3s;border-radius:8px}
+.speak{background:rgba(233,180,76,.11);box-shadow:0 0 0 8px rgba(233,180,76,.11)}
+
+/* Режим чтения */
+body{--fz:1}
+.story p{font-size:calc(18px * var(--fz))}
+.story.lead p:first-child::first-letter{font-size:calc(66px * var(--fz))}
+.dock .aa{font:700 19px/1 var(--serif)}
+.rd{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));z-index:16;transform:translateX(-50%);display:none;gap:6px;padding:8px;border-radius:18px;background:rgba(24,24,26,.96);border:1px solid rgba(255,255,255,.1);box-shadow:0 12px 30px rgba(0,0,0,.5);white-space:nowrap}
+.rd.open{display:flex}
+.rd button{height:42px;padding:0 14px;border-radius:12px;border:1px solid var(--line);font-weight:700;font-size:14px;color:var(--text)}
+.rd button.on{border-color:var(--gold);color:var(--gold)}
+.rd .z{font:700 17px/1 var(--serif);min-width:46px}
+.rd .z small{font-size:12px}
+.rd i{width:1px;margin:4px 2px;background:var(--line)}
+/* светлая «бумажная» тема для чтения днём */
+body.paper{--pbg:#f3ead7;background:var(--pbg)}
+body.paper .gallery{background:var(--bg)}
+body.paper .person{position:relative;z-index:4;margin-top:-22px;padding-top:26px;background:var(--pbg);border-radius:24px 24px 0 0;color:#2a251d}
+body.paper .story p,body.paper .path span{color:#2e2820}
+body.paper .story mark,body.paper .story.lead p:first-child::first-letter,body.paper .path b,body.paper .path h4,body.paper .links h4{color:#94650f}
+body.paper .path li::before{background:var(--pbg);border-color:#b98a2e}
+body.paper .path ol::before{background:linear-gradient(#c9a35a,#e3d6b8)}
+body.paper .fact,body.paper .lk button,body.paper .done,body.paper .next{background:#fbf6ea;border-color:#e3d6b8}
+body.paper .done .next{background:var(--pbg)}
+body.paper .fact b{color:#94650f}
+body.paper .fact span,body.paper .lk span,body.paper .done p,body.paper .next small,body.paper .credits,body.paper .credits a{color:#7a705f}
+body.paper .qslide{background:radial-gradient(120% 90% at 50% 0,#ecdcb6 0,var(--pbg) 72%);border-color:#ddc999}
+body.paper .qslide p{color:#2a251d}
+body.paper .qslide small,body.paper .share{color:#94650f;border-color:#c9a35a}
+body.paper .done .acts button{border-color:#ddc999}
+body.paper .done .acts .on{color:#94650f}
+body.paper .speak{background:rgba(185,138,46,.14);box-shadow:0 0 0 8px rgba(185,138,46,.14)}
+
+/* Награды */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px var(--pad) 6px}
+.awards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 10px;padding:14px var(--pad) 40px}
+.aw{text-align:center}
+.medal{--fc:#e9b44c;width:80px;height:80px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 28%,#fff3cf 0,color-mix(in srgb,var(--fc) 85%,#fff) 22%,var(--fc) 52%,color-mix(in srgb,var(--fc) 55%,#000) 100%);box-shadow:0 0 0 4px #1d1810,0 0 0 5px color-mix(in srgb,var(--fc) 50%,#000),0 10px 26px -8px var(--fc);color:color-mix(in srgb,var(--fc) 25%,#000);font:900 25px/1 var(--serif)}
+.medal svg{width:32px;height:32px}
+.aw.off .medal{background:#19191c;box-shadow:0 0 0 4px #121214,0 0 0 5px var(--line);color:#46443f}
+.aw b{display:block;font-size:13px;line-height:1.25}
+.aw span{display:block;margin-top:3px;font-size:11px;line-height:1.3;color:var(--muted)}
+.aw .pb{height:3px;margin:7px 14px 0;border-radius:2px;background:var(--line);overflow:hidden}
+.aw .pb i{display:block;height:100%;background:var(--gold-dim)}
+#award{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));z-index:70;display:flex;align-items:center;gap:12px;width:max-content;max-width:92vw;padding:8px 20px 8px 8px;border-radius:999px;background:#1b1712;border:1px solid #5a4520;box-shadow:0 14px 40px rgba(0,0,0,.6);transform:translate(-50%,-170%);transition:transform .5s cubic-bezier(.2,1.4,.4,1)}
+#award.show{transform:translate(-50%,0)}
+#award .medal{width:46px;height:46px;margin:0;font-size:18px;box-shadow:0 0 18px -2px var(--fc)}
+#award .medal svg{width:20px;height:20px}
+#award small{display:block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+#award b{font-size:15px}
+
 @media (prefers-reduced-motion:reduce){
-  .hero img,.down i,#splash img,.pop svg{animation:none}
-  .dock{transition:none}
+  .hero img,.down i,#splash img,.pop svg,.roll svg{animation:none}
+  .dock,#award{transition:none}
 }
 </style>
 </head>
@@ -269,6 +382,8 @@ textarea{width:100%;height:110px;margin-top:12px;padding:10px;border-radius:10px
 <div class="wrap" id="app"></div>
 <div class="toast" id="toast"></div>
 <nav class="dock" id="dock"></nav>
+<div class="rd" id="rd"></div>
+<div id="award"></div>
 <div id="viewer"><button class="icon-btn x" onclick="closeViewer()" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><img id="vimg" alt=""><div class="hint">Двойной тап — приблизить, двумя пальцами — масштаб</div></div>
 
 <script>
@@ -290,10 +405,17 @@ const ICONS = {
   down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>',
   check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
-  flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.7 7-7 0-4-3-6.5-4-10-2.5 2-3.5 4-3.5 6.5C10 10 9 8.5 9 7c-2 2-4 4.6-4 8 0 4.3 3 7 7 7z"/></svg>'
+  flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.7 7-7 0-4-3-6.5-4-10-2.5 2-3.5 4-3.5 6.5C10 10 9 8.5 9 7c-2 2-4 4.6-4 8 0 4.3 3 7 7 7z"/></svg>',
+  dice: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><g fill="currentColor" stroke="none"><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="15.5" cy="8.5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="8.5" cy="15.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/></g></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
+  medal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 2l3 7M16.5 2l-3 7"/><circle cx="12" cy="15" r="6.5"/><path d="M12 11.6l1.1 2.1 2.3.3-1.7 1.6.4 2.3-2.1-1.1-2.1 1.1.4-2.3-1.7-1.6 2.3-.3z" fill="currentColor" stroke="none"/></svg>',
+  ear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18v-5.5a8.5 8.5 0 0 1 17 0V18"/><path d="M20.5 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3.5 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2h-3z"/></svg>',
+  stop: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h14"/></svg>'
 };
 
-let PEOPLE = [], FACTS = {}, EXTRA = {}, SHELVES = [];
+let PEOPLE = [], FACTS = {}, EXTRA = {}, SHELVES = [], WORLD = {}, LINKS = {}, LATER = [];
 let filter = "Все";
 const $app = document.getElementById("app");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -333,7 +455,7 @@ const nbsp = s => s.replace(/ —/g, " —");
 
 function cardHtml(x, lazy = true) {
   return `<button class="card ${read.has(x.id) ? "read" : ""}" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}', this)">
-        <div class="ph grain"><img ${lazy ? 'loading="lazy"' : ""} src="${x.photos[0].src}" alt="" data-id="${x.id}"></div>
+        <div class="ph grain"><img ${lazy ? 'loading="lazy"' : ""} src="${x.photos[0].src}" alt="" data-id="${x.id}"><i class="tint"></i></div>
         <div class="cb"><span class="tag">${esc(x.field)}</span><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span></div>
       </button>`;
 }
@@ -377,20 +499,106 @@ function shelvesHtml() {
   }).join("");
 }
 
-function renderHome() {
-  const p = PEOPLE[todayIndex()];
-  const fields = ["Все", ...new Set(PEOPLE.map(x => x.field)), "Избранное"];
-  $app.innerHTML = topBar(true) + `
-    <article class="hero grain" onclick="openPerson('${p.id}', this)" style="--fc:${fc(p.field)}">
+/* ---------- Приветствие и «человек дня» до 13:00 ---------- */
+const MOTTO = ["Каждый великий когда-то начинал с нуля", "Маленький шаг каждый день — это и есть путь",
+  "Дисциплина сильнее таланта", "Неудача — просто глава в истории успеха", "Великими не рождаются — ими становятся",
+  "Начните с того, что можете сделать сейчас", "Упасть не страшно, страшно не подняться",
+  "Сегодняшнее усилие — завтрашняя сила", "Ваша история ещё пишется", "Смелость — это действовать, даже когда страшно",
+  "Главное — не останавливаться", "Мечта без действия остаётся мечтой", "Терпение и труд творят историю",
+  "Сильные не те, кто не падал, а те, кто вставал"];
+function helloHtml() {
+  const h = new Date().getHours();
+  const g = h < 5 ? "Доброй ночи" : h < 12 ? "Доброе утро" : h < 17 ? "Добрый день" : h < 23 ? "Добрый вечер" : "Доброй ночи";
+  const day = Math.floor((Date.now() + 3 * 3600e3) / 86400000);
+  return `<div class="hello"><b>${g}</b><span>${esc(nbsp(MOTTO[day % MOTTO.length]))}</span></div>`;
+}
+const UNLOCK = 13 * 3600; // 13:00 по Москве — время уведомления
+function lockLeft() {
+  const m = new Date(Date.now() + 3 * 3600e3);
+  return Math.max(0, UNLOCK - (m.getUTCHours() * 3600 + m.getUTCMinutes() * 60 + m.getUTCSeconds()));
+}
+const pad2 = n => String(n).padStart(2, "0");
+function countHtml(s) {
+  return [[Math.floor(s / 3600), "час"], [Math.floor(s / 60) % 60, "мин"], [s % 60, "сек"]]
+    .map(([v, l]) => `<div><b>${pad2(v)}</b><span>${l}</span></div>`).join("");
+}
+setInterval(() => {
+  const el = document.getElementById("cd");
+  if (!el) return;
+  const s = lockLeft();
+  if (s > 0) el.innerHTML = countHtml(s);
+  else { const y = scrollY; renderHome(); scrollTo(0, y); }
+}, 1000);
+
+function heroHtml() {
+  const t = todayIndex(), p = PEOPLE[t], left = lockLeft();
+  if (left > 0) {
+    const y = PEOPLE[(t - 1 + PEOPLE.length) % PEOPLE.length];
+    return `<article class="hero grain locked" style="--fc:${fc(p.field)}" onclick="toast('Откроется в 13:00')">
+      <img src="${p.photos[0].src}" alt="">
+      <i class="tint"></i><i class="top-shade"></i>${helloHtml()}
+      <div class="hero-body">
+        <span class="kicker">Человек дня</span><span class="lock">${ICONS.lock}</span>
+        <h1>Откроется в&nbsp;13:00</h1>
+        <p>Новый герой приходит каждый день вместе с уведомлением. До встречи осталось:</p>
+        <div class="count" id="cd">${countHtml(left)}</div>
+        <button class="btn ghost" onclick="event.stopPropagation(); openPerson('${y.id}')">Пока — вчерашний герой ${ICONS.arrow}</button>
+      </div>
+    </article>`;
+  }
+  return `<article class="hero grain" onclick="openPerson('${p.id}', this)" style="--fc:${fc(p.field)}">
       <img src="${p.photos[0].src}" alt="${esc(p.name)}" data-id="${p.id}">
+      <i class="tint"></i><i class="top-shade"></i>${helloHtml()}
       <div class="hero-body">
         <span class="kicker">Человек дня</span><span class="tag">${esc(p.field)}</span>
         <h1>${esc(p.name)}</h1>
         <p>${esc(p.teaser)}</p>
         <span class="btn">Читать историю · ${readMin(p)} мин ${ICONS.arrow}</span>
       </div>
-    </article>
+    </article>`;
+}
+
+/* ---------- Удиви меня, отложенные из уведомления ---------- */
+function surprise(btn) {
+  const locked = lockLeft() > 0 ? PEOPLE[todayIndex()].id : null;
+  let pool = PEOPLE.filter(x => !read.has(x.id) && x.id !== locked);
+  if (!pool.length) pool = PEOPLE.filter(x => x.id !== locked);
+  const x = pool[Math.floor(Math.random() * pool.length)];
+  if (navigator.vibrate) navigator.vibrate([12, 40, 12]);
+  if (reduced) return openPerson(x.id);
+  btn.classList.remove("roll"); void btn.offsetWidth; btn.classList.add("roll");
+  setTimeout(() => openPerson(x.id), 420);
+}
+function quickHtml() {
+  return `<div class="quick">
+      <button onclick="surprise(this)"><i>${ICONS.dice}</i><span>Удиви меня<small>наугад</small></span></button>
+      <button onclick="homeScroll = scrollY; go('#/map')"><i>${ICONS.globe}</i><span>Карта<small>где родились</small></span></button>
+      <button onclick="homeScroll = scrollY; go('#/awards')"><i>${ICONS.medal}</i><span>Награды<small>${earnedCount()} из ${AWARDS.length}</small></span></button>
+    </div>`;
+}
+async function loadLater() {
+  try { const r = await (await caches.open("velikie-state")).match("later"); LATER = r ? await r.json() : []; }
+  catch { LATER = []; }
+}
+async function saveLater() {
+  try { await (await caches.open("velikie-state")).put("later", new Response(JSON.stringify(LATER))); } catch {}
+}
+function laterHtml() {
+  const x = LATER.map(id => PEOPLE.find(p => p.id === id)).find(Boolean);
+  if (!x) return "";
+  return `<button class="resume later" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}')">
+      <img src="${x.photos[0].src}" alt="">
+      <div><small>Отложено на потом</small><strong>${esc(x.name)}</strong><span style="font-size:13px;color:var(--muted)">Из уведомления · ${readMin(x)} мин</span></div>
+      ${ICONS.arrow}</button>`;
+}
+
+function renderHome() {
+  const fields = ["Все", ...new Set(PEOPLE.map(x => x.field)), "Избранное"];
+  $app.innerHTML = topBar(true) + `
+    ${heroHtml()}
+    ${laterHtml()}
     ${resumeHtml()}
+    ${quickHtml()}
     ${weekHtml()}
     ${quoteDayHtml()}
     ${shelvesHtml()}
@@ -411,7 +619,7 @@ function renderList() {
   document.getElementById("grid").innerHTML = list.length ? list.map(x => cardHtml(x)).join("") : `<div class="empty">${empty}</div>`;
 }
 function openPerson(id, el) {
-  homeScroll = window.scrollY;
+  if (!location.hash || location.hash === "#/") homeScroll = window.scrollY;
   const img = el && el.querySelector("img");
   if (img) img.style.viewTransitionName = "photo";
   lastId = id; lastEl = img;
@@ -438,19 +646,25 @@ function renderPerson(id) {
   const p = PEOPLE[i], n = PEOPLE[(i + 1) % PEOPLE.length];
   lastId = p.id; current = p;
   read.add(p.id); localStorage.setItem("read", JSON.stringify([...read]));
+  days.add(dayKey()); localStorage.setItem("days", JSON.stringify([...days]));
+  if (LATER.includes(p.id)) { LATER = LATER.filter(x => x !== p.id); saveLater(); }
   const facts = FACTS[p.id] || [], ex = EXTRA[p.id] || {}, hl = ex.highlight, tl = ex.timeline || [];
   $app.innerHTML = `
     <div class="gallery grain" style="--fc:${fc(p.field)}">
       <button class="icon-btn back" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
       <button class="icon-btn fav ${favs.has(p.id) ? "on" : ""}" data-fav onclick="toggleFav('${p.id}')" aria-label="В избранное">${ICONS.star}</button>
       <div class="slides" id="slides">${p.photos.map((ph, k) => `<img ${k ? 'loading="lazy"' : 'style="view-transition-name:photo"'} src="${ph.src}" alt="${esc(p.name)}" onclick="openViewer(${k})">`).join("")}</div>
+      <i class="tint"></i>
       ${p.photos.length > 1 ? `<div class="dots" id="dots">${p.photos.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</div>` : ""}
       <div class="cover" style="--fc:${fc(p.field)}">
         <span class="tag">${esc(p.field)}</span>
         <h1>${esc(p.name)}</h1>
         <div class="yrs">${esc(p.years)} · ${readMin(p)} мин чтения</div>
         <div class="role">${esc(p.role)}</div>
-        <button class="down" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})"><i>${ICONS.down}</i>Читать</button>
+        <div class="go">
+          <button class="down" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})"><i>${ICONS.down}</i>Читать</button>
+          <button class="down" data-listen onclick="listen()"><i>${ICONS.ear}</i><span>Слушать</span></button>
+        </div>
       </div>
       <i class="line"></i>
     </div>
@@ -461,6 +675,7 @@ function renderPerson(id) {
       <div class="story">${p.story.slice(3).map(t => para(t, hl)).join("")}</div>
       ${p.quotes[1] ? quoteSlide(p, 1) : ""}
       ${tl.length ? `<div class="path"><h4>Путь</h4><ol>${tl.map(e => `<li><b>${esc(e.y)}</b><span>${esc(e.t)}</span></li>`).join("")}</ol></div>` : ""}
+      ${linksHtml(p)}
       <div class="lesson"><div class="lh"><i>${ICONS.flame}</i><b>Урок на сегодня</b></div><p>${esc(p.lesson)}</p></div>
       <div class="done" id="done">
         <div class="ok">${ICONS.check}</div>
@@ -478,6 +693,8 @@ function renderPerson(id) {
       <div class="credits">Фото: Wikimedia Commons — ${p.photos.map((ph, k) => `<a href="${ph.page}" target="_blank" rel="noopener">${k + 1}</a> (${esc(ph.license || "свободная лицензия")})`).join(", ")}</div>
     </section>`;
   $dock.innerHTML = `<button onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
+    <button onclick="rdToggle()" aria-label="Настройки чтения"><span class="aa">Aa</span></button>
+    <button data-listen onclick="listen()" aria-label="Слушать">${ICONS.ear}</button>
     <button ${favBtnAttr(p.id)} onclick="toggleFav('${p.id}')" aria-label="В избранное">${ICONS.star}</button>
     <button onclick="shareStory('${p.id}')" aria-label="Поделиться">${ICONS.share}</button>
     <button onclick="go('#/p/${n.id}')" aria-label="Следующая история">${ICONS.arrow}</button>`;
@@ -485,12 +702,212 @@ function renderPerson(id) {
     const r = resumeTo; resumeTo = null;
     requestAnimationFrame(() => window.scrollTo(0, r * (document.documentElement.scrollHeight - innerHeight)));
   } else window.scrollTo(0, 0);
+  checkAwards();
   const s = document.getElementById("slides"), dots = [...document.querySelectorAll("#dots i")];
   s.addEventListener("scroll", () => {
     const k = Math.round(s.scrollLeft / s.clientWidth);
     dots.forEach((d, j) => d.classList.toggle("on", j === k));
   }, {passive: true});
 }
+/* ---------- Связи между героями ---------- */
+function linksHtml(p) {
+  let list = (LINKS[p.id] || []).map(([id, t]) => [PEOPLE.find(x => x.id === id), t]).filter(l => l[0]);
+  let title = "Связи";
+  if (!list.length) {
+    // прямых связей нет — похожие истории той же рубрики, сначала непрочитанные
+    const i = PEOPLE.indexOf(p);
+    const same = PEOPLE.map((x, k) => PEOPLE[(i + 1 + k) % PEOPLE.length]).filter(x => x.field === p.field && x !== p);
+    list = [...same.filter(x => !read.has(x.id)), ...same.filter(x => read.has(x.id))].slice(0, 3).map(x => [x, x.role]);
+    title = "Похожие истории";
+  }
+  if (!list.length) return "";
+  return `<div class="links"><h4>${title}</h4><div class="lk">${list.map(([x, t]) => `<button style="--fc:${fc(x.field)}" onclick="go('#/p/${x.id}')">
+      <img loading="lazy" src="${x.photos[0].src}" alt=""><div><strong>${esc(x.name)}</strong><span>${esc(nbsp(t))}</span></div></button>`).join("")}</div></div>`;
+}
+
+/* ---------- Озвучка: телефон читает историю ---------- */
+let tts = null;
+function ruVoice() {
+  const v = speechSynthesis.getVoices().filter(v => v.lang.replace("_", "-").toLowerCase().startsWith("ru"));
+  return v.find(x => /google/i.test(x.name)) || v[0];
+}
+function setListen(on) {
+  document.querySelectorAll("[data-listen]").forEach(b => {
+    b.classList.toggle("on", on);
+    const ic = b.querySelector("i") || b;
+    const sp = b.querySelector("span");
+    ic.innerHTML = on ? ICONS.stop : ICONS.ear;
+    if (sp) { sp.textContent = on ? "Стоп" : "Слушать"; }
+  });
+}
+function listen() {
+  if (!("speechSynthesis" in window)) return toast("Этот браузер не умеет читать вслух");
+  if (tts) return stopTts();
+  tts = {i: 0, els: [...document.querySelectorAll(".story p, .lesson p")]};
+  setListen(true); speakNext();
+}
+function speakNext() {
+  if (!tts) return;
+  document.querySelectorAll(".speak").forEach(e => e.classList.remove("speak"));
+  if (tts.i >= tts.els.length) {
+    stats.listened = (stats.listened || 0) + 1; saveStats();
+    stopTts(); checkAwards(); return;
+  }
+  const el = tts.els[tts.i];
+  el.classList.add("speak");
+  el.scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "center"});
+  const u = new SpeechSynthesisUtterance((el.closest(".lesson") ? "Урок на сегодня. " : "") + el.textContent);
+  u.lang = "ru-RU"; const v = ruVoice(); if (v) u.voice = v;
+  u.onend = () => { if (tts && tts.u === u) { tts.i++; speakNext(); } };
+  u.onerror = e => {
+    if (tts && tts.u === u && e.error !== "interrupted" && e.error !== "canceled") { stopTts(); toast("Не получилось включить озвучку"); }
+  };
+  tts.u = u; speechSynthesis.speak(u);
+}
+function stopTts() {
+  tts = null;
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  document.querySelectorAll(".speak").forEach(e => e.classList.remove("speak"));
+  setListen(false);
+}
+
+/* ---------- Режим чтения: размер текста и «бумага» ---------- */
+const FZ = [0.9, 1, 1.12, 1.25, 1.4];
+const rd = Object.assign({z: 1, paper: false}, JSON.parse(localStorage.getItem("rd") || "{}"));
+const $rd = document.getElementById("rd");
+function applyRd() {
+  document.body.style.setProperty("--fz", FZ[rd.z]);
+  document.body.classList.toggle("paper", rd.paper && !!current);
+  localStorage.setItem("rd", JSON.stringify(rd));
+  $rd.innerHTML = `<button class="z" onclick="rdSet('z', -1)" ${rd.z ? "" : "disabled"}><small>A</small>−</button>
+    <button class="z" onclick="rdSet('z', 1)" ${rd.z < FZ.length - 1 ? "" : "disabled"}>A+</button><i></i>
+    <button class="${rd.paper ? "" : "on"}" onclick="rdSet('paper', false)">Тёмная</button>
+    <button class="${rd.paper ? "on" : ""}" onclick="rdSet('paper', true)">Бумага</button>`;
+}
+function rdSet(k, v) {
+  // при смене размера держим на экране тот же абзац
+  const anchor = [...document.querySelectorAll(".story p")].find(p => p.getBoundingClientRect().bottom > 80);
+  const top = anchor && anchor.getBoundingClientRect().top;
+  if (k === "z") rd.z = Math.min(FZ.length - 1, Math.max(0, rd.z + v)); else rd.paper = v;
+  applyRd();
+  if (anchor) scrollBy(0, anchor.getBoundingClientRect().top - top);
+}
+function rdToggle(force) { $rd.classList.toggle("open", force); }
+
+/* ---------- Награды ---------- */
+const days = new Set(JSON.parse(localStorage.getItem("days") || "[]"));
+const stats = JSON.parse(localStorage.getItem("stats") || "{}");
+const saveStats = () => localStorage.setItem("stats", JSON.stringify(stats));
+const dayKey = (d = new Date()) => d.toLocaleDateString("sv");
+function streakNow() {
+  let n = 0; const d = new Date();
+  if (!days.has(dayKey(d))) d.setDate(d.getDate() - 1);
+  while (days.has(dayKey(d))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function streakBest() {
+  let best = 0, run = 0, prev = null;
+  for (const k of [...days].sort()) {
+    const t = Date.parse(k + "T12:00:00");
+    run = prev && Math.round((t - prev) / 864e5) === 1 ? run + 1 : 1;
+    best = Math.max(best, run); prev = t;
+  }
+  return best;
+}
+const AWARDS = [
+  {id: "r1", t: "Первая история", d: "Прочитать одну историю", ic: "1", n: 1, v: () => read.size},
+  {id: "r10", t: "Десятка", d: "Прочитать 10 историй", ic: "10", n: 10, v: () => read.size},
+  {id: "r25", t: "Четверть сотни", d: "Прочитать 25 историй", ic: "25", n: 25, v: () => read.size},
+  {id: "r50", t: "Полсотни", d: "Прочитать 50 историй", ic: "50", n: 50, v: () => read.size},
+  {id: "r100", t: "Сотня", d: "Прочитать 100 историй", ic: "100", n: 100, v: () => read.size},
+  {id: "rall", t: "Все великие", d: "Прочитать все истории", ic: "★", n: () => PEOPLE.length, v: () => read.size},
+  {id: "s3", t: "Три дня подряд", d: "Читать 3 дня без пропусков", ic: "flame", n: 3, v: streakBest},
+  {id: "s7", t: "Неделя подряд", d: "Читать 7 дней без пропусков", ic: "flame", n: 7, v: streakBest},
+  {id: "s30", t: "Месяц подряд", d: "Читать 30 дней без пропусков", ic: "flame", n: 30, v: streakBest},
+  {id: "fav", t: "Коллекционер", d: "Отметить 10 историй звёздочкой", ic: "star", n: 10, v: () => favs.size},
+  {id: "share", t: "Вдохновитель", d: "Поделиться картинкой", ic: "share", n: 1, v: () => stats.shared || 0},
+  {id: "ear", t: "Слушатель", d: "Дослушать историю до конца", ic: "ear", n: 1, v: () => stats.listened || 0},
+  ...Object.keys(FC).map(f => ({id: "f-" + f, t: f, d: "Прочитать все истории рубрики", ic: "book", fc: FC[f],
+    n: () => PEOPLE.filter(x => x.field === f).length, v: () => PEOPLE.filter(x => x.field === f && read.has(x.id)).length}))
+];
+const need = a => typeof a.n === "function" ? a.n() : a.n;
+const isEarned = a => PEOPLE.length > 0 && a.v() >= need(a);
+const earnedCount = () => AWARDS.filter(isEarned).length;
+const medalHtml = a => `<div class="medal" ${a.fc ? `style="--fc:${a.fc}"` : ""}>${ICONS[a.ic] || esc(a.ic)}</div>`;
+let awardQ = [];
+function checkAwards() {
+  const got = new Set(JSON.parse(localStorage.getItem("awards") || "[]"));
+  const fresh = AWARDS.filter(a => isEarned(a) && !got.has(a.id));
+  if (!fresh.length) return;
+  fresh.forEach(a => got.add(a.id));
+  localStorage.setItem("awards", JSON.stringify([...got]));
+  const idle = !awardQ.length;
+  awardQ.push(...fresh.slice(-3));
+  if (idle) showAward();
+}
+function showAward() {
+  const a = awardQ[0], el = document.getElementById("award");
+  if (!a) return;
+  el.innerHTML = `${medalHtml(a)}<div><small>Новая награда</small><b>${esc(a.t)}</b></div>`;
+  el.onclick = () => go("#/awards");
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("show")));
+  if (navigator.vibrate && navigator.userActivation?.hasBeenActive) navigator.vibrate([20, 60, 30]);
+  setTimeout(() => { el.classList.remove("show"); setTimeout(() => { awardQ.shift(); showAward(); }, 600); }, 2800);
+}
+function renderAwards() {
+  const e = earnedCount();
+  $app.innerHTML = `<header class="top"><button class="icon-btn" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button><div class="logo">Вели<b>кие</b></div><span style="width:40px"></span></header>
+    <section class="panel" style="padding-bottom:0"><h2>Мои награды</h2><p>Получено ${e} из ${AWARDS.length}. Медали открываются за чтение, серии дней без пропусков и находки.</p></section>
+    <div class="stats">
+      <div class="fact"><b>${read.size}</b><span>прочитано</span></div>
+      <div class="fact"><b>${streakNow()}</b><span>дней подряд сейчас</span></div>
+      <div class="fact"><b>${streakBest()}</b><span>лучшая серия</span></div>
+    </div>
+    <div class="awards">${AWARDS.map(a => {
+      const n = need(a), v = Math.min(a.v(), n), ok = v >= n;
+      return `<div class="aw ${ok ? "" : "off"}">${medalHtml(a)}<b>${esc(a.t)}</b><span>${esc(a.d)}</span>
+        ${ok ? "" : `<div class="pb"><i style="width:${Math.round(v / n * 100)}%"></i></div><span>${v} из ${n}</span>`}</div>`;
+    }).join("")}</div>`;
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Карта: где родились ---------- */
+let mapSel = -1, mapClusters = [];
+function renderMap() {
+  const cl = [];
+  for (const x of PEOPLE) {
+    const w = WORLD[x.id]; if (!w) continue;
+    const c = cl.find(c => Math.hypot(c.x - w.x, c.y - w.y) < 6);
+    if (c) c.list.push(x); else cl.push({x: w.x, y: w.y, list: [x]});
+  }
+  mapClusters = cl;
+  if (!cl[mapSel]) mapSel = cl.reduce((m, c, k) => c.list.length > cl[m].list.length ? k : m, 0);
+  $app.innerHTML = `<header class="top"><button class="icon-btn" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button><div class="logo">Вели<b>кие</b></div><span style="width:40px"></span></header>
+    <section class="panel" style="padding-bottom:0"><h2>Где родились великие</h2><p>${PEOPLE.length} героев, ${cl.length} мест на карте. Нажмите на точку — покажу, кто там родился.</p></section>
+    <div class="mapwrap" id="mapw"><div class="map">${cl.map((c, k) => {
+      const n = c.list.length, f = new Set(c.list.map(x => x.field));
+      const col = f.size === 1 ? fc(c.list[0].field) : "#e9b44c";
+      return `<button class="pin ${k === mapSel ? "on" : ""}" style="left:${c.x / 10}%;top:${c.y / 5}%;--fc:${col};--s:${n > 1 ? Math.min(30, 15 + n * 2) : 11}px" onclick="mapPick(${k})" aria-label="${esc(c.list.map(x => x.name).join(", "))}">${n > 1 ? n : ""}</button>`;
+    }).join("")}</div></div>
+    <div class="mhint">Карту можно листать вбок</div>
+    <div class="msel" id="msel"></div>`;
+  mapList();
+  document.getElementById("mapw").scrollLeft = cl[mapSel].x * 1.4 - innerWidth / 2;
+  window.scrollTo(0, 0);
+}
+function mapPick(k) {
+  mapSel = k;
+  document.querySelectorAll(".pin").forEach((b, j) => b.classList.toggle("on", j === k));
+  mapList();
+  if (navigator.vibrate) navigator.vibrate(8);
+}
+function mapList() {
+  const c = mapClusters[mapSel], places = [...new Set(c.list.map(x => WORLD[x.id].place))];
+  document.getElementById("msel").innerHTML = `<h3>${esc(places.join(", "))}</h3>` + c.list.map(x =>
+    `<button class="mrow" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}')"><img loading="lazy" src="${x.photos[0].src}" alt="">
+      <div><strong>${esc(x.name)}</strong><span>${esc(x.field)} · ${esc(x.years)}</span></div></button>`).join("");
+}
+
 let current = null;
 function toggleFav(id) {
   favs.has(id) ? favs.delete(id) : favs.add(id);
@@ -502,19 +919,21 @@ function toggleFav(id) {
   });
   if (navigator.vibrate) navigator.vibrate(on ? 18 : 8);
   toast(on ? "Добавлено в избранное" : "Убрано из избранного");
+  checkAwards();
 }
 
 /* ---------- Полоса чтения, нижняя панель, запоминание места ---------- */
 const $prog = document.getElementById("prog"), $dock = document.getElementById("dock");
 let saveT = 0;
 function updateProgress() {
-  if (!location.hash.startsWith("#/p/") || !current) { $prog.style.width = 0; $dock.classList.remove("show"); return; }
+  if (!location.hash.startsWith("#/p/") || !current) { $prog.style.width = 0; $dock.classList.remove("show"); rdToggle(false); return; }
   const max = document.documentElement.scrollHeight - innerHeight, r = max > 0 ? Math.min(1, scrollY / max) : 0;
   $prog.style.width = r * 100 + "%";
   // панель — после обложки и пока не виден финальный экран
   const done = document.getElementById("done");
   const doneTop = done ? done.getBoundingClientRect().top : 1e9;
   $dock.classList.toggle("show", scrollY > innerHeight * 0.75 && doneTop > innerHeight - 40);
+  if (!$dock.classList.contains("show")) rdToggle(false);
   clearTimeout(saveT);
   saveT = setTimeout(() => {
     if (!current) return;
@@ -626,6 +1045,7 @@ async function shareCanvas(c, p) {
   try {
     if (navigator.canShare && navigator.canShare({files: [file]})) {
       await navigator.share({files: [file], title: p.name});
+      stats.shared = (stats.shared || 0) + 1; saveStats(); checkAwards();
       return;
     }
   } catch (e) { if (e.name === "AbortError") return; }
@@ -633,6 +1053,7 @@ async function shareCanvas(c, p) {
   a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
   toast("Картинка сохранена");
+  stats.shared = (stats.shared || 0) + 1; saveStats(); checkAwards();
 }
 async function shareQuote(id, k) {
   const p = PEOPLE.find(x => x.id === id);
@@ -708,7 +1129,8 @@ async function testPush() {
   const p = PEOPLE[todayIndex()];
   reg.showNotification(p.name, {
     body: p.teaser, icon: "icons/icon-192.png", badge: "icons/badge-96.png",
-    image: p.photos[0].src, data: {url: "./#/p/" + p.id}, tag: "test"
+    image: p.photos[0].src, data: {url: "./#/p/" + p.id, id: p.id}, tag: "test",
+    actions: [{action: "read", title: "Читать"}, {action: "later", title: "Позже"}]
   });
 }
 async function copyCode() {
@@ -753,8 +1175,11 @@ let rendered = null;
 function render() {
   const h = location.hash || "#/";
   rendered = h;
+  if (tts) stopTts();
   if (h.startsWith("#/p/")) renderPerson(decodeURIComponent(h.slice(4)));
   else if (h === "#/settings") { current = null; renderSettings(); }
+  else if (h === "#/map") { current = null; renderMap(); }
+  else if (h === "#/awards") { current = null; renderAwards(); }
   else {
     current = null;
     renderHome();
@@ -764,6 +1189,7 @@ function render() {
     });
     if (back) back.style.viewTransitionName = "photo";
   }
+  applyRd();
   updateProgress();
 }
 function route() {
@@ -777,9 +1203,11 @@ window.addEventListener("hashchange", route);
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
 Promise.all([
   fetch("data/people.json").then(r => r.json()),
-  ...["facts", "extra", "shelves"].map(n => fetch(`data/${n}.json`).then(r => r.ok ? r.json() : null).catch(() => null))
-]).then(([d, f, e, sh]) => {
-  PEOPLE = d; FACTS = f || {}; EXTRA = e || {}; SHELVES = sh || []; render();
+  ...["facts", "extra", "shelves", "world", "links"].map(n => fetch(`data/${n}.json`).then(r => r.ok ? r.json() : null).catch(() => null)),
+  loadLater()
+]).then(([d, f, e, sh, w, l]) => {
+  PEOPLE = d; FACTS = f || {}; EXTRA = e || {}; SHELVES = sh || []; WORLD = w || {}; LINKS = l || {}; render();
+  setTimeout(checkAwards, 1200);
   const sp = document.getElementById("splash");
   sp.classList.add("hide"); setTimeout(() => sp.remove(), 600);
 });

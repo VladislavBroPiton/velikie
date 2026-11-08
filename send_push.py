@@ -28,6 +28,7 @@ def main():
     payload = json.dumps({
         "title": p["name"],
         "body": p["teaser"],
+        "id": p["id"],
         "url": f"./#/p/{p['id']}",
         "image": site + p["photos"][0]["src"],
     }, ensure_ascii=False)

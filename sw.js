@@ -1,6 +1,7 @@
 // Service worker: офлайн-кэш и ежедневные push-уведомления
-const CACHE = "velikie-v4";
-const SHELL = ["./", "index.html", "data/people.json", "data/facts.json", "data/extra.json", "data/shelves.json", "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png",
+const CACHE = "velikie-v5";
+const STATE = "velikie-state"; // отложенные из уведомления истории — не удалять при обновлении
+const SHELL = ["./", "index.html", "data/people.json", "data/facts.json", "data/extra.json", "data/shelves.json", "data/world.json", "data/links.json", "data/map.svg", "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png",
   "fonts/pf-cyr.woff2", "fonts/pf-lat.woff2", "fonts/pf-italic-cyr.woff2", "fonts/pf-italic-lat.woff2"];
 
 self.addEventListener("install", e => {
@@ -8,7 +9,7 @@ self.addEventListener("install", e => {
 });
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys()
-    .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+    .then(keys => Promise.all(keys.filter(k => k !== CACHE && k !== STATE).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 
@@ -38,12 +39,22 @@ self.addEventListener("push", e => {
     badge: "icons/badge-96.png",
     image: d.image,
     tag: "daily",
-    data: {url: d.url || "./"}
+    data: {url: d.url || "./", id: d.id || (d.url || "").split("/p/")[1]},
+    actions: [{action: "read", title: "Читать"}, {action: "later", title: "Позже"}]
   }));
 });
 
+// «Позже»: запоминаем историю, приложение покажет её на главном экране
+async function addLater(id) {
+  if (!id) return;
+  const c = await caches.open(STATE), r = await c.match("later");
+  const list = r ? await r.json() : [];
+  await c.put("later", new Response(JSON.stringify([id, ...list.filter(x => x !== id)].slice(0, 10))));
+}
+
 self.addEventListener("notificationclick", e => {
   e.notification.close();
+  if (e.action === "later") { e.waitUntil(addLater(e.notification.data.id)); return; }
   const url = new URL(e.notification.data.url, self.registration.scope).href;
   e.waitUntil(clients.matchAll({type: "window", includeUncontrolled: true}).then(list => {
     for (const c of list) {
