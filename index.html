@@ -4,15 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0b">
+<meta name="view-transition" content="same-origin">
 <title>Великие</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preload" href="fonts/pf-cyr.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/pf-cyr.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/pf-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Playfair Display";font-style:italic;font-weight:400 900;font-display:swap;src:url(fonts/pf-italic-cyr.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Playfair Display";font-style:italic;font-weight:400 900;font-display:swap;src:url(fonts/pf-italic-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --bg:#0a0a0b; --card:#141416; --line:#26262a; --text:#f2f0eb; --muted:#9a978f;
   --gold:#e9b44c; --gold-dim:#a77f2e; --red:#d8432f;
   --pad:20px;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  /* единый тёплый тон для фото разных эпох */
+  --photo:grayscale(.25) sepia(.22) saturate(1.1) contrast(1.06) brightness(.94);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--text)}
@@ -20,83 +30,130 @@ body{font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit}
 img{display:block;max-width:100%}
-.wrap{max-width:640px;margin:0 auto}
+.wrap{max-width:640px;margin:0 auto;position:relative}
+/* плёночное зерно поверх фото */
+.grain::before{content:"";position:absolute;inset:0;z-index:1;background-image:var(--grain);opacity:.16;mix-blend-mode:overlay;pointer-events:none}
+
+/* Экран запуска */
+#splash{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .5s}
+#splash div{display:grid;justify-items:center;gap:18px}
+#splash img{width:96px;height:96px;animation:glow 1.6s ease-in-out infinite alternate}
+#splash span{font:900 15px/1 system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+#splash.hide{opacity:0;pointer-events:none}
+@keyframes glow{from{filter:drop-shadow(0 0 0 rgba(233,180,76,0))}to{filter:drop-shadow(0 0 22px rgba(233,180,76,.45))}}
 
 /* Шапка */
 .top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) var(--pad) 12px;background:rgba(10,10,11,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top.over{position:absolute;left:0;right:0;background:linear-gradient(180deg,rgba(10,10,11,.75),rgba(10,10,11,0));backdrop-filter:none;border:0}
 .logo{font-weight:900;letter-spacing:.22em;font-size:15px;text-transform:uppercase}
 .logo b{color:var(--gold)}
 .icon-btn{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line)}
+.top.over .icon-btn{background:rgba(10,10,11,.45);backdrop-filter:blur(8px);border-color:rgba(255,255,255,.12)}
 .icon-btn svg{width:20px;height:20px}
 .icon-btn.on{border-color:var(--gold);color:var(--gold)}
 
-/* Человек дня */
-.hero{position:relative;margin:16px var(--pad) 0;border-radius:20px;overflow:hidden;background:var(--card);min-height:440px;display:flex;align-items:flex-end;cursor:pointer}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(.35) contrast(1.05)}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,0) 30%,rgba(10,10,11,.85) 68%,#0a0a0b 100%)}
-.hero-body{position:relative;z-index:1;padding:22px}
+/* Человек дня — на весь экран */
+.hero{position:relative;height:92svh;min-height:540px;overflow:hidden;background:var(--card);display:flex;align-items:flex-end;cursor:pointer}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:var(--photo);transform-origin:50% 30%;animation:kb 26s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.13) translate(-1.5%,1%)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,0) 35%,rgba(10,10,11,.8) 66%,#0a0a0b 100%)}
+.hero-body{position:relative;z-index:2;padding:0 var(--pad) 34px}
 .kicker{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#0a0a0b;background:var(--gold);padding:5px 10px;border-radius:6px}
-.hero h1{font-size:38px;line-height:1.05;font-weight:900;margin:12px 0 10px;text-transform:uppercase;letter-spacing:-.01em}
-.hero p{color:#d6d3cc;font-size:16px;line-height:1.5}
-.btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:13px 20px;border-radius:12px;background:var(--gold);color:#0a0a0b;font-weight:800;font-size:15px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--fc)}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--fc);box-shadow:0 0 10px var(--fc)}
+.hero .tag{margin-left:10px}
+.hero h1{font:900 48px/1.02 var(--serif);margin:16px 0 12px;letter-spacing:-.01em}
+.hero p{color:#d6d3cc;font-size:17px;line-height:1.5}
+.btn{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:13px 20px;border-radius:12px;background:var(--gold);color:#0a0a0b;font-weight:800;font-size:15px}
 .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
 .btn:disabled{opacity:.5}
 
 /* Фильтры и список */
-.section-title{margin:32px var(--pad) 12px;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.section-title{margin:28px var(--pad) 14px;font:800 26px/1.1 var(--serif)}
+.section-title em{display:block;margin-top:6px;font:600 13px/1.3 system-ui,sans-serif;font-style:normal;letter-spacing:.04em;color:var(--gold-dim)}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:0 var(--pad) 4px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--muted)}
+.chip{flex:none;display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--muted)}
+.chip[style]::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--fc)}
 .chip.on{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:700}
+.chip.on[style]{background:var(--fc);border-color:var(--fc);color:#0a0a0b}
+.chip.on[style]::before{background:#0a0a0b}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px var(--pad) 40px}
-.card{background:var(--card);border-radius:16px;overflow:hidden;text-align:left;border:1px solid var(--line)}
-.card .ph{aspect-ratio:3/4;background:#1c1c1f;overflow:hidden}
-.card img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(.4)}
-.card .cb{padding:10px 12px 12px}
-.card h3{font-size:15px;line-height:1.25;font-weight:800}
-.card span{display:block;margin-top:3px;font-size:12px;color:var(--muted)}
-.section-title em{float:right;font-style:normal;letter-spacing:.04em;text-transform:none;font-weight:600;color:var(--gold-dim)}
+.card{position:relative;border-radius:16px;overflow:hidden;text-align:left;background:var(--card);aspect-ratio:3/4.3;box-shadow:inset 0 3px 0 var(--fc)}
+.card .ph{position:absolute;inset:0}
+.card img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:var(--photo)}
+.card .ph::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,0) 38%,rgba(10,10,11,.94) 100%)}
+.card .cb{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:12px}
+.card h3{font:800 18px/1.15 var(--serif);text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.card .tag{margin-bottom:6px;font-size:10px}
+.card .yrs{display:block;margin-top:4px;font-size:12px;color:#b9b6ae}
+.card.read::after{content:"✓";position:absolute;top:10px;right:10px;z-index:2;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#0a0a0b;font-size:13px;font-weight:900}
 .search{padding:0 var(--pad) 12px}
 .search input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;font-size:16px;outline:none}
 .search input:focus{border-color:var(--gold-dim)}
-.card.read h3::after{content:" ✓";color:var(--gold)}
 .empty{grid-column:1/-1;color:var(--muted);padding:30px 0;text-align:center}
 
-/* Страница человека */
-.gallery{position:relative}
-.slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+/* Страница человека: обложка */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:20;background:var(--gold);box-shadow:0 0 10px rgba(233,180,76,.6)}
+.gallery{position:relative;height:100svh;min-height:540px}
+.slides{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
 .slides::-webkit-scrollbar{display:none}
-.slides img{flex:none;width:100%;height:62vh;max-height:560px;object-fit:cover;object-position:center 20%;scroll-snap-align:center;background:#1c1c1f}
-.dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:6px;z-index:2}
-.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)}
+.slides img{flex:none;width:100%;height:100%;object-fit:cover;object-position:center 20%;scroll-snap-align:center;background:#1c1c1f;filter:var(--photo)}
+.gallery::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.55) 0,rgba(10,10,11,0) 18%,rgba(10,10,11,0) 40%,rgba(10,10,11,.85) 72%,#0a0a0b 100%);pointer-events:none}
+.dots{position:absolute;left:0;right:0;top:calc(30px + env(safe-area-inset-top));display:flex;justify-content:center;gap:6px;z-index:3;pointer-events:none}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45)}
 .dots i.on{background:var(--gold);width:18px;border-radius:3px}
-.gallery::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(180deg,rgba(10,10,11,0),#0a0a0b);pointer-events:none}
-.back{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;z-index:3;background:rgba(10,10,11,.6);backdrop-filter:blur(8px);border-color:transparent}
-.fav{position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:3;background:rgba(10,10,11,.6);backdrop-filter:blur(8px);border-color:transparent}
+.back,.fav{position:absolute;top:calc(12px + env(safe-area-inset-top));z-index:4;background:rgba(10,10,11,.5);backdrop-filter:blur(8px);border-color:rgba(255,255,255,.12)}
+.back{left:12px}.fav{right:12px}
 .fav.on{color:var(--gold)}
 .fav.on svg{fill:currentColor}
-.person{padding:4px var(--pad) 40px}
-.meta{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.person h1{font-size:36px;line-height:1.05;font-weight:900;text-transform:uppercase;margin:8px 0 6px}
-.role{color:var(--muted);font-size:15px}
+.cover{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 var(--pad) 26px;pointer-events:none}
+.cover h1{font:900 46px/1.02 var(--serif);margin:12px 0 8px}
+.cover .yrs{color:var(--gold);font-weight:700;font-size:14px;letter-spacing:.06em}
+.role{color:#cfccc4;font-size:16px;line-height:1.45;margin-top:4px}
+.down{pointer-events:auto;display:flex;align-items:center;gap:10px;margin-top:20px;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.down i{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--gold-dim);animation:bob 2.2s ease-in-out infinite}
+.down svg{width:16px;height:16px}
+@keyframes bob{50%{transform:translateY(4px)}}
+.person{padding:8px var(--pad) 40px;scroll-margin-top:0}
+
+/* Ключевые цифры */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 4px}
+.fact{padding:14px 8px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-align:center}
+.fact b{display:block;font:900 24px/1.1 var(--serif);color:var(--gold);white-space:nowrap}
+.fact b.sm{font-size:18px;line-height:1.45}
+.fact span{display:block;margin-top:6px;font-size:12px;line-height:1.3;color:var(--muted)}
+
 .story{margin-top:24px}
-.story p{font-size:18px;line-height:1.65;margin-bottom:18px;color:#e6e3dc}
-.story.lead p:first-child::first-letter{float:left;font-size:58px;line-height:.9;font-weight:900;color:var(--gold);margin:6px 10px 0 0}
-.quote{margin:26px 0;padding:4px 0 4px 18px;border-left:3px solid var(--gold);font-size:20px;line-height:1.45;font-weight:700}
-.quote small{display:block;margin-top:8px;font-size:13px;color:var(--muted);font-weight:500}
-.lesson{margin-top:30px;padding:20px;border-radius:16px;background:linear-gradient(135deg,#1d1810,#141416);border:1px solid #3a2f17}
-.lesson b{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.lesson p{font-size:18px;line-height:1.5;font-weight:600}
+.story p{font-size:18px;line-height:1.7;margin-bottom:18px;color:#e6e3dc}
+.story.lead p:first-child::first-letter{float:left;font:900 66px/.86 var(--serif);color:var(--gold);margin:6px 10px 0 0}
+
+/* Цитата-слайд */
+.qslide{position:relative;margin:34px calc(-1 * var(--pad));padding:58px var(--pad) 30px;background:radial-gradient(120% 90% at 50% 0,#24190a 0,#0f0e0c 62%,var(--bg) 100%);border-top:1px solid #3a2f17;border-bottom:1px solid #3a2f17;text-align:center;overflow:hidden}
+.qslide::before{content:"“";position:absolute;top:-26px;left:50%;transform:translateX(-50%);font:900 170px/1 var(--serif);color:var(--gold);opacity:.25}
+.qslide p{position:relative;font:italic 600 26px/1.36 var(--serif);color:#f6efe0}
+.qslide small{display:block;margin-top:18px;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.share{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:10px 16px;border-radius:999px;border:1px solid var(--gold-dim);color:var(--gold);font-size:14px;font-weight:700}
+.share svg{width:16px;height:16px}
+
+/* Урок */
+.lesson{position:relative;margin-top:34px;padding:24px 22px 22px;border-radius:20px;background:linear-gradient(150deg,#2a1f0d 0,#16130e 55%,#121214 100%);border:1px solid #5a4520;overflow:hidden;box-shadow:0 20px 50px -24px rgba(233,180,76,.35)}
+.lesson::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(233,180,76,.22),transparent 70%)}
+.lesson .lh{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.lesson .lh i{width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:12px;background:var(--gold);color:#0a0a0b}
+.lesson .lh i svg{width:20px;height:20px}
+.lesson b{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.lesson p{position:relative;font:700 21px/1.42 var(--serif)}
 .next{display:flex;align-items:center;gap:14px;width:100%;margin-top:30px;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line);text-align:left}
-.next img{width:56px;height:56px;border-radius:12px;object-fit:cover;filter:grayscale(.4)}
+.next img{width:56px;height:56px;border-radius:12px;object-fit:cover;filter:var(--photo)}
 .next small{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
-.next strong{font-size:17px}
+.next strong{font:800 19px/1.2 var(--serif)}
 .credits{margin-top:30px;font-size:12px;color:#6c6a64;line-height:1.5}
 .credits a{color:#8d8a83}
 
 /* Настройки */
 .panel{padding:24px var(--pad) 40px}
-.panel h2{font-size:28px;font-weight:900;text-transform:uppercase;line-height:1.1}
+.panel h2{font:900 32px/1.1 var(--serif)}
 .panel p{color:#cfccc4;margin-top:12px}
 .box{margin-top:20px;padding:18px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
 .status{display:flex;align-items:center;gap:10px;font-weight:700}
@@ -108,9 +165,19 @@ textarea{width:100%;height:110px;margin-top:12px;padding:10px;border-radius:10px
 .row{display:flex;flex-wrap:wrap;gap:10px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
 .toast.show{opacity:1}
+
+/* Плавный переход между экранами: фото из карточки «вырастает» в обложку */
+::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
+::view-transition-group(photo){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-old(photo),::view-transition-new(photo){height:100%;object-fit:cover}
+@media (prefers-reduced-motion:reduce){
+  .hero img,.down i,#splash img{animation:none}
+}
 </style>
 </head>
 <body>
+<div id="splash"><div><img src="icons/icon-192.png" alt=""><span>Великие</span></div></div>
+<div class="progress" id="prog"></div>
 <div class="wrap" id="app"></div>
 <div class="toast" id="toast"></div>
 
@@ -120,17 +187,26 @@ const VAPID_PUBLIC = "BCjQJYSZfXAK5ovB3jXrIgjABBZprAtgLOwU44pGzaEaV35P-uDILVsyWd
 // День, с которого считается очередь «человека дня» (тот же расчёт в send_push.py)
 const START_DAY = Date.UTC(2026, 10, 6) / 86400000;
 
+// Цвет каждой рубрики
+const FC = {"Спорт":"#e5553f","Бизнес":"#e9b44c","Наука":"#4f9cf0","Искусство":"#f08a4b","Музыка":"#a07cf5",
+  "Кино":"#3cc0b5","Открытия":"#62c46e","История":"#c9925a","Мода":"#ee7fac"};
+const fc = f => FC[f] || "#e9b44c";
+
 const ICONS = {
   bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
   back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
   star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>',
-  arrow: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+  arrow: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+  share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>',
+  flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.7 7-7 0-4-3-6.5-4-10-2.5 2-3.5 4-3.5 6.5C10 10 9 8.5 9 7c-2 2-4 4.6-4 8 0 4.3 3 7 7 7z"/></svg>'
 };
 
-let PEOPLE = [];
+let PEOPLE = [], FACTS = {};
 let filter = "Все";
 const $app = document.getElementById("app");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const favs = new Set(JSON.parse(localStorage.getItem("favs") || "[]"));
 const saveFavs = () => localStorage.setItem("favs", JSON.stringify([...favs]));
@@ -148,32 +224,33 @@ function toast(msg) {
   clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-function topBar() {
+function topBar(over) {
   const on = "Notification" in window && Notification.permission === "granted";
-  return `<header class="top"><div class="logo">Вели<b>кие</b></div>
+  return `<header class="top ${over ? "over" : ""}"><div class="logo">Вели<b>кие</b></div>
     <button class="icon-btn ${on ? "on" : ""}" onclick="go('#/settings')" aria-label="Уведомления">${ICONS.bell}</button></header>`;
 }
 
 let query = "";
 let homeScroll = 0;
+let lastId = null;   // чья история была открыта — для обратного перехода
 const read = new Set(JSON.parse(localStorage.getItem("read") || "[]"));
 
 function renderHome() {
   const p = PEOPLE[todayIndex()];
   const fields = ["Все", ...new Set(PEOPLE.map(x => x.field)), "Избранное"];
-  $app.innerHTML = topBar() + `
-    <article class="hero" onclick="go('#/p/${p.id}')">
-      <img src="${p.photos[0].src}" alt="${esc(p.name)}">
+  $app.innerHTML = topBar(true) + `
+    <article class="hero grain" onclick="openPerson('${p.id}', this)" style="--fc:${fc(p.field)}">
+      <img src="${p.photos[0].src}" alt="${esc(p.name)}" data-id="${p.id}">
       <div class="hero-body">
-        <span class="kicker">Человек дня</span>
+        <span class="kicker">Человек дня</span><span class="tag">${esc(p.field)}</span>
         <h1>${esc(p.name)}</h1>
         <p>${esc(p.teaser)}</p>
         <span class="btn">Читать историю · ${readMin(p)} мин ${ICONS.arrow}</span>
       </div>
     </article>
-    <div class="section-title">Все истории <em>Прочитано ${read.size} из ${PEOPLE.length}</em></div>
+    <div class="section-title">Все истории<em>Прочитано ${read.size} из ${PEOPLE.length}</em></div>
     <div class="search"><input id="q" type="search" placeholder="Поиск по имени" value="${esc(query)}" autocomplete="off"></div>
-    <div class="chips">${fields.map(f => `<button class="chip ${f === filter ? "on" : ""}" onclick="setFilter('${f}')">${f}</button>`).join("")}</div>
+    <div class="chips">${fields.map(f => `<button class="chip ${f === filter ? "on" : ""}" ${FC[f] ? `style="--fc:${FC[f]}"` : ""} onclick="setFilter('${f}')">${f}</button>`).join("")}</div>
     <div class="grid" id="grid"></div>`;
   document.getElementById("q").addEventListener("input", e => { query = e.target.value; renderList(); });
   renderList();
@@ -186,35 +263,52 @@ function renderList() {
     (!q || x.name.toLowerCase().replace(/ё/g, "е").includes(q)));
   const empty = filter === "Избранное" && !q ? "Здесь появятся истории, которые вы отметите звёздочкой" : "Никого не нашлось";
   document.getElementById("grid").innerHTML = list.length ? list.map(x => `
-      <button class="card ${read.has(x.id) ? "read" : ""}" onclick="openPerson('${x.id}')">
-        <div class="ph"><img loading="lazy" src="${x.photos[0].src}" alt=""></div>
-        <div class="cb"><h3>${esc(x.name)}</h3><span>${esc(x.field)} · ${esc(x.years)}</span></div>
+      <button class="card ${read.has(x.id) ? "read" : ""}" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}', this)">
+        <div class="ph grain"><img loading="lazy" src="${x.photos[0].src}" alt="" data-id="${x.id}"></div>
+        <div class="cb"><span class="tag">${esc(x.field)}</span><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span></div>
       </button>`).join("") : `<div class="empty">${empty}</div>`;
 }
-function openPerson(id) { homeScroll = window.scrollY; go("#/p/" + id); }
+function openPerson(id, el) {
+  homeScroll = window.scrollY;
+  const img = el && el.querySelector("img");
+  if (img) img.style.viewTransitionName = "photo";
+  go("#/p/" + id);
+}
 function setFilter(f) { filter = f; const y = window.scrollY; renderHome(); window.scrollTo(0, y); }
+
+function quoteSlide(p, k) {
+  return `<figure class="qslide"><p>${esc(p.quotes[k]).replace(/ —/g, " —")}</p><small>${esc(p.name)}</small>
+    <button class="share" onclick="shareQuote('${p.id}', ${k})">${ICONS.share}Поделиться цитатой</button></figure>`;
+}
 
 function renderPerson(id) {
   const i = PEOPLE.findIndex(x => x.id === id);
   if (i < 0) return go("#/");
   const p = PEOPLE[i], n = PEOPLE[(i + 1) % PEOPLE.length];
+  lastId = p.id;
   read.add(p.id); localStorage.setItem("read", JSON.stringify([...read]));
+  const facts = FACTS[p.id] || [];
   $app.innerHTML = `
-    <div class="gallery">
+    <div class="gallery grain">
       <button class="icon-btn back" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
       <button class="icon-btn fav ${favs.has(p.id) ? "on" : ""}" onclick="toggleFav('${p.id}', this)" aria-label="В избранное">${ICONS.star}</button>
-      <div class="slides" id="slides">${p.photos.map((ph, k) => `<img ${k ? 'loading="lazy"' : ""} src="${ph.src}" alt="${esc(p.name)}">`).join("")}</div>
-      <div class="dots" id="dots">${p.photos.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</div>
+      <div class="slides" id="slides">${p.photos.map((ph, k) => `<img ${k ? 'loading="lazy"' : 'style="view-transition-name:photo"'} src="${ph.src}" alt="${esc(p.name)}">`).join("")}</div>
+      ${p.photos.length > 1 ? `<div class="dots" id="dots">${p.photos.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</div>` : ""}
+      <div class="cover" style="--fc:${fc(p.field)}">
+        <span class="tag">${esc(p.field)}</span>
+        <h1>${esc(p.name)}</h1>
+        <div class="yrs">${esc(p.years)} · ${readMin(p)} мин чтения</div>
+        <div class="role">${esc(p.role)}</div>
+        <button class="down" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})"><i>${ICONS.down}</i>Читать</button>
+      </div>
     </div>
-    <section class="person">
-      <div class="meta">${esc(p.field)} · ${esc(p.years)} · ${readMin(p)} мин</div>
-      <h1>${esc(p.name)}</h1>
-      <div class="role">${esc(p.role)}</div>
+    <section class="person" id="story">
+      ${facts.length ? `<div class="facts">${facts.map(f => `<div class="fact"><b class="${f.v.length > 5 ? "sm" : ""}">${esc(f.v)}</b><span>${esc(f.l)}</span></div>`).join("")}</div>` : ""}
       <div class="story lead">${p.story.slice(0, 3).map(t => `<p>${esc(t)}</p>`).join("")}</div>
-      <blockquote class="quote">«${esc(p.quotes[0])}»<small>— ${esc(p.name)}</small></blockquote>
+      ${quoteSlide(p, 0)}
       <div class="story">${p.story.slice(3).map(t => `<p>${esc(t)}</p>`).join("")}</div>
-      ${p.quotes[1] ? `<blockquote class="quote">«${esc(p.quotes[1])}»<small>— ${esc(p.name)}</small></blockquote>` : ""}
-      <div class="lesson"><b>Урок на сегодня</b><p>${esc(p.lesson)}</p></div>
+      ${p.quotes[1] ? quoteSlide(p, 1) : ""}
+      <div class="lesson"><div class="lh"><i>${ICONS.flame}</i><b>Урок на сегодня</b></div><p>${esc(p.lesson)}</p></div>
       <button class="next" onclick="go('#/p/${n.id}')">
         <img src="${n.photos[0].src}" alt="">
         <div><small>Следующая история</small><strong>${esc(n.name)}</strong></div>
@@ -232,6 +326,78 @@ function toggleFav(id, el) {
   favs.has(id) ? favs.delete(id) : favs.add(id);
   saveFavs(); el.classList.toggle("on", favs.has(id));
   toast(favs.has(id) ? "Добавлено в избранное" : "Убрано из избранного");
+}
+
+/* ---------- Полоса прогресса чтения ---------- */
+const $prog = document.getElementById("prog");
+function updateProgress() {
+  if (!location.hash.startsWith("#/p/")) { $prog.style.width = 0; return; }
+  const max = document.documentElement.scrollHeight - innerHeight;
+  $prog.style.width = (max > 0 ? Math.min(1, scrollY / max) * 100 : 0) + "%";
+}
+addEventListener("scroll", updateProgress, {passive: true});
+
+/* ---------- Цитата картинкой для сторис ---------- */
+function wrapLines(ctx, text, maxW) {
+  const lines = []; let line = "";
+  for (const w of text.split(" ")) {
+    const t = line ? line + " " + w : w;
+    if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else line = t;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+async function shareQuote(id, k) {
+  const p = PEOPLE.find(x => x.id === id);
+  toast("Готовлю картинку…");
+  const W = 1080, H = 1920, c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const ctx = c.getContext("2d");
+  await Promise.all([document.fonts.load('italic 600 60px "Playfair Display"'), document.fonts.load('900 60px "Playfair Display"')]);
+  const img = new Image(); img.src = p.photos[0].src;
+  await img.decode();
+  // фото «обложкой» в верхние две трети
+  const ph = H * 0.64, sc = Math.max(W / img.width, ph / img.height);
+  const iw = img.width * sc, ih = img.height * sc;
+  ctx.fillStyle = "#0a0a0b"; ctx.fillRect(0, 0, W, H);
+  ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, ph); ctx.clip();
+  ctx.filter = "grayscale(.25) sepia(.22) saturate(1.1) contrast(1.06) brightness(.9)";
+  ctx.drawImage(img, (W - iw) / 2, (ph - ih) * 0.2, iw, ih);
+  ctx.restore(); ctx.filter = "none";
+  const g = ctx.createLinearGradient(0, ph * 0.5, 0, ph);
+  g.addColorStop(0, "rgba(10,10,11,0)"); g.addColorStop(0.7, "rgba(10,10,11,.75)"); g.addColorStop(0.94, "#0a0a0b");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, ph + 4);
+  const gt = ctx.createLinearGradient(0, 0, 0, 260);
+  gt.addColorStop(0, "rgba(10,10,11,.7)"); gt.addColorStop(1, "rgba(10,10,11,0)");
+  ctx.fillStyle = gt; ctx.fillRect(0, 0, W, 260);
+  // логотип
+  ctx.textAlign = "center"; ctx.fillStyle = "#e9b44c";
+  ctx.font = '900 34px system-ui, sans-serif';
+  ctx.letterSpacing = "12px"; ctx.fillText("ВЕЛИКИЕ", W / 2 + 6, 110); ctx.letterSpacing = "0px";
+  // цитата: подбираем размер, чтобы влезла
+  let size = 72, lines;
+  do { ctx.font = `italic 600 ${size}px "Playfair Display"`; lines = wrapLines(ctx, "«" + p.quotes[k].replace(/ —/g, " —") + "»", W - 160); size -= 4; }
+  while (lines.length * size * 1.35 > H * 0.32 && size > 36);
+  size += 4;
+  // цитата по центру полосы между низом фото и подписью
+  const lh = size * 1.35, total = lines.length * lh, top = ph - 80, bottom = H - 240;
+  let y = top + (bottom - top - total) / 2 + size;
+  ctx.fillStyle = "#f6efe0";
+  lines.forEach(l => { ctx.fillText(l, W / 2, y); y += lh; });
+  ctx.fillStyle = "#e9b44c"; ctx.font = '800 34px system-ui, sans-serif';
+  ctx.letterSpacing = "6px"; ctx.fillText(p.name.toUpperCase(), W / 2, Math.min(y + 50, H - 120)); ctx.letterSpacing = "0px";
+  const blob = await new Promise(r => c.toBlob(r, "image/jpeg", 0.9));
+  const file = new File([blob], `velikie-${p.id}.jpg`, {type: "image/jpeg"});
+  try {
+    if (navigator.canShare && navigator.canShare({files: [file]})) {
+      await navigator.share({files: [file], title: p.name});
+      return;
+    }
+  } catch (e) { if (e.name === "AbortError") return; }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  toast("Картинка сохранена");
 }
 
 /* ---------- Уведомления ---------- */
@@ -302,17 +468,37 @@ function installBox() {
 async function installApp() { deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; renderSettings(); }
 
 /* ---------- Роутинг ---------- */
-function go(h) { if (location.hash === h) route(); else location.hash = h; }
-function route() {
+let rendered = null;
+function render() {
   const h = location.hash || "#/";
+  rendered = h;
   if (h.startsWith("#/p/")) renderPerson(decodeURIComponent(h.slice(4)));
   else if (h === "#/settings") renderSettings();
-  else renderHome();
+  else {
+    renderHome();
+    // при возврате фото «садится» обратно в карточку
+    const back = lastId && $app.querySelector(`img[data-id="${lastId}"]`);
+    if (back) back.style.viewTransitionName = "photo";
+  }
+  updateProgress();
 }
+function route() {
+  if (!document.startViewTransition || reduced || !rendered) return render();
+  const t = document.startViewTransition(render);
+  t.finished.finally(() => $app.querySelectorAll("img[style*=view-transition]").forEach(i => i.style.viewTransitionName = ""));
+}
+function go(h) { if (location.hash === h || (h === "#/" && !location.hash)) route(); else location.hash = h; }
 window.addEventListener("hashchange", route);
 
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
-fetch("data/people.json").then(r => r.json()).then(d => { PEOPLE = d; route(); });
+Promise.all([
+  fetch("data/people.json").then(r => r.json()),
+  fetch("data/facts.json").then(r => r.ok ? r.json() : {}).catch(() => ({}))
+]).then(([d, f]) => {
+  PEOPLE = d; FACTS = f; render();
+  const sp = document.getElementById("splash");
+  sp.classList.add("hide"); setTimeout(() => sp.remove(), 600);
+});
 </script>
 </body>
 </html>

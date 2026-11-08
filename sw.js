@@ -1,6 +1,7 @@
 // Service worker: офлайн-кэш и ежедневные push-уведомления
-const CACHE = "velikie-v2";
-const SHELL = ["./", "index.html", "data/people.json", "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png"];
+const CACHE = "velikie-v3";
+const SHELL = ["./", "index.html", "data/people.json", "data/facts.json", "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png",
+  "fonts/pf-cyr.woff2", "fonts/pf-lat.woff2", "fonts/pf-italic-cyr.woff2", "fonts/pf-italic-lat.woff2"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -14,7 +15,7 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
-  const isPhoto = /\/(photos|icons)\//.test(req.url);
+  const isPhoto = /\/(photos|icons|fonts)\//.test(req.url);
   if (isPhoto) {
     // Фото не меняются: сначала кэш
     e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => {
