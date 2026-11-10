@@ -292,7 +292,8 @@ textarea{width:100%;height:110px;margin-top:12px;padding:10px;border-radius:10px
 .mapwrap::-webkit-scrollbar{display:none}
 .map{position:relative;width:1400px;height:700px;background:url(data/map.svg) 0 0/100% 100% no-repeat}
 .pin{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;background:var(--fc);box-shadow:0 0 0 3px rgba(10,10,11,.75),0 0 16px var(--fc);display:grid;place-items:center;font:800 10px/1 system-ui,sans-serif;color:#0a0a0b}
-.pin::after{content:"";position:absolute;inset:-9px}
+.map{cursor:pointer}
+.pin{pointer-events:none}
 .pin.on{box-shadow:0 0 0 3px #0a0a0b,0 0 0 5px #fff,0 0 22px var(--fc);z-index:2}
 .mhint{margin:10px var(--pad) 0;font-size:13px;color:var(--muted)}
 .msel{padding:6px var(--pad) 40px}
@@ -997,13 +998,25 @@ function renderMap() {
     <div class="mhint">Карту можно листать вбок</div>
     <div class="msel" id="msel"></div>`;
   mapList();
+  // нажатие по карте выбирает ближайшую к пальцу точку
+  document.querySelector(".map").addEventListener("click", e => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width * 1000, y = (e.clientY - r.top) / r.height * 500;
+    let best = -1, bd = 1e9;
+    mapClusters.forEach((c, k) => { const d = Math.hypot(c.x - x, c.y - y); if (d < bd) { bd = d; best = k; } });
+    if (best >= 0 && bd * r.width / 1000 < 30) mapPick(best, true);
+  });
   document.getElementById("mapw").scrollLeft = cl[mapSel].x * 1.4 - innerWidth / 2;
   window.scrollTo(0, 0);
 }
-function mapPick(k) {
+function mapPick(k, show) {
   mapSel = k;
   document.querySelectorAll(".pin").forEach((b, j) => b.classList.toggle("on", j === k));
   mapList();
+  // список под картой — подтягиваем его на экран, чтобы было видно, кто там родился
+  const m = document.getElementById("msel");
+  if (show && m.getBoundingClientRect().top > innerHeight * 0.6)
+    scrollTo({top: scrollY + m.getBoundingClientRect().top - innerHeight * 0.45, behavior: reduced ? "auto" : "smooth"});
   if (navigator.vibrate) navigator.vibrate(8);
 }
 function mapList() {
