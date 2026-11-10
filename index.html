@@ -550,6 +550,11 @@ const read = new Set(JSON.parse(localStorage.getItem("read") || "[]"));
 // где остановились в каждой истории: {id: {r: доля 0..1, t: время}}
 const prog = JSON.parse(localStorage.getItem("prog") || "{}");
 const saveProg = () => localStorage.setItem("prog", JSON.stringify(prog));
+// склонение по числу: plural(381, "герой", "героя", "героев") → «381 герой»
+const plural = (n, one, few, many) => {
+  const a = n % 100, b = n % 10;
+  return n + " " + (a > 10 && a < 20 ? many : b === 1 ? one : b > 1 && b < 5 ? few : many);
+};
 const nbsp = s => s.replace(/ —/g, " —");
 
 function cardHtml(x, lazy = true) {
@@ -594,7 +599,7 @@ function quoteDayHtml() {
 function shelvesHtml() {
   return SHELVES.map(s => {
     const list = s.ids.map(id => PEOPLE.find(x => x.id === id)).filter(Boolean);
-    return `<div class="h2">${esc(s.title)}<small>${list.length} историй</small></div>
+    return `<div class="h2">${esc(s.title)}<small>${plural(list.length, "история", "истории", "историй")}</small></div>
       <div class="shelf">${list.map(x => cardHtml(x)).join("")}</div>`;
   }).join("");
 }
@@ -989,7 +994,7 @@ function renderMap() {
   mapClusters = cl;
   if (!cl[mapSel]) mapSel = cl.reduce((m, c, k) => c.list.length > cl[m].list.length ? k : m, 0);
   $app.innerHTML = `<header class="top"><button class="icon-btn" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button><div class="logo">Вели<b>кие</b></div><span style="width:40px"></span></header>
-    <section class="panel" style="padding-bottom:0"><h2>Где родились великие</h2><p>${PEOPLE.length} героев, ${cl.length} мест на карте. Нажмите на точку — покажу, кто там родился.</p></section>
+    <section class="panel" style="padding-bottom:0"><h2>Где родились великие</h2><p>${plural(PEOPLE.length, "герой", "героя", "героев")}, ${plural(cl.length, "место", "места", "мест")} на карте. Нажмите на точку — покажу, кто там родился.</p></section>
     <div class="mapwrap" id="mapw"><div class="map">${cl.map((c, k) => {
       const n = c.list.length, f = new Set(c.list.map(x => x.field));
       const col = f.size === 1 ? fc(c.list[0].field) : "#e9b44c";
@@ -1045,7 +1050,7 @@ function storySlides(p) {
   s.push({img: ph(0), t: 5, html: `<span class="tag">${esc(p.field)}</span><h2>${esc(p.name)}</h2><div class="yrs">${esc(p.years)}</div><p>${esc(nbsp(p.teaser))}</p>`});
   if (f.length) s.push({img: ph(1), t: 6, html: `<div class="slabel">В цифрах</div><div class="sf">${f.map(x => `<div><b>${esc(x.v)}</b><span>${esc(x.l)}</span></div>`).join("")}</div>`});
   if (ex.timeline && ex.timeline.length) s.push({img: ph(2), t: 7, html: `<div class="slabel">Путь</div><div class="path"><ol>${ex.timeline.map(e => `<li><b>${esc(e.y)}</b><span>${esc(e.t)}</span></li>`).join("")}</ol></div>`});
-  if (ex.highlight) s.push({img: ph(1), t: 6, html: `<div class="slabel">Главное</div><p class="big">${esc(nbsp(ex.highlight))}</p>`});
+  if (ex.highlight) s.push({img: ph(1), t: 6, html: `<div class="slabel">Главное</div><p class="big">${esc(nbsp(ex.highlight[0].toUpperCase() + ex.highlight.slice(1)))}</p>`});
   if (p.quotes[0]) s.push({img: ph(0), t: 6, html: `<p class="q">${esc(nbsp(p.quotes[0]))}</p><div class="slabel" style="margin:18px 0 0">${esc(p.name)}</div>`});
   s.push({img: ph(2), t: 8, last: true, html: `<div class="slabel">Урок</div><p class="ls">${esc(nbsp(p.lesson))}</p>
     <div class="acts"><button class="btn ghost" onclick="stFull()">Читать полностью</button><button class="btn" onclick="stNext()">Дальше ${ICONS.arrow}</button></div>`});
