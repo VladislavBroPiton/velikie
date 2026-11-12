@@ -1,7 +1,7 @@
 // Service worker: офлайн-кэш и ежедневные push-уведомления
-const CACHE = "velikie-v5";
+const CACHE = "velikie-v7";
 const STATE = "velikie-state"; // отложенные из уведомления истории — не удалять при обновлении
-const SHELL = ["./", "index.html", "data/people.json", "data/facts.json", "data/extra.json", "data/shelves.json", "data/world.json", "data/links.json", "data/map.svg", "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png",
+const SHELL = ["./", "index.html", "data/people.json", "data/facts.json", "data/extra.json", "data/shelves.json", "data/world.json", "data/links.json", "data/look.json", "data/map.svg", "manifest.webmanifest", "icons/icon-192.png", "icons/badge-96.png",
   "fonts/pf-cyr.woff2", "fonts/pf-lat.woff2", "fonts/pf-italic-cyr.woff2", "fonts/pf-italic-lat.woff2"];
 
 self.addEventListener("install", e => {

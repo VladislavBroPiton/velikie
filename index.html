@@ -464,9 +464,130 @@ body.night .speak{background:rgba(191,144,70,.1);box-shadow:0 0 0 8px rgba(191,1
 .cover .go .down{letter-spacing:.12em;font-size:12px}
 .cover .go .down i{width:32px;height:32px}
 
+/* ================== Патина по эпохе ==================
+   Чем старше герой, тем больше снимок похож на гравюру и старый отпечаток */
+.e-ant{--photo:grayscale(.6) sepia(.42) saturate(.8) contrast(1.18) brightness(.88)}
+.e-cls{--photo:grayscale(.34) sepia(.33) saturate(1) contrast(1.12) brightness(.91)}
+.e-ear{--photo:grayscale(.26) sepia(.26) saturate(1.05) contrast(1.08) brightness(.93)}
+.e-mod{--photo:grayscale(.1) sepia(.09) saturate(1.14) contrast(1.03) brightness(.97)}
+
+/* Подложка под фото — в цвет самого снимка (считается заранее, data/look.json) */
+.hero,.card .ph,.gallery{background:radial-gradient(120% 80% at 50% 25%,color-mix(in srgb,var(--tone,var(--fc,#e9b44c)) 72%,#17171a) 0,#121214 76%)}
+/* и мягкий отсвет этого цвета в начале истории */
+body:not(.paper):not(.night) .person{background:linear-gradient(180deg,color-mix(in srgb,var(--tone,transparent) 40%,var(--bg)) 0,var(--bg) 360px)}
+
+/* Иконка рубрики вместо цветной точки */
+.tag::before,.chip[style]::before{content:none}
+.tag svg{width:12px;height:12px;flex:none}
+.card .tag svg{width:11px;height:11px}
+.chip svg{width:15px;height:15px;flex:none;color:var(--fc)}
+.chip.on svg{color:inherit}
+
+/* Каждая седьмая карточка — во всю ширину: портрет слева, рассказ справа */
+.grid .card.wide{grid-column:1/-1;aspect-ratio:auto;display:grid;grid-template-columns:128px 1fr;grid-template-rows:auto 1fr;min-height:182px;background:linear-gradient(100deg,color-mix(in srgb,var(--tone,#17171a) 45%,#141416) 0,#141416 76%)}
+.grid .card.wide .ph{grid-column:1;grid-row:1/3;position:relative}
+.grid .card.wide .ph::after{background:linear-gradient(90deg,rgba(10,10,11,0) 62%,rgba(20,20,22,.8) 100%)}
+.grid .card.wide .tag{grid-column:2;grid-row:1;position:static;justify-self:start;margin:14px 0 0 15px;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:0;font-size:10px}
+.grid .card.wide .cb{grid-column:2;grid-row:2;position:static;padding:7px 16px 15px}
+.grid .card.wide h3{font-size:21px;line-height:1.16;text-shadow:none}
+.grid .card.wide .yrs{margin-top:4px}
+.grid .card.wide .tz{margin-top:8px;font-size:13px;line-height:1.42;color:#aeaba3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* Титул выбранной рубрики */
+.fhead{display:flex;align-items:center;gap:14px;margin:16px var(--pad) 0;padding:13px 15px;border-radius:18px;background:linear-gradient(100deg,color-mix(in srgb,var(--fc) 26%,#121214) 0,#121214 72%);border:1px solid color-mix(in srgb,var(--fc) 34%,#26262a)}
+.fhead .pics{display:flex;flex:none}
+.fhead .pics img{width:42px;height:42px;border-radius:50%;object-fit:cover;filter:var(--photo);border:2px solid #15151a;margin-left:-14px}
+.fhead .pics img:first-child{margin-left:0}
+.fhead b{display:block;font:800 20px/1.15 var(--serif)}
+.fhead span{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+.fhead .ic{flex:none;margin-left:auto;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:color-mix(in srgb,var(--fc) 18%,transparent);color:var(--fc)}
+.fhead .ic svg{width:20px;height:20px}
+
+/* Дата над обложкой — приложение как ежедневное издание */
+.hello .date{display:block;margin-bottom:7px;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* Заготовки карточек, пока список не собран */
+.sk{border-radius:16px;aspect-ratio:3/4.3;background:linear-gradient(100deg,#141416 28%,#1d1d21 50%,#141416 72%);background-size:300% 100%;animation:skw 1.3s linear infinite}
+@keyframes skw{from{background-position:150% 0}to{background-position:-150% 0}}
+/* нижние карточки браузер не рисует, пока до них не дошли — так список из 381 героя собирается быстрее */
+.grid .card{content-visibility:auto;contain-intrinsic-size:auto 242px}
+
+/* 1. Открытие героя в 13:00: фото проясняется, золотая вспышка, имя поднимается */
+.hero.reveal img{animation:unblur 1.9s cubic-bezier(.2,.7,.2,1) both,kb 26s ease-in-out 1.9s infinite alternate}
+@keyframes unblur{from{filter:var(--photo) blur(26px) brightness(.55);transform:scale(1.2)}to{filter:var(--photo) blur(0) brightness(1);transform:scale(1)}}
+.hero .flash{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(60% 45% at 50% 42%,rgba(255,232,170,.95),rgba(233,180,76,.4) 45%,transparent 75%);mix-blend-mode:screen;opacity:0}
+.hero.reveal .flash{animation:flash 1.6s ease-out .45s both}
+@keyframes flash{0%{opacity:0}22%{opacity:1}100%{opacity:0}}
+.hero.reveal .hero-body>*{animation:rise .75s cubic-bezier(.2,.8,.2,1) both}
+.hero.reveal .hero-body>:nth-child(1),.hero.reveal .hero-body>:nth-child(2){animation-delay:.9s}
+.hero.reveal .hero-body>:nth-child(3){animation-delay:1.1s}
+.hero.reveal .hero-body>:nth-child(4){animation-delay:1.3s}
+.hero.reveal .hero-body>:nth-child(5){animation-delay:1.45s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+
+/* 2. Цитата на экране запуска */
+#splash img{transition:width .5s,height .5s}
+#splash.q img{width:60px;height:60px}
+#splash .sq{max-width:310px;padding:0 10px;text-align:center;font:italic 600 21px/1.42 var(--serif);color:#f6efe0;animation:sqin .8s .1s both}
+#splash .sq small{display:block;margin-top:14px;font:800 11px/1 system-ui,sans-serif;font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+@keyframes sqin{from{opacity:0;transform:translateY(12px)}}
+
+/* 3. Кольца рубрик */
+.rings{display:flex;gap:10px;overflow-x:auto;padding:2px var(--pad) 4px;scroll-padding-inline:var(--pad);scrollbar-width:none}
+.rings::-webkit-scrollbar{display:none}
+.rg{flex:none;width:74px;text-align:center}
+.rg i{position:relative;display:grid;place-items:center;width:62px;height:62px;margin:0 auto;border-radius:50%;background:conic-gradient(var(--fc) calc(var(--p) * 1%),#26262a 0);color:var(--fc)}
+.rg i::before{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--bg)}
+.rg i svg{position:relative;width:22px;height:22px}
+.rg.full i{box-shadow:0 0 18px -3px var(--fc)}
+.rg b{display:block;margin-top:7px;font-size:12px;font-weight:700;line-height:1.2}
+.rg span{display:block;margin-top:1px;font-size:11px;color:var(--muted)}
+
+/* 4. «Удиви меня» — барабан */
+#reel{position:fixed;inset:0;z-index:66;display:none;place-items:center;align-content:center;gap:20px;background:rgba(8,8,9,.84);backdrop-filter:blur(10px)}
+#reel.open{display:grid}
+.rw{position:relative;width:220px;height:290px;border-radius:22px;overflow:hidden;border:2px solid var(--gold);box-shadow:0 0 0 6px rgba(233,180,76,.12),0 0 60px rgba(233,180,76,.3)}
+.rw::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,9,.75),rgba(8,8,9,0) 24%,rgba(8,8,9,0) 76%,rgba(8,8,9,.75));pointer-events:none}
+.rs{will-change:transform}
+.rs img{display:block;width:220px;height:290px;object-fit:cover;object-position:center 20%;filter:var(--photo)}
+.rs.spin img{filter:var(--photo) blur(1.6px)}
+.rn{min-height:70px;text-align:center}
+.rn small{display:block;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);animation:rise .5s both}
+.rn b{display:block;margin-top:8px;font:900 30px/1.1 var(--serif);animation:rise .5s .1s both}
+
+/* 5. Озвучка: подсветка слова, которое звучит */
+::highlight(tts){background-color:rgba(233,180,76,.9);color:#0a0a0b}
+
+/* 6. Лента цитат */
+.qfeed{position:fixed;inset:0;z-index:12;overflow-y:auto;scroll-snap-type:y mandatory;background:#000;scrollbar-width:none;overscroll-behavior:contain}
+.qfeed::-webkit-scrollbar{display:none}
+.qs{position:relative;height:100svh;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;display:flex;align-items:flex-end;background:radial-gradient(120% 80% at 50% 25%,color-mix(in srgb,var(--fc) 26%,#1b1b1e) 0,#121214 75%)}
+.qs>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:var(--photo) brightness(.75)}
+.qs::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 18%,rgba(10,10,11,0) 30%,rgba(10,10,11,.88) 60%,#0a0a0b 100%)}
+.qb{position:relative;z-index:2;padding:0 26px calc(50px + env(safe-area-inset-bottom))}
+.qb p{font:italic 600 29px/1.36 var(--serif);color:#f6efe0}
+.qb p::before{content:"“";display:block;height:54px;font:900 104px/1 var(--serif);color:var(--gold);opacity:.6}
+.qb small{display:block;margin-top:18px;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.qb .qacts{justify-content:flex-start;margin-top:22px}
+.qtop{position:fixed;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top));z-index:13;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.qtop>*{pointer-events:auto}
+.qtop .icon-btn{background:rgba(10,10,11,.5);backdrop-filter:blur(8px);border-color:rgba(255,255,255,.14)}
+.qtop span{padding:7px 12px;border-radius:999px;background:rgba(10,10,11,.5);backdrop-filter:blur(8px);font-size:12px;font-weight:700;color:#cfccc4}
+.qhint{position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));z-index:2;text-align:center;font-size:12px;color:rgba(255,255,255,.45)}
+
+/* Быстрые действия: четыре кнопки */
+.quick{grid-template-columns:repeat(4,1fr);gap:8px}
+.quick button{padding:14px 4px 12px;font-size:13px}
+.quick i{width:42px;height:42px}
+
+/* 7. Режим чтения: автоматическая ночь */
+.rd .ta{flex:1 1 100%;font-size:13px;font-weight:600;color:var(--muted)}
+.rd .ta.on{color:var(--gold);border-color:var(--gold-dim)}
+
 @media (prefers-reduced-motion:reduce){
+  .hero.reveal img,.hero.reveal .flash,.hero.reveal .hero-body>*,#splash .sq{animation:none}
   .sl>img,.sc,.done .ok.burst{animation:none}
-  .hero img,.down i,#splash img,.pop svg,.roll svg{animation:none}
+  .hero img,.down i,#splash img,.pop svg,.roll svg,.sk{animation:none}
   .dock,#award{transition:none}
 }
 </style>
@@ -480,6 +601,7 @@ body.night .speak{background:rgba(191,144,70,.1);box-shadow:0 0 0 8px rgba(191,1
 <div class="rd" id="rd"></div>
 <div id="award"></div>
 <div id="stories"></div>
+<div id="reel"></div>
 <div id="swipe"></div>
 <div id="viewer"><button class="icon-btn x" onclick="closeViewer()" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><img id="vimg" alt=""><div class="hint">Двойной тап — приблизить, двумя пальцами — масштаб</div></div>
 
@@ -493,6 +615,20 @@ const START_DAY = Date.UTC(2026, 10, 6) / 86400000;
 const FC = {"Спорт":"#e5553f","Бизнес":"#e9b44c","Наука":"#4f9cf0","Искусство":"#f08a4b","Музыка":"#a07cf5",
   "Кино":"#3cc0b5","Открытия":"#62c46e","История":"#c9925a","Мода":"#ee7fac"};
 const fc = f => FC[f] || "#e9b44c";
+
+// Знак каждой рубрики — вместо цветной точки
+const sv = d => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>';
+const FI = {
+  "Спорт": sv('<path d="M8 3.5h8V8a4 4 0 0 1-8 0z"/><path d="M8 4.5H5.2c0 2.6 1.2 4.2 2.8 4.5M16 4.5h2.8c0 2.6-1.2 4.2-2.8 4.5"/><path d="M12 12v4M9.5 20.5h5l-.6-4h-3.8z"/>'),
+  "Бизнес": sv('<path d="M3 20.5h18"/><path d="M6.5 20.5v-5M11 20.5V9.5M15.5 20.5v-8M20 20.5v-13"/>'),
+  "Наука": sv('<path d="M9 3h6M10 3v6.6L5.2 18a2 2 0 0 0 1.7 3h10.2a2 2 0 0 0 1.7-3L14 9.6V3"/><path d="M7.4 15h9.2"/>'),
+  "Искусство": sv('<path d="M20.4 3.6a2.1 2.1 0 0 0-3 0L9 12l3 3 8.4-8.4a2.1 2.1 0 0 0 0-3z"/><path d="M9 12l-2 5 5-2"/><path d="M6.4 17.6C5 19 3 19.6 3 19.6S3.6 17.5 5 16.2"/>'),
+  "Музыка": sv('<circle cx="6.5" cy="18" r="3"/><circle cx="17.5" cy="15.5" r="3"/><path d="M9.5 18V7.2L20.5 4.7v10.8"/>'),
+  "Кино": sv('<rect x="2.5" y="7" width="13" height="10" rx="2.2"/><path d="M15.5 11l6-3.2v8.4l-6-3.2z"/>'),
+  "Открытия": sv('<circle cx="12" cy="12" r="9"/><path d="M15.4 8.6l-2.1 4.7-4.7 2.1 2.1-4.7z"/>'),
+  "История": sv('<path d="M3.5 20.5h17M6 20.5V9M10 20.5V9M14 20.5V9M18 20.5V9"/><path d="M3.5 9h17L12 3.5z"/>'),
+  "Мода": sv('<circle cx="6.2" cy="6.2" r="2.7"/><circle cx="6.2" cy="17.8" r="2.7"/><path d="M8.4 7.6l12 10.2M8.4 16.4l12-10.2"/>')
+};
 
 const ICONS = {
   bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
@@ -510,11 +646,29 @@ const ICONS = {
   stop: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>',
   phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>',
   bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z"/></svg>',
+  quote: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 18.5V13c0-4.2 2.2-7.2 6-8.5l.8 1.6C8.6 7.1 7.6 8.8 7.5 11H10v7.5zm10 0V13c0-4.2 2.2-7.2 6-8.5l.8 1.6c-2.2 1-3.2 2.7-3.3 4.9H20v7.5z"/></svg>',
   lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
   book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h14"/></svg>'
 };
 
 let PEOPLE = [], FACTS = {}, EXTRA = {}, SHELVES = [], WORLD = {}, LINKS = {}, LATER = [];
+// где на каждом снимке лицо и какой у человека главный цвет — посчитано заранее
+// скриптом tools/photo_look.py, лежит в data/look.json
+let LOOK = {f: {}, tone: {}};
+
+// год рождения из «1860–1937», «род. 1966», «ок. 100–44 до н.э.»
+function bornYear(y) {
+  const m = String(y).match(/\d{1,4}/);
+  if (!m) return 1900;
+  return /до н\.?\s?э/.test(y) ? -(+m[0]) : +m[0];
+}
+// у каждой эпохи свой отпечаток: гравюра, писаный портрет, первые фото, современный снимок
+function era(p) {
+  const b = bornYear(p.years);
+  return "e-" + (b < 1500 ? "ant" : b < 1830 ? "cls" : b < 1895 ? "ear" : "mod");
+}
+const tone = id => LOOK.tone[id] || "";
+const plural = (k, a) => a[k % 10 === 1 && k % 100 !== 11 ? 0 : [2, 3, 4].includes(k % 10) && !(k % 100 >= 12 && k % 100 <= 14) ? 1 : 2];
 let filter = "Все";
 const $app = document.getElementById("app");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -550,18 +704,18 @@ const read = new Set(JSON.parse(localStorage.getItem("read") || "[]"));
 // где остановились в каждой истории: {id: {r: доля 0..1, t: время}}
 const prog = JSON.parse(localStorage.getItem("prog") || "{}");
 const saveProg = () => localStorage.setItem("prog", JSON.stringify(prog));
-// склонение по числу: plural(381, "герой", "героя", "героев") → «381 герой»
-const plural = (n, one, few, many) => {
+// число со словом: plur(381, "герой", "героя", "героев") → «381 герой»
+const plur = (n, one, few, many) => {
   const a = n % 100, b = n % 10;
   return n + " " + (a > 10 && a < 20 ? many : b === 1 ? one : b > 1 && b < 5 ? few : many);
 };
 const nbsp = s => s.replace(/ —/g, " —");
 
-function cardHtml(x, lazy = true) {
-  return `<button class="card ${read.has(x.id) ? "read" : ""}" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}', this)">
+function cardHtml(x, lazy = true, wide = false) {
+  return `<button class="card ${era(x)} ${wide ? "wide" : ""} ${read.has(x.id) ? "read" : ""}" style="--fc:${fc(x.field)};--tone:${tone(x.id)}" onclick="openPerson('${x.id}', this)">
         <div class="ph grain"><img ${lazy ? 'loading="lazy"' : ""} src="${x.photos[0].src}" alt="" data-id="${x.id}"><i class="tint"></i></div>
-        <span class="tag">${esc(x.field)}</span>
-        <div class="cb"><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span></div>
+        <span class="tag">${FI[x.field] || ""}${esc(x.field)}</span>
+        <div class="cb"><h3>${esc(x.name)}</h3><span class="yrs">${esc(x.years)}</span>${wide ? `<p class="tz">${esc(x.teaser)}</p>` : ""}</div>
       </button>`;
 }
 
@@ -572,7 +726,7 @@ function weekHtml() {
     <div class="week">${days.map((d, k) => {
       const x = PEOPLE[(t - k - 1 + N) % N];
       return `<button class="wk ${read.has(x.id) ? "read" : ""}" onclick="openPerson('${x.id}', this)">
-        <div class="ring"><img loading="lazy" src="${x.photos[0].src}" alt="" data-id="${x.id}"></div>
+        <div class="ring"><img class="${era(x)}" loading="lazy" src="${x.photos[0].src}" alt="" data-id="${x.id}" data-ty="46"></div>
         <b>${esc(x.name.split(" ").slice(-1)[0])}</b><span>${d}</span></button>`;
     }).join("")}</div>`;
 }
@@ -583,7 +737,7 @@ function resumeHtml() {
   if (!open) return "";
   const x = PEOPLE.find(p => p.id === open[0]);
   return `<button class="resume" onclick="resume('${x.id}')">
-      <img src="${x.photos[0].src}" alt="">
+      <img class="${era(x)}" src="${x.photos[0].src}" alt="" data-ty="46">
       <div><small>Продолжить чтение</small><strong>${esc(x.name)}</strong><div class="bar"><i style="width:${Math.round(open[1].r * 100)}%"></i></div></div>
       ${ICONS.arrow}</button>`;
 }
@@ -599,7 +753,7 @@ function quoteDayHtml() {
 function shelvesHtml() {
   return SHELVES.map(s => {
     const list = s.ids.map(id => PEOPLE.find(x => x.id === id)).filter(Boolean);
-    return `<div class="h2">${esc(s.title)}<small>${plural(list.length, "история", "истории", "историй")}</small></div>
+    return `<div class="h2">${esc(s.title)}<small>${plur(list.length, "история", "истории", "историй")}</small></div>
       <div class="shelf">${list.map(x => cardHtml(x)).join("")}</div>`;
   }).join("");
 }
@@ -611,11 +765,18 @@ const MOTTO = ["Каждый великий когда-то начинал с н
   "Сегодняшнее усилие — завтрашняя сила", "Ваша история ещё пишется", "Смелость — это действовать, даже когда страшно",
   "Главное — не останавливаться", "Мечта без действия остаётся мечтой", "Терпение и труд творят историю",
   "Сильные не те, кто не падал, а те, кто вставал"];
+const DOW = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"];
+const MONTH = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+function dateLine() {
+  // дата по Москве — тот же счёт, что у «человека дня»
+  const m = new Date(Date.now() + 3 * 3600e3);
+  return DOW[m.getUTCDay()] + ", " + m.getUTCDate() + " " + MONTH[m.getUTCMonth()];
+}
 function helloHtml() {
   const h = new Date().getHours();
   const g = h < 5 ? "Доброй ночи" : h < 12 ? "Доброе утро" : h < 17 ? "Добрый день" : h < 23 ? "Добрый вечер" : "Доброй ночи";
   const day = Math.floor((Date.now() + 3 * 3600e3) / 86400000);
-  return `<div class="hello"><b>${g}</b><span>${esc(nbsp(MOTTO[day % MOTTO.length]))}</span></div>`;
+  return `<div class="hello"><i class="date">${dateLine()}</i><b>${g}</b><span>${esc(nbsp(MOTTO[day % MOTTO.length]))}</span></div>`;
 }
 const UNLOCK = 13 * 3600; // 13:00 по Москве — время уведомления
 function lockLeft() {
@@ -632,14 +793,14 @@ setInterval(() => {
   if (!el) return;
   const s = lockLeft();
   if (s > 0) el.innerHTML = countHtml(s);
-  else { const y = scrollY; renderHome(); scrollTo(0, y); }
+  else { homeScroll = scrollY; renderHome(); fadeImgs($app); playReveal(); }
 }, 1000);
 
 function heroHtml() {
   const t = todayIndex(), p = PEOPLE[t], left = lockLeft();
   if (left > 0) {
     const y = PEOPLE[(t - 1 + PEOPLE.length) % PEOPLE.length];
-    return `<article class="hero grain locked" style="--fc:${fc(p.field)}" onclick="toast('Откроется в 13:00')">
+    return `<article class="hero grain locked ${era(p)}" style="--fc:${fc(p.field)};--tone:${tone(p.id)}" onclick="toast('Откроется в 13:00')">
       <img src="${p.photos[0].src}" alt="">
       <i class="tint"></i><i class="top-shade"></i>${helloHtml()}
       <div class="hero-body">
@@ -651,11 +812,11 @@ function heroHtml() {
       </div>
     </article>`;
   }
-  return `<article class="hero grain" onclick="openPerson('${p.id}', this)" style="--fc:${fc(p.field)}">
+  return `<article class="hero grain ${era(p)}" onclick="openPerson('${p.id}', this)" style="--fc:${fc(p.field)};--tone:${tone(p.id)}">
       <img src="${p.photos[0].src}" alt="${esc(p.name)}" data-id="${p.id}">
       <i class="tint"></i><i class="top-shade"></i>${helloHtml()}
       <div class="hero-body">
-        <span class="kicker">Человек дня</span><span class="tag">${esc(p.field)}</span>
+        <span class="kicker">Человек дня</span><span class="tag">${FI[p.field] || ""}${esc(p.field)}</span>
         <h1>${esc(p.name)}</h1>
         <p>${esc(p.teaser)}</p>
         <span class="btn">Читать историю · ${readMin(p)} мин ${ICONS.arrow}</span>
@@ -664,21 +825,12 @@ function heroHtml() {
 }
 
 /* ---------- Удиви меня, отложенные из уведомления ---------- */
-function surprise(btn) {
-  const locked = lockLeft() > 0 ? PEOPLE[todayIndex()].id : null;
-  let pool = PEOPLE.filter(x => !read.has(x.id) && x.id !== locked);
-  if (!pool.length) pool = PEOPLE.filter(x => x.id !== locked);
-  const x = pool[Math.floor(Math.random() * pool.length)];
-  if (navigator.vibrate) navigator.vibrate([12, 40, 12]);
-  if (reduced) return openPerson(x.id);
-  btn.classList.remove("roll"); void btn.offsetWidth; btn.classList.add("roll");
-  setTimeout(() => openPerson(x.id), 420);
-}
 function quickHtml() {
   return `<div class="quick">
-      <button onclick="surprise(this)"><i>${ICONS.dice}</i><span>Удиви меня<small>наугад</small></span></button>
+      <button onclick="surprise()"><i>${ICONS.dice}</i><span>Наугад<small>удиви меня</small></span></button>
       <button onclick="homeScroll = scrollY; go('#/map')"><i>${ICONS.globe}</i><span>Карта<small>где родились</small></span></button>
       <button onclick="homeScroll = scrollY; go('#/awards')"><i>${ICONS.medal}</i><span>Награды<small>${earnedCount()} из ${AWARDS.length}</small></span></button>
+      <button onclick="homeScroll = scrollY; go('#/quotes')"><i>${ICONS.quote}</i><span>Цитаты<small>лентой</small></span></button>
     </div>`;
 }
 async function loadLater() {
@@ -692,9 +844,23 @@ function laterHtml() {
   const x = LATER.map(id => PEOPLE.find(p => p.id === id)).find(Boolean);
   if (!x) return "";
   return `<button class="resume later" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}')">
-      <img src="${x.photos[0].src}" alt="">
+      <img class="${era(x)}" src="${x.photos[0].src}" alt="" data-ty="46">
       <div><small>Отложено на потом</small><strong>${esc(x.name)}</strong><span style="font-size:13px;color:var(--muted)">Из уведомления · ${readMin(x)} мин</span></div>
       ${ICONS.arrow}</button>`;
+}
+
+// Полоса над списком, когда выбрана рубрика: три портрета, название и сколько внутри
+function fheadHtml(list) {
+  if (filter === "Все" || !list.length) return "";
+  const pics = list.slice(0, 3).map(x =>
+    `<img class="${era(x)}" loading="lazy" src="${x.photos[0].src}" alt="" data-ty="46">`).join("");
+  const was = list.filter(x => read.has(x.id)).length;
+  const cnt = list.length + " " + plural(list.length, ["история", "истории", "историй"]);
+  return `<div class="fhead" style="--fc:${fc(filter)}">
+      <div class="pics">${pics}</div>
+      <div><b>${esc(filter)}</b><span>${cnt} · прочитано ${was}</span></div>
+      ${FI[filter] ? `<i class="ic">${FI[filter]}</i>` : ""}
+    </div>`;
 }
 
 function renderHome() {
@@ -704,16 +870,24 @@ function renderHome() {
     ${laterHtml()}
     ${resumeHtml()}
     ${quickHtml()}
+    ${ringsHtml()}
     ${weekHtml()}
     ${quoteDayHtml()}
     ${shelvesHtml()}
     <div class="section-title" style="margin-top:40px">Все истории<em>Прочитано ${read.size} из ${PEOPLE.length}</em></div>
     <div class="search"><input id="q" type="search" placeholder="Поиск по имени" value="${esc(query)}" autocomplete="off"></div>
-    <div class="chips">${fields.map(f => `<button class="chip ${f === filter ? "on" : ""}" ${FC[f] ? `style="--fc:${FC[f]}"` : ""} onclick="setFilter('${f}')">${f}</button>`).join("")}</div>
-    <div class="grid" id="grid"></div>`;
+    <div class="chips">${fields.map(f => `<button class="chip ${f === filter ? "on" : ""}" ${FC[f] ? `style="--fc:${FC[f]}"` : ""} onclick="setFilter('${f}')">${FI[f] || (f === "Избранное" ? ICONS.star : "")}${f}</button>`).join("")}</div>
+    <div id="fhead"></div>
+    <div class="grid" id="grid">${Array(6).fill('<i class="sk"></i>').join("")}</div>`;
   document.getElementById("q").addEventListener("input", e => { query = e.target.value; renderList(); });
-  renderList();
-  if (homeScroll) { window.scrollTo(0, homeScroll); homeScroll = 0; }
+  if (homeScroll) {
+    // возвращаемся на главную — список нужен сразу, иначе прокрутка не встанет на место
+    renderList();
+    window.scrollTo(0, homeScroll); homeScroll = 0;
+  } else {
+    // первый вход: сначала показываем верх экрана, список из 381 героя собираем следом
+    requestAnimationFrame(() => requestAnimationFrame(renderList));
+  }
 }
 function renderList() {
   setTimeout(() => fadeImgs(document.getElementById("grid")));
@@ -722,7 +896,13 @@ function renderList() {
     (filter === "Все" || (filter === "Избранное" ? favs.has(x.id) : x.field === filter)) &&
     (!q || x.name.toLowerCase().replace(/ё/g, "е").includes(q)));
   const empty = filter === "Избранное" && !q ? "Здесь появятся истории, которые вы отметите звёздочкой" : "Никого не нашлось";
-  document.getElementById("grid").innerHTML = list.length ? list.map(x => cardHtml(x)).join("") : `<div class="empty">${empty}</div>`;
+  // каждая седьмая карточка — во всю ширину, чтобы длинная лента не была однообразной
+  const wide = i => list.length > 12 && i % 7 === 2;
+  document.getElementById("fhead").innerHTML = fheadHtml(list);
+  document.getElementById("grid").innerHTML = list.length
+    ? list.map((x, i) => cardHtml(x, true, wide(i))).join("")
+    : `<div class="empty">${empty}</div>`;
+  fadeImgs(document.getElementById("fhead"));
 }
 function openPerson(id, el) {
   if (!location.hash || location.hash === "#/") homeScroll = window.scrollY;
@@ -732,7 +912,7 @@ function openPerson(id, el) {
   go("#/p/" + id);
 }
 let lastEl = null;
-function setFilter(f) { filter = f; const y = window.scrollY; renderHome(); window.scrollTo(0, y); }
+function setFilter(f) { filter = f; homeScroll = window.scrollY; renderHome(); }
 
 function quoteSlide(p, k) {
   return `<figure class="qslide"><p>${esc(nbsp(p.quotes[k]))}</p><small>${esc(p.name)}</small>
@@ -757,14 +937,14 @@ function renderPerson(id) {
   if (LATER.includes(p.id)) { LATER = LATER.filter(x => x !== p.id); saveLater(); }
   const facts = FACTS[p.id] || [], ex = EXTRA[p.id] || {}, hl = ex.highlight, tl = ex.timeline || [];
   $app.innerHTML = `
-    <div class="gallery grain" style="--fc:${fc(p.field)}">
+    <div class="gallery grain ${era(p)}" style="--fc:${fc(p.field)};--tone:${tone(p.id)}">
       <button class="icon-btn back" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button>
       <button class="icon-btn fav ${favs.has(p.id) ? "on" : ""}" data-fav onclick="toggleFav('${p.id}')" aria-label="В избранное">${ICONS.star}</button>
       <div class="slides" id="slides">${p.photos.map((ph, k) => `<img ${k ? 'loading="lazy"' : 'style="view-transition-name:photo"'} src="${ph.src}" alt="${esc(p.name)}" onclick="openViewer(${k})">`).join("")}</div>
       <i class="tint"></i>
       ${p.photos.length > 1 ? `<div class="dots" id="dots">${p.photos.map((_, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</div>` : ""}
       <div class="cover" style="--fc:${fc(p.field)}">
-        <span class="tag">${esc(p.field)}</span>
+        <span class="tag">${FI[p.field] || ""}${esc(p.field)}</span>
         <h1>${esc(p.name)}</h1>
         <div class="yrs">${esc(p.years)} · ${readMin(p)} мин чтения</div>
         <div class="role">${esc(p.role)}</div>
@@ -776,7 +956,7 @@ function renderPerson(id) {
       </div>
       <i class="line"></i>
     </div>
-    <section class="person" id="story">
+    <section class="person" id="story" style="--tone:${tone(p.id)}">
       ${facts.length ? `<div class="facts">${facts.map(f => `<div class="fact"><b class="${f.v.length > 5 ? "sm" : ""}">${esc(f.v)}</b><span>${esc(f.l)}</span></div>`).join("")}</div>` : ""}
       <div class="story lead">${p.story.slice(0, 3).map(t => para(t, hl)).join("")}</div>
       ${quoteSlide(p, 0)}
@@ -794,7 +974,7 @@ function renderPerson(id) {
           <button onclick="shareStory('${p.id}')">${ICONS.share}Поделиться</button>
         </div>
         <button class="next" onclick="go('#/p/${n.id}')">
-          <img src="${n.photos[0].src}" alt="">
+          <img class="${era(n)}" src="${n.photos[0].src}" alt="" data-ty="46">
           <div><small>Следующая история</small><strong>${esc(n.name)}</strong></div>
         </button>
       </div>
@@ -830,7 +1010,7 @@ function linksHtml(p) {
   }
   if (!list.length) return "";
   return `<div class="links"><h4>${title}</h4><div class="lk">${list.map(([x, t]) => `<button style="--fc:${fc(x.field)}" onclick="go('#/p/${x.id}')">
-      <img loading="lazy" src="${x.photos[0].src}" alt=""><div><strong>${esc(x.name)}</strong><span>${esc(nbsp(t))}</span></div></button>`).join("")}</div></div>`;
+      <img class="${era(x)}" loading="lazy" src="${x.photos[0].src}" alt="" data-ty="46"><div><strong>${esc(x.name)}</strong><span>${esc(nbsp(t))}</span></div></button>`).join("")}</div></div>`;
 }
 
 /* ---------- Озвучка: телефон читает историю ---------- */
@@ -864,8 +1044,11 @@ function speakNext() {
   const el = tts.els[tts.i];
   el.classList.add("speak");
   el.scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "center"});
-  const u = new SpeechSynthesisUtterance((el.closest(".lesson") ? "Урок на сегодня. " : "") + el.textContent);
+  const pre = el.closest(".lesson") ? "Урок на сегодня. " : "";
+  const u = new SpeechSynthesisUtterance(pre + el.textContent);
   u.lang = "ru-RU"; const v = ruVoice(); if (v) u.voice = v;
+  clearWord();
+  u.onboundary = e => { if (tts && tts.u === u && (!e.name || e.name === "word")) markWord(el, e.charIndex - pre.length, e.charLength); };
   u.onend = () => { if (tts && tts.u === u) { tts.i++; speakNext(); } };
   u.onerror = e => {
     if (tts && tts.u === u && e.error !== "interrupted" && e.error !== "canceled") { stopTts(); toast("Не получилось включить озвучку"); }
@@ -875,6 +1058,7 @@ function speakNext() {
 function stopTts() {
   tts = null;
   if ("speechSynthesis" in window) speechSynthesis.cancel();
+  clearWord();
   document.querySelectorAll(".speak").forEach(e => e.classList.remove("speak"));
   setListen(false);
 }
@@ -887,17 +1071,24 @@ const THEMES = [["dark", "Тёмная"], ["paper", "Бумага"], ["night", "
 const $rd = document.getElementById("rd");
 function applyRd() {
   document.body.style.setProperty("--fz", FZ[rd.z]);
-  THEMES.forEach(([k]) => k !== "dark" && document.body.classList.toggle(k, rd.t === k && !!current));
+  const th = themeNow();
+  THEMES.forEach(([k]) => k !== "dark" && document.body.classList.toggle(k, th === k && !!current));
   localStorage.setItem("rd", JSON.stringify(rd));
   $rd.innerHTML = `<button class="z" onclick="rdSet('z', -1)" ${rd.z ? "" : "disabled"}><small>A</small>−</button>
     <button class="z" onclick="rdSet('z', 1)" ${rd.z < FZ.length - 1 ? "" : "disabled"}>A+</button>
-    ${THEMES.map(([k, l]) => `<button class="th th-${k} ${rd.t === k ? "on" : ""}" onclick="rdSet('t', '${k}')"><span></span>${l}</button>`).join("")}`;
+    ${THEMES.map(([k, l]) => `<button class="th th-${k} ${th === k ? "on" : ""}" onclick="rdSet('t', '${k}')"><span></span>${l}</button>`).join("")}
+    <button class="ta ${rd.auto !== false ? "on" : ""}" onclick="rdAuto()">Ночная тема с 22:00 до 6:00 — ${rd.auto !== false ? "включена" : "выключена"}</button>`;
 }
 function rdSet(k, v) {
   // при смене размера держим на экране тот же абзац
   const anchor = [...document.querySelectorAll(".story p")].find(p => p.getBoundingClientRect().bottom > 80);
   const top = anchor && anchor.getBoundingClientRect().top;
-  if (k === "z") rd.z = Math.min(FZ.length - 1, Math.max(0, rd.z + v)); else rd.t = v;
+  if (k === "z") rd.z = Math.min(FZ.length - 1, Math.max(0, rd.z + v));
+  else {
+    // ночью выбрали «Тёмную» — автоматическую ночь до утра не включаем
+    if (v === "dark" && nightNow()) rd.skip = nightKey();
+    rd.t = v;
+  }
   applyRd();
   if (anchor) scrollBy(0, anchor.getBoundingClientRect().top - top);
 }
@@ -994,7 +1185,7 @@ function renderMap() {
   mapClusters = cl;
   if (!cl[mapSel]) mapSel = cl.reduce((m, c, k) => c.list.length > cl[m].list.length ? k : m, 0);
   $app.innerHTML = `<header class="top"><button class="icon-btn" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button><div class="logo">Вели<b>кие</b></div><span style="width:40px"></span></header>
-    <section class="panel" style="padding-bottom:0"><h2>Где родились великие</h2><p>${plural(PEOPLE.length, "герой", "героя", "героев")}, ${plural(cl.length, "место", "места", "мест")} на карте. Нажмите на точку — покажу, кто там родился.</p></section>
+    <section class="panel" style="padding-bottom:0"><h2>Где родились великие</h2><p>${plur(PEOPLE.length, "герой", "героя", "героев")}, ${plur(cl.length, "место", "места", "мест")} на карте. Нажмите на точку — покажу, кто там родился.</p></section>
     <div class="mapwrap" id="mapw"><div class="map">${cl.map((c, k) => {
       const n = c.list.length, f = new Set(c.list.map(x => x.field));
       const col = f.size === 1 ? fc(c.list[0].field) : "#e9b44c";
@@ -1027,9 +1218,57 @@ function mapPick(k, show) {
 function mapList() {
   const c = mapClusters[mapSel], places = [...new Set(c.list.map(x => WORLD[x.id].place))];
   document.getElementById("msel").innerHTML = `<h3>${esc(places.join(", "))}</h3>` + c.list.map(x =>
-    `<button class="mrow" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}')"><img loading="lazy" src="${x.photos[0].src}" alt="">
+    `<button class="mrow" style="--fc:${fc(x.field)}" onclick="openPerson('${x.id}')"><img class="${era(x)}" loading="lazy" src="${x.photos[0].src}" alt="" data-ty="46">
       <div><strong>${esc(x.name)}</strong><span>${esc(x.field)} · ${esc(x.years)}</span></div></button>`).join("");
+  fadeImgs(document.getElementById("msel"));
 }
+
+/* ---------- Обрезка кадра под лицо ----------
+   Раньше все снимки обрезались одинаково и у части портретов срезало подбородок.
+   Теперь известен центр лица, и кадр сдвигается так, чтобы лицо встало на нужное
+   место рамки: по умолчанию в верхней трети, у круглых портретов — почти в центре. */
+const stem = src => src.replace(/^.*\//, "").replace(/\.jpg$/i, "");
+function fitImg(i) {
+  const f = LOOK.f[stem(i.getAttribute("src") || "")];
+  if (!f || !i.naturalWidth) return;
+  const w = i.clientWidth, h = i.clientHeight;
+  if (!w || !h) return;
+  const tx = (+i.dataset.tx || 50) / 100, ty = (+i.dataset.ty || 32) / 100;
+  const k = Math.max(w / i.naturalWidth, h / i.naturalHeight);
+  const W = i.naturalWidth * k, H = i.naturalHeight * k;      // размер снимка после вписывания
+  const cl = v => v < 0 ? 0 : v > 1 ? 1 : v;
+  const x = W - w > .5 ? cl((f[0] / 100 * W - tx * w) / (W - w)) : .5;
+  const y = H - h > .5 ? cl((f[1] / 100 * H - ty * h) / (H - h)) : .5;
+  i.style.objectPosition = (x * 100).toFixed(1) + "% " + (y * 100).toFixed(1) + "%";
+}
+// карточки ниже экрана браузер не рисует, их размер становится известен только при
+// приближении — поэтому ждём появления в поле зрения и считаем обрезку тогда
+const fitObs = "IntersectionObserver" in window ? new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    requestAnimationFrame(() => {
+      if (!e.target.clientWidth) return;
+      fitImg(e.target);
+      fitObs.unobserve(e.target);
+    });
+  });
+}, {rootMargin: "500px 0px"}) : null;
+
+function fitImgs(root) {
+  (root || document).querySelectorAll("img").forEach(i => {
+    if (!/photos\//.test(i.getAttribute("src") || "")) return;
+    const go = () => {
+      if (i.clientWidth && i.clientHeight) fitImg(i);
+      else if (fitObs) fitObs.observe(i);
+    };
+    if (i.complete && i.naturalWidth) go();
+    else i.addEventListener("load", go, {once: true});
+  });
+}
+addEventListener("resize", () => {
+  clearTimeout(fitImgs.t);
+  fitImgs.t = setTimeout(() => fitImgs($app), 250);
+});
 
 /* ---------- Плавное появление фото ---------- */
 function fadeImgs(root) {
@@ -1040,6 +1279,7 @@ function fadeImgs(root) {
     const on = () => i.classList.add("ld");
     i.addEventListener("load", on, {once: true}); i.addEventListener("error", on, {once: true});
   });
+  fitImgs(root);
 }
 
 /* ---------- Режим «сторис»: коротко за полминуты ---------- */
@@ -1061,8 +1301,11 @@ function openStories() {
   if (tts) stopTts();
   ST = {p: current, s: storySlides(current), i: 0};
   $st.style.setProperty("--fc", fc(current.field));
+  $st.style.setProperty("--tone", tone(current.id));
+  $st.classList.remove("e-ant", "e-cls", "e-ear", "e-mod");
+  $st.classList.add(era(current));
   $st.innerHTML = `<div class="sbars">${ST.s.map(() => "<i><b></b></i>").join("")}</div>
-    <div class="who"><img src="${current.photos[0].src}" alt="">${esc(current.name)}</div>
+    <div class="who"><img src="${current.photos[0].src}" alt="" data-ty="46">${esc(current.name)}</div>
     <button class="icon-btn x" onclick="closeStories()" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="sl" id="sl"></div>`;
   $st.classList.add("open"); $st.classList.remove("paused");
@@ -1073,6 +1316,7 @@ function stShow(i) {
   ST.i = i;
   const sl = ST.s[i];
   document.getElementById("sl").innerHTML = `<img src="${sl.img}" alt=""><i class="tint"></i><div class="sc">${sl.html}</div>`;
+  fitImgs(document.getElementById("sl"));
   [...$st.querySelectorAll(".sbars i")].forEach((b, k) => {
     b.className = k < i ? "past" : k === i ? "now" : "";
     b.style.setProperty("--t", sl.t + "s");
@@ -1222,6 +1466,125 @@ async function shareWallpaper(id, k) {
   ctx.fillText("ВЕЛИКИЕ", W / 2 + 6, H - 170); ctx.letterSpacing = "0px";
   await shareCanvas(c, p);
 }
+
+/* ---------- Открытие героя дня в 13:00 ---------- */
+const mskDay = () => Math.floor((Date.now() + 3 * 3600e3) / 86400000);
+function playReveal() {
+  const h = document.querySelector(".hero:not(.locked)");
+  if (!h || reduced || scrollY > innerHeight * 0.5) return;
+  localStorage.setItem("revealed", mskDay());
+  h.insertAdjacentHTML("beforeend", '<i class="flash"></i>');
+  h.classList.add("reveal");
+  setTimeout(() => sparks(h.querySelector("h1"), true), 1250);
+  if (navigator.vibrate && navigator.userActivation?.hasBeenActive) navigator.vibrate([30, 80, 30]);
+}
+// впервые за день открыли главную после 13:00 — тоже показываем открытие
+function maybeReveal() {
+  if (lockLeft() === 0 && String(localStorage.getItem("revealed")) !== String(mskDay())) playReveal();
+}
+
+/* ---------- Цитата на экране запуска ---------- */
+function splashQuote(sp) {
+  // только при холодном запуске на главную: по ссылке из уведомления сразу открываем историю
+  if (sessionStorage.getItem("sq") || (location.hash && location.hash !== "#/")) return false;
+  sessionStorage.setItem("sq", 1);
+  const pool = [];
+  PEOPLE.forEach(p => p.quotes.forEach(q => { if (q.length <= 110) pool.push([p, q]); }));
+  if (!pool.length) return false;
+  const [p, q] = pool[Math.floor(Math.random() * pool.length)];
+  sp.classList.add("q");
+  sp.querySelector("div").insertAdjacentHTML("beforeend", `<p class="sq">«${esc(nbsp(q))}»<small>${esc(p.name)}</small></p>`);
+  return true;
+}
+
+/* ---------- Кольца рубрик ---------- */
+function ringsHtml() {
+  return `<div class="h2">Ваш прогресс<small>Сколько прочитано в каждой рубрике</small></div>
+    <div class="rings">${Object.keys(FC).map(f => {
+      const all = PEOPLE.filter(x => x.field === f);
+      if (!all.length) return "";
+      const n = all.filter(x => read.has(x.id)).length;
+      return `<button class="rg ${n === all.length ? "full" : ""}" style="--fc:${FC[f]};--p:${(n / all.length * 100).toFixed(1)}" onclick="ringGo('${f}')">
+        <i>${FI[f] || ""}</i><b>${esc(f)}</b><span>${n} из ${all.length}</span></button>`;
+    }).join("")}</div>`;
+}
+function ringGo(f) {
+  filter = f; homeScroll = scrollY; renderHome(); fadeImgs($app);
+  requestAnimationFrame(() => document.querySelector(".chips").scrollIntoView({behavior: reduced ? "auto" : "smooth", block: "start"}));
+}
+
+/* ---------- «Удиви меня»: барабан из портретов ---------- */
+let reeling = false;
+function surprise() {
+  if (reeling) return;
+  const locked = lockLeft() > 0 ? PEOPLE[todayIndex()].id : null;
+  let pool = PEOPLE.filter(x => !read.has(x.id) && x.id !== locked);
+  if (!pool.length) pool = PEOPLE.filter(x => x.id !== locked);
+  const x = pool[Math.floor(Math.random() * pool.length)];
+  if (reduced) return openPerson(x.id);
+  // 13 случайных портретов, последний — выпавший герой
+  const strip = [];
+  while (strip.length < 13) { const r = PEOPLE[Math.floor(Math.random() * PEOPLE.length)]; if (r !== x) strip.push(r); }
+  strip.push(x);
+  const $r = document.getElementById("reel");
+  $r.innerHTML = `<div class="rw"><div class="rs spin" id="rs">${strip.map(p => `<img class="${era(p)}" src="${p.photos[0].src}" alt="">`).join("")}</div></div><div class="rn" id="rn"></div>`;
+  $r.classList.add("open"); reeling = true;
+  const rs = document.getElementById("rs");
+  if (navigator.vibrate) navigator.vibrate([8, 70, 8, 80, 8, 100, 8, 130, 8, 170, 8, 230, 8, 300, 14]);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    rs.style.transition = "transform 2.6s cubic-bezier(.12,.8,.18,1)";
+    rs.style.transform = `translateY(${-(strip.length - 1) * 290}px)`;
+  }));
+  rs.addEventListener("transitionend", () => {
+    rs.classList.remove("spin");
+    document.getElementById("rn").innerHTML = `<small>Ваш герой</small><b>${esc(x.name)}</b>`;
+    sparks(rs.parentElement, true);
+    setTimeout(() => { $r.classList.remove("open"); $r.innerHTML = ""; reeling = false; openPerson(x.id); }, 1100);
+  }, {once: true});
+}
+
+/* ---------- Озвучка: подсветка звучащего слова ---------- */
+const hlOK = !!(window.CSS && CSS.highlights && window.Highlight);
+function markWord(el, i, len) {
+  if (!hlOK || i < 0) return;
+  if (!len) { const m = el.textContent.slice(i).match(/^[\p{L}\p{N}\-]+/u); len = m ? m[0].length : 0; }
+  if (!len) return;
+  const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), r = new Range();
+  let n, pos = 0, started = false;
+  while ((n = w.nextNode())) {
+    const L = n.length;
+    if (!started && i < pos + L) { r.setStart(n, i - pos); started = true; }
+    if (started && i + len <= pos + L) { r.setEnd(n, i + len - pos); CSS.highlights.set("tts", new Highlight(r)); return; }
+    pos += L;
+  }
+}
+const clearWord = () => { if (hlOK) CSS.highlights.delete("tts"); };
+
+/* ---------- Лента цитат ---------- */
+function seeded(seed) { return () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }; }
+function renderQuotes() {
+  // порядок меняется каждый день, но в течение дня один и тот же
+  const rnd = seeded(mskDay()), items = [];
+  PEOPLE.forEach(p => p.quotes.forEach((q, k) => items.push([p, k])));
+  for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
+  $app.innerHTML = `<div class="qtop"><button class="icon-btn" onclick="go('#/')" aria-label="Назад">${ICONS.back}</button><span id="qn">1 из ${items.length}</span></div>
+    <div class="qfeed" id="qf">${items.map(([p, k], i) => `<section class="qs" style="--fc:${fc(p.field)}">
+      <img class="${era(p)}" ${i > 1 ? 'loading="lazy"' : ""} src="${p.photos[k % p.photos.length].src}" alt="">
+      <div class="qb"><p>${esc(nbsp(p.quotes[k]))}</p><small>${esc(p.name)}</small>
+        <div class="qacts"><button class="share" onclick="go('#/p/${p.id}')">${ICONS.book}История</button>
+        <button class="share" onclick="shareQuote('${p.id}', ${k})">${ICONS.share}Сторис</button>
+        <button class="share" onclick="shareWallpaper('${p.id}', ${k})">${ICONS.phone}Обои</button></div></div>
+      ${i === 0 ? '<div class="qhint">Листайте вверх</div>' : ""}</section>`).join("")}</div>`;
+  const qf = document.getElementById("qf"), qn = document.getElementById("qn");
+  qf.addEventListener("scroll", () => { qn.textContent = `${Math.round(qf.scrollTop / qf.clientHeight) + 1} из ${items.length}`; }, {passive: true});
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Автоматическая ночная тема с 22:00 до 6:00 ---------- */
+const nightNow = () => { const h = new Date().getHours(); return h >= 22 || h < 6; };
+const nightKey = () => { const d = new Date(); if (d.getHours() < 6) d.setDate(d.getDate() - 1); return dayKey(d); };
+const themeNow = () => rd.t === "dark" && rd.auto !== false && nightNow() && rd.skip !== nightKey() ? "night" : rd.t;
+function rdAuto() { rd.auto = rd.auto === false; rd.skip = null; applyRd(); }
 
 let current = null;
 function toggleFav(id) {
@@ -1500,6 +1863,7 @@ function render() {
   else if (h === "#/settings") { current = null; renderSettings(); }
   else if (h === "#/map") { current = null; renderMap(); }
   else if (h === "#/awards") { current = null; renderAwards(); }
+  else if (h === "#/quotes") { current = null; renderQuotes(); }
   else {
     current = null;
     renderHome();
@@ -1515,6 +1879,7 @@ function render() {
   if (current) {
     watchDone();
   }
+  if (h === "#/" && !document.getElementById("splash")) setTimeout(maybeReveal, 300);
 }
 function route() {
   if (!document.startViewTransition || reduced || !rendered) return render();
@@ -1527,13 +1892,16 @@ window.addEventListener("hashchange", route);
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
 Promise.all([
   fetch("data/people.json").then(r => r.json()),
-  ...["facts", "extra", "shelves", "world", "links"].map(n => fetch(`data/${n}.json`).then(r => r.ok ? r.json() : null).catch(() => null)),
+  ...["facts", "extra", "shelves", "world", "links", "look"].map(n => fetch(`data/${n}.json`).then(r => r.ok ? r.json() : null).catch(() => null)),
   loadLater()
-]).then(([d, f, e, sh, w, l]) => {
-  PEOPLE = d; FACTS = f || {}; EXTRA = e || {}; SHELVES = sh || []; WORLD = w || {}; LINKS = l || {}; render();
+]).then(([d, f, e, sh, w, l, lk]) => {
+  PEOPLE = d; FACTS = f || {}; EXTRA = e || {}; SHELVES = sh || []; WORLD = w || {}; LINKS = l || {};
+  if (lk && lk.f) LOOK = lk;
+  render();
   setTimeout(checkAwards, 1200);
   const sp = document.getElementById("splash");
-  sp.classList.add("hide"); setTimeout(() => sp.remove(), 600);
+  const hide = () => { if (!sp.isConnected || sp.classList.contains("hide")) return; sp.classList.add("hide"); setTimeout(() => { sp.remove(); maybeReveal(); }, 600); };
+  if (splashQuote(sp)) { sp.onclick = hide; setTimeout(hide, 2600); } else hide();
 });
 </script>
 </body>
